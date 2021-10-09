@@ -9,15 +9,12 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      // 수정 필요
-      // User_ingredient.belongsTo(models.User, {
-      //   as: 'user',
-      //   foreignKey: 'user_id',
-      // });
-      // User_ingredient.hasMany(models.Ingredient, {
-      //   as: 'items',
-      //   foreignKey: 'ingredient_id',
-      // });
+      this.belongsTo(models.User, {
+        foreignKey: 'id',
+      });
+      this.belongsTo(models.Ingredient, {
+        foreignKey: 'id',
+      });
     }
   }
   User_ingredient.init(
