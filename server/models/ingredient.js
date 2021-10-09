@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      // 수정 필요
+      this.belongsTo(models.User_ingredient);
       this.belongsToMany(models.User, {
         through: 'User_ingredient',
         foreignKey: 'ingredient_id',
@@ -24,7 +24,6 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: 'Ingredient',
-      timestamps: true,
     }
   );
   return Ingredient;
