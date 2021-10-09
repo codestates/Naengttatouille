@@ -9,9 +9,13 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       user_id: {
+        allowNull: false,
+        primaryKey: true,
         type: Sequelize.INTEGER,
       },
       ingredient_id: {
+        allowNull: false,
+        primaryKey: true,
         type: Sequelize.INTEGER,
       },
     });
