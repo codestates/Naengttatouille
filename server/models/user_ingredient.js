@@ -13,15 +13,9 @@ module.exports = (sequelize, DataTypes) => {
       this.hasMany(models.Ingredient);
     }
   }
-  User_ingredient.init(
-    {
-      user_id: DataTypes.INTEGER,
-      ingredient_id: DataTypes.INTEGER,
-    },
-    {
-      sequelize,
-      modelName: 'User_ingredient',
-    }
-  );
+  User_ingredient.init({
+    sequelize,
+    modelName: 'User_ingredient',
+  });
   return User_ingredient;
 };
