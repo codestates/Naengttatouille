@@ -8,6 +8,12 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
+      user_id: {
+        type: Sequelize.INTEGER,
+      },
+      ingredient_id: {
+        type: Sequelize.INTEGER,
+      }
     });
   },
   down: async (queryInterface, Sequelize) => {
