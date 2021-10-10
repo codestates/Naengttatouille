@@ -7,8 +7,8 @@ export DATABASE_NAME=$(aws ssm get-parameters --region ap-northeast-2 --names DA
 export HTTP_PORT=$(aws ssm get-parameters --region ap-northeast-2 --names HTTP_PORT --query Parameters[0].Value | sed 's/"//g')
 export CLIENT=$(aws ssm get-parameters --region ap-northeast-2 --names CLIENT --query Parameters[0].Value | sed 's/"//g')
 
-authbind --deep pm2 start app.js
+authbind --deep pm2 start index.js
 
 (초기)
 #cd /home/ubuntu/Naengttatouille/server
-#authbind --deep pm2 start app.js
+#authbind --deep pm2 start index.js
