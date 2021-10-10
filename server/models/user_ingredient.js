@@ -1,5 +1,6 @@
 'use strict';
 const { Model } = require('sequelize');
+const ingredient = require('../controllers/ingredient/ingredient');
 module.exports = (sequelize, DataTypes) => {
   class User_ingredient extends Model {
     /**
@@ -17,9 +18,15 @@ module.exports = (sequelize, DataTypes) => {
       });
     }
   }
-  User_ingredient.init({
-    sequelize,
-    modelName: 'User_ingredient',
-  });
+  User_ingredient.init(
+    {
+      user_id: DataTypes.INTEGER,
+      ingredient_id: DataTypes.INTEGER,
+    },
+    {
+      sequelize,
+      modelName: 'User_ingredient',
+    }
+  );
   return User_ingredient;
 };
