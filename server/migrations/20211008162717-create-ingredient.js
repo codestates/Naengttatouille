@@ -16,6 +16,7 @@ module.exports = {
       keep_method: {
         allowNull: false,
         type: Sequelize.STRING,
+      },
     });
   },
   down: async (queryInterface, Sequelize) => {
