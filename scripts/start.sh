@@ -9,10 +9,6 @@ export CLIENT=$(aws ssm get-parameters --region ap-northeast-2 --names CLIENT --
 
 authbind --deep pm2 start app.js
 
-<<<<<<< HEAD
 #초기(아래)
-=======
-(초기)
->>>>>>> dev
 #cd /home/ubuntu/Naengttatouille/server
 #authbind --deep pm2 start app.js
