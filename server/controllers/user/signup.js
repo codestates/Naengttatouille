@@ -1,13 +1,13 @@
+const { User } = require('../../models');
+const { generateAccessToken, sendAccessToken } = require('../tokenFunctions');
+
 module.exports = {
   post: async (req, res) => {
     const { email, password, name } = req.body;
-    if (!email && !password && !name) { 
-      res.status(422).send('insufficient parameters supplied');
+    if (!email || !password || !name) { 
+      return res.status(400).send('Bad Request');
     }
-    else if (!email || !password || !name) { 
-      res.status(400).send('Bad Request');
-    }
-    await user.findOrCreate({
+    await User.findOrCreate({
       where: { email: email },
       defaults: { 
         email: email,
@@ -21,7 +21,7 @@ module.exports = {
         res.status(409).send('email exists');
       } else { 
         const token = generateAccessToken(result.dataValues);
-        res.cookie('accessToken', token);
+        sendAccessToken(res, token);
         const { email, name, admin } = token;
         res.status(201).send({ email: email, name: name, admin: Boolean(admin)})
       }
