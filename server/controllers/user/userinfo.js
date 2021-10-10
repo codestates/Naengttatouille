@@ -1,4 +1,4 @@
-const { user } = require('../../models');
+const { User } = require('../../models');
 const { isAuthorized, generateAccessToken, sendAccessToken } = require('../tokenFunctions');
 
 module.exports = {
@@ -11,7 +11,7 @@ module.exports = {
       return res.status(401).send('invalid access token')
     }
     
-    await user.update({
+    await User.update({
       password: password,
       name: name,
     }, {
@@ -38,7 +38,7 @@ module.exports = {
     if (!accessToken) {
       return res.status(401).send('invalid access token')
     }
-    await user.destroy({
+    await User.destroy({
       where: {
         id,
       }

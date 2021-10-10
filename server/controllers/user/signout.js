@@ -1,3 +1,4 @@
+const { User } = require('../../models');
 const { isAuthorized } = require('../tokenFunctions');
 
 module.exports = {
@@ -8,7 +9,7 @@ module.exports = {
     if (!accessToken) {
       return res.status(401).send('invalid access token')
     }
-    await user.findOne({
+    await User.findOne({
       where: {
         id,
       }
