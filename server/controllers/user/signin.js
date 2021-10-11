@@ -2,45 +2,26 @@ const { User } = require('../../models');
 const { generateAccessToken, sendAccessToken } = require('../tokenFunctions');
 
 module.exports = {
-  post: async (req, res) => {
-    const { email, password } = req.body;
-    await User.findOne({
-      where: {
-        email : email,
-        // password: password,
-      },
-      // attributes: { exclude: ['password'] }
-    })
-      .then(data => {
-        //이메일 없는 경우 => 가입해라 
-        if (!data) {
-          return res.status(401).send('가입하지 않은 유저입니다. 회원가입을 진행해주세요.')
-        }
-        // 이메일 있는 경우 => 비번이 맞는 지 확인
-        if (data.dataValues.password !== password) {
-          return res.status(401).send('비밀번호가 틀렸습니다.')
-        }
-        else {
-          const accessToken = generateAccessToken(data.dataValues);
-          sendAccessToken(res, accessToken);
-          const { email, name, admin } = accessToken;
-          res.status(200).send({ email: email, name: name, admin: Boolean(admin) });
-        }
-      })
-
-    /*
+  post: (req, res) => {
+    const [reqEmail, reqPassword] = [req.body.email, req.body.password];
+    if (!reqEmail || !reqPassword) {
+      return res.status(400).send('Bad Request');
+    }
+    User.findOne({ where: { email: reqEmail } }).then((data) => {
       if (!data) {
-        return res.status(204).send('password/email is wrong or need to register')
+        return res.status(404).send('Not exist');
       }
-      const accessToken = generateAccessToken(data.dataValues);
-        sendAccessToken(res, accessToken);
-        const { email, name, admin } = accessToken;
-        res.status(200).send({ email: email, name: name, admin: Boolean(admin) });
-    })
-    */
-    .catch(err => {
-      console.log(err);
-      res.sendStatus(500);
+
+      const { email, password, name, admin, createdAt, updatedAt } =
+        data.dataValues;
+      if (reqPassword !== password) {
+        return res.status(422).send('failed to login');
+      }
+
+      const userinfo = { email, name, admin, createdAt, updatedAt };
+      const token = generateAccessToken(userinfo);
+      sendAccessToken(res, token);
+      return res.status(200).send(userinfo);
     });
   },
 };

@@ -1,58 +1,58 @@
 const { User } = require('../../models');
-const { isAuthorized, generateAccessToken, sendAccessToken } = require('../tokenFunctions');
+const {
+  isAuthorized,
+  generateAccessToken,
+  sendAccessToken,
+  clearAccessToken,
+} = require('../tokenFunctions');
 
 module.exports = {
   patch: async (req, res) => {
-    const accessToken = isAuthorized(req);
-    const id = req.params.id; // 사용자의 원래 정보를 가져오기 위함
-    const { password, name } = req.body;
-
-    if (!accessToken) {
-      return res.status(401).send('invalid access token')
+    const userinfo = isAuthorized(req);
+    if (!userinfo) {
+      clearAccessToken(res);
+      return res.status(401).send('invalid access token');
     }
-    
-    await User.update({
-      password: password,
-      name: name,
-    }, {
-      where: {id: id}
-    })
-      .then(data => {
-        if (!data) {
-          return res.status(404).send('failed to modify')
-        }
-        const { email, name, admin } = data.dataValues;
-        const newAccessToken = generateAccessToken(data);
-        sendAccessToken(res, newAccessToken);
-        return res.status(200).send({email: email, name: name, admin: Boolean(admin)})
+    const email = req.params.email;
+    const { password, name } = req.body;
+    await User.update(
+      {
+        password,
+        name,
+      },
+      { where: { email } }
+    ).catch((err) => {
+      console.log(err);
+      res.status(500).send('Internal Server Error');
+    });
+    await User.findOne({ where: { email } })
+      .then((data) => {
+        clearAccessToken(res);
+        const userinfo = data.dataValues;
+        const { admin, name, createdAt, updatedAt } = userinfo;
+        const payload = { email, admin, name, createdAt, updatedAt };
+        const token = generateAccessToken(payload);
+        sendAccessToken(res, token);
+        res.status(200).send(payload);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
-        res.status(500).send('Internal Server Error')
-    })
+        res.status(500).send('Internal Server Error');
+      });
   },
   delete: async (req, res) => {
-    const accessToken = isAuthorized(req);
-    const { id } = req.params.id;
-    
-    if (!accessToken) {
-      return res.status(401).send('invalid access token')
+    // delete시 user 테이블 뿐만 아니라 관련된 조인 테이블도 삭제
+    const userinfo = isAuthorized(req);
+    if (!userinfo) {
+      clearAccessToken(res);
+      return res.status(401).send('invalid access token');
     }
-    await User.destroy({
-      where: {
-        id,
-      }
-    })
-      .then(data => {
-        if (!data) {
-        return res.status(204).send('회원탈퇴에 실패하였습니다. 로그인 후 다시 시도해보세요.')
-        }
-        const { email, name, admin } = data.dataValues;
-        return res.status(205).send({email:email, name: name, admin:Boolean(admin)})
-    })
-      .catch(err => {
-        console.log(err);
-        res.status(500).send('Internal Server Error')
-    })
+    const email = req.params.email;
+    await User.destroy({ where: { email } }).catch((err) => {
+      console.log(err);
+      res.status(500).send('Internal Server Error');
+    });
+    clearAccessToken(res);
+    return res.status(205).send(userinfo);
   },
 };
