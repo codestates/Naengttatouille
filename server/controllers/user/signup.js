@@ -22,6 +22,7 @@ module.exports = {
           return res.status(409).send('email exists');
         }
         const { id, email, name, admin, createdAt, updatedAt } = result.dataValues;
+
         const data = { id, email, name, admin, createdAt, updatedAt };
         return res.status(201).send(data);
       })

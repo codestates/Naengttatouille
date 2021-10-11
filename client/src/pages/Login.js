@@ -20,6 +20,15 @@ export default function Login() {
     return false;
   };
 
+  //구글 로그인
+  function onSignIn(googleUser) {
+    var profile = googleUser.getBasicProfile();
+    console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+    console.log('Name: ' + profile.getName());
+    console.log('Image URL: ' + profile.getImageUrl());
+    console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+  }
+
   const handleLogin = () => {
     if (checkErr()) {
       console.log('failed to submit');
@@ -55,6 +64,7 @@ export default function Login() {
       <button type={checkErr() ? 'button' : 'submit'} onClick={handleLogin}>
         Sign In
       </button>
+      <div class='g-signin2' data-onsuccess={onSignIn}></div>
     </div>
   );
 }
