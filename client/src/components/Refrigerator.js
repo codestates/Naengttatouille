@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import './Refrigerator.css'
 
 
-export default function Refrigerator() {
+export default function Refrigerator({isAdmin}) {
 
   const list = ['당근', '양상추', '토마토', '애호박', '양파', '가지', '아스파라거스', '감자', '고구마', '고추', '야채', '이름']
   //  서버구현완료시 삭제
@@ -21,11 +21,10 @@ export default function Refrigerator() {
   }
   getRefrigeratorLists()
 
-  const deleteIngrediente = (event) => {
-    // axios.delete('http://localhost:4000/refrigerator/ingredient')//유져아이디,재료아이디
+  const deleteRefrigerator = (el) => {
+    // axios.delete('http://localhost:4000/refrigerator/ingredient' {ingredient_id: el.id})//유져아이디,재료아이디
     // .then((res) => {
     // })
-    console.log(event.target.value)
   }
 
 
@@ -62,15 +61,15 @@ export default function Refrigerator() {
 
   const makeDelete = (el) => {
     if(el[1] === undefined){
-      return <div className='showDeleteBtn'><span className='deleteBtn' onClick={deleteIngrediente}>X 냉장고에서 지우기</span></div>
+      return <div className='showDeleteBtn__Refrigerator'><span className='deleteBtn__Refrigerator' onClick={() => deleteRefrigerator(el[0])}>X 냉장고에서 지우기</span></div>
     }else if(el[2] === undefined){
-      return <div className='showDeleteBtn'><span className='deleteBtn' onClick={deleteIngrediente}>X 냉장고에서 지우기</span><span className='deleteBtn' onClick={deleteIngrediente}>X 냉장고에서 지우기</span></div>
+      return <div className='showDeleteBtn__Refrigerator'><span className='deleteBtn__Refrigerator' onClick={() => deleteRefrigerator(el[0])}>X 냉장고에서 지우기</span><span className='deleteBtn__Refrigerator' onClick={() => deleteRefrigerator(el[1])}>X 냉장고에서 지우기</span></div>
     }else if(el[3] === undefined){
-      return <div className='showDeleteBtn'><span className='deleteBtn' onClick={deleteIngrediente}>X 냉장고에서 지우기</span><span className='deleteBtn' onClick={deleteIngrediente}>X 냉장고에서 지우기</span><span className='deleteBtn' onClick={deleteIngrediente}>X 냉장고에서 지우기</span></div>
+      return <div className='showDeleteBtn__Refrigerator'><span className='deleteBtn__Refrigerator' onClick={() => deleteRefrigerator(el[0])}>X 냉장고에서 지우기</span><span className='deleteBtn__Refrigerator' onClick={() => deleteRefrigerator(el[1])}>X 냉장고에서 지우기</span><span className='deleteBtn__Refrigerator' onClick={() => deleteRefrigerator(el[2])}>X 냉장고에서 지우기</span></div>
     }else if(el[4] === undefined){
-      return <div className='showDeleteBtn'><span className='deleteBtn' onClick={deleteIngrediente}>X 냉장고에서 지우기</span><span className='deleteBtn' onClick={deleteIngrediente}>X 냉장고에서 지우기</span><span className='deleteBtn' onClick={deleteIngrediente}>X 냉장고에서 지우기</span><span className='deleteBtn' onClick={deleteIngrediente}>X 냉장고에서 지우기</span></div>
+      return <div className='showDeleteBtn__Refrigerator'><span className='deleteBtn__Refrigerator' onClick={() => deleteRefrigerator(el[0])}>X 냉장고에서 지우기</span><span className='deleteBtn__Refrigerator' onClick={() => deleteRefrigerator(el[1])}>X 냉장고에서 지우기</span><span className='deleteBtn__Refrigerator' onClick={() => deleteRefrigerator(el[2])}>X 냉장고에서 지우기</span><span className='deleteBtn__Refrigerator' onClick={() => deleteRefrigerator(el[3])}>X 냉장고에서 지우기</span></div>
     }else{
-      return <div className='showDeleteBtn'><span className='deleteBtn' onClick={deleteIngrediente}>X 냉장고에서 지우기</span><span className='deleteBtn' onClick={deleteIngrediente}>X 냉장고에서 지우기</span><span className='deleteBtn' onClick={deleteIngrediente}>X 냉장고에서 지우기</span><span className='deleteBtn' onClick={deleteIngrediente}>X 냉장고에서 지우기</span><span className='deleteBtn' onClick={deleteIngrediente}>X 냉장고에서 지우기</span></div>
+      return <div className='showDeleteBtn__Refrigerator'><span className='deleteBtn__Refrigerator' onClick={() => deleteRefrigerator(el[0])}>X 냉장고에서 지우기</span><span className='deleteBtn__Refrigerator' onClick={() => deleteRefrigerator(el[1])}>X 냉장고에서 지우기</span><span className='deleteBtn__Refrigerator' onClick={() => deleteRefrigerator(el[2])}>X 냉장고에서 지우기</span><span className='deleteBtn__Refrigerator' onClick={() => deleteRefrigerator(el[3])}>X 냉장고에서 지우기</span><span className='deleteBtn__Refrigerator' onClick={() => deleteRefrigerator(el[4])}>X 냉장고에서 지우기</span></div>
     }
   }
   //재료 데이터를 가져와서 클릭시 작동하는 함수에 재료의 데이터를 전해줘야함

@@ -16,6 +16,7 @@
     padding-left: -5%;
     border: solid;
     border-color: teal;
+    margin-top: 3%;
 }
 
 .ingredient{
@@ -26,7 +27,7 @@
     background-color: skyblue;
 }
 
-.showDeleteBtn {
+.showDeleteBtn__Refrigerator {
     border: solid;
     border-color: tomato;
     display: flex;
@@ -34,10 +35,10 @@
     padding-left: -5%;
 }
 
-.deleteBtn:hover{
+.deleteBtn__Refrigerator:hover{
     background-color: pink;
 }
-.deleteBtn {
+.deleteBtn__Refrigerator {
     border: solid;
     border-color: aqua;
     height: 5vh;
