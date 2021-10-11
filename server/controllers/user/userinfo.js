@@ -13,31 +13,39 @@ module.exports = {
       clearAccessToken(res);
       return res.status(401).send('invalid access token');
     }
-    const email = req.params.email;
+    const { user_id } = req.params;
     const { password, name } = req.body;
+    if (!password || !name) {
+      return res.status(400).send('check password and name');
+    }
+
     await User.update(
       {
         password,
         name,
       },
-      { where: { email } }
-    ).catch((err) => {
-      console.log(err);
-      res.status(500).send('Internal Server Error');
-    });
-    await User.findOne({ where: { email } })
+      { where: { user_id } }
+    )
       .then((data) => {
-        clearAccessToken(res);
-        const userinfo = data.dataValues;
-        const { id, admin, name, createdAt, updatedAt } = userinfo;
-        const payload = { id, email, admin, name, createdAt, updatedAt };
-        const token = generateAccessToken(payload);
-        sendAccessToken(res, token);
-        res.status(200).send(payload);
+        return data;
       })
       .catch((err) => {
         console.log(err);
-        res.status(500).send('Internal Server Error');
+        return res.status(500).send('Internal Server Error');
+      });
+
+    await User.findOne({ where: { user_id } })
+      .then((data) => {
+        clearAccessToken(res);
+        const { user_id, email, admin, name, createdAt, updatedAt } = data;
+        const payload = { user_id, email, admin, name, createdAt, updatedAt };
+        const token = generateAccessToken(payload);
+        sendAccessToken(res, token);
+        return res.status(200).send(payload);
+      })
+      .catch((err) => {
+        console.log(err);
+        return res.status(500).send('Internal Server Error');
       });
   },
   delete: async (req, res) => {
@@ -47,11 +55,15 @@ module.exports = {
       clearAccessToken(res);
       return res.status(401).send('invalid access token');
     }
-    const email = req.params.email;
-    await User.destroy({ where: { email } }).catch((err) => {
-      console.log(err);
-      res.status(500).send('Internal Server Error');
-    });
+    const { user_id } = req.params;
+    await User.destroy({ where: { user_id } })
+      .then((data) => {
+        return data;
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(500).send('Internal Server Error');
+      });
     clearAccessToken(res);
     return res.status(205).send(userinfo);
   },

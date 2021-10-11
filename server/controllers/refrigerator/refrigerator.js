@@ -1,19 +1,16 @@
 const { isAuthorized, clearAccessToken } = require('../tokenFunctions');
 const { User, Ingredient, User_ingredient } = require('../../models');
 
-const getIngredient = async (req) => {
-  const { ingredient_name } = req.params;
+const getIngredient = async (ingredient_id) => {
   let ingredient;
-  await Ingredient.findOne({ where: { ingredient_name } })
+  await Ingredient.findOne({ where: { ingredient_id } })
     .then((data) => {
-      const { id, keep_method } = data.dataValues;
-      ingredient = { ingredient_id: id, ingredient_name, keep_method };
+      ingredient = data;
     })
     .catch((err) => {
       console.log(err);
       ingredient = null;
     });
-  console.log(ingredient);
   return ingredient;
 };
 
@@ -22,36 +19,38 @@ module.exports = {
     const userinfo = isAuthorized(req);
     if (!userinfo) {
       clearAccessToken(res);
-      res.status(401).send('invalid accesstoken');
+      return res.status(401).send('invalid accesstoken');
     }
 
-    const { id } = userinfo;
-    User.findAll({ where: { id }, include: Ingredient })
+    const { user_id } = userinfo;
+    User.findAll({
+      where: { user_id },
+      include: Ingredient,
+    })
       .then((data) => {
         const ingredients = data[0].Ingredients.map((ingredient) => {
-          const { ingredient_name, keep_method } = ingredient;
-          return { ingredient_name, keep_method };
+          const { ingredient_id, name, keep_method } = ingredient;
+          return { ingredient_id, name, keep_method };
         });
-        res.status(200).send(ingredients);
+        return res.status(200).send(ingredients);
       })
       .catch((err) => {
         console.log(err);
-        res.status(500).send('Internal Server Error');
+        return res.status(500).send('Internal Server Error');
       });
   },
   post: async (req, res) => {
     const userinfo = isAuthorized(req);
     if (!userinfo) {
       clearAccessToken(res);
-      res.status(401).send('invalid accesstoken');
+      return res.status(401).send('invalid accesstoken');
     }
 
-    const user_id = userinfo.id;
-    const { ingredient_id, ingredient_name, keep_method } = await getIngredient(
-      req
-    );
-    if (!ingredient_id || !ingredient_name || !keep_method) {
-      return res.status(500).send('Internal Server Error');
+    const { user_id } = userinfo;
+    const { ingredient_id } = req.params;
+    const ingredient = await getIngredient(ingredient_id);
+    if (!ingredient) {
+      return res.status(404).send('No Exist Ingredient');
     }
 
     await User_ingredient.findOrCreate({
@@ -60,10 +59,9 @@ module.exports = {
     })
       .then(([result, created]) => {
         if (!created) {
-          return res.status(409).send('ingredient exists');
+          return res.status(409).send('ingredient exists in refrigerator');
         }
-        const resData = { ingredient_name, keep_method };
-        return res.status(201).send(resData);
+        return res.status(201).send(ingredient);
       })
       .catch((err) => {
         console.log(err);
@@ -74,25 +72,28 @@ module.exports = {
     const userinfo = isAuthorized(req);
     if (!userinfo) {
       clearAccessToken(res);
-      res.status(401).send('invalid accesstoken');
+      return res.status(401).send('invalid accesstoken');
     }
 
-    const user_id = userinfo.id;
-    const { ingredient_id, ingredient_name, keep_method } = await getIngredient(
-      req
+    const { user_id } = userinfo;
+    const { ingredient_id } = req.params;
+    const ingredient = await getIngredient(ingredient_id);
+
+    await User_ingredient.findOne({ where: { user_id, ingredient_id } }).then(
+      (data) => {
+        if (!data) {
+          return res.status(404).send('No Exist Ingredient in refrigerator');
+        }
+      }
     );
-    if (!ingredient_id || !ingredient_name || !keep_method) {
-      return res.status(500).send('Internal Server Error');
-    }
 
     await User_ingredient.destroy({ where: { user_id, ingredient_id } })
       .then((data) => {
-        const resData = { ingredient_name, keep_method };
-        res.status(205).send(resData);
+        return res.status(205).send(ingredient);
       })
       .catch((err) => {
         console.log(err);
-        res.status(500).send('Internal Server Error');
+        return res.status(500).send('Internal Server Error');
       });
   },
 };

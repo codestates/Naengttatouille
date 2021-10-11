@@ -2,58 +2,82 @@ const { Ingredient } = require('../../models');
 const { isAuthorized } = require('../tokenFunctions');
 
 module.exports = {
-  get: (req, res) => { // 전체 식재료 가져오기
+  get: (req, res) => {
     Ingredient.findAll()
-      .then(data => {
+      .then((data) => {
         if (!data) {
-          return res.status(404).send('No contents')
+          return res.status(404).send('No contents');
         }
         const ingredient = [...data];
-        res.status(200).send(ingredient);
+        return res.status(200).send(ingredient);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
-        res.status(500).send('Internal Server Error')
+        return res.status(500).send('Internal Server Error');
       });
   },
-  post: (req, res) => { // 관리자모드, 식재료 추가(동일한 식재료 추가 X)
+  post: (req, res) => {
     const userinfo = isAuthorized(req);
-    if (!userinfo.admin) {
-      return res.status(403).send('Not authorized. Only admin available to edit')
+    if (!userinfo) {
+      return res.status(401).send('invalid accesstoken');
     }
-    const { ingredient_name, keep_method } = req.body;
+    if (!userinfo.admin) {
+      return res
+        .status(403)
+        .send('Not authorized. Only admin available to edit');
+    }
+    const { name, keep_method } = req.body;
     Ingredient.findOrCreate({
       where: {
-        ingredient_name,
+        name,
       },
       defaults: {
-        ingredient_name,
+        name,
         keep_method,
       },
     })
       .then(([result, created]) => {
         if (!created) {
-          return res.status(409).send('resource exists')
+          return res.status(409).send('resource exists');
         }
-        const ingredient = result.dataValues;
-        res.status(201).send(ingredient);
+        return res.status(201).send(result);
       })
-      .catch(err => {
-        console.log(err);
-        res.status(500).send('Internal Server Error');
-    })
-  },
-  delete: (req, res) => { // 관리자모드, 식재료 삭제
-    const userinfo = isAuthorized(req);
-    if (!userinfo.admin) {
-      return res.status(403).send('Not authorized. Only admin available to edit')
-    }
-    const { ingredient_name } = req.body; // 클라이언트 확인
-    Ingredient.destroy({ where: { ingredient_name } })
       .catch((err) => {
-      console.log(err);
-      res.status(500).send('Internal Server Error');
-    });
-    return res.status(205).send(req.body);
+        console.log(err);
+        return res.status(500).send('Internal Server Error');
+      });
+  },
+  delete: async (req, res) => {
+    const userinfo = isAuthorized(req);
+    if (!userinfo) {
+      return res.status(401).send('invalid accesstoken');
+    }
+    if (!userinfo.admin) {
+      return res
+        .status(403)
+        .send('Not authorized. Only admin available to edit');
+    }
+
+    const { ingredient_id } = req.params;
+    let ingredient;
+    await Ingredient.findOne({ where: { ingredient_id } })
+      .then((data) => {
+        ingredient = data;
+      })
+      .catch((err) => {
+        console.log(err);
+        return res.status(404).send('No Exists');
+      });
+
+    await Ingredient.destroy({ where: { ingredient_id } })
+      .then((data) => {
+        return data;
+      })
+      .catch((err) => {
+        console.log(err);
+        return res.status(500).send('Internal Server Error');
+      });
+
+    return res.status(205).send(ingredient);
   },
 };
