@@ -12,13 +12,13 @@ module.exports = {
         return res.status(404).send('Not exist');
       }
 
-      const { email, password, name, admin, createdAt, updatedAt } =
+      const { id, email, password, name, admin, createdAt, updatedAt } =
         data.dataValues;
       if (reqPassword !== password) {
         return res.status(422).send('failed to login');
       }
 
-      const userinfo = { email, name, admin, createdAt, updatedAt };
+      const userinfo = { id, email, name, admin, createdAt, updatedAt };
       const token = generateAccessToken(userinfo);
       sendAccessToken(res, token);
       return res.status(200).send(userinfo);
