@@ -21,8 +21,8 @@ module.exports = {
         if (!created) {
           return res.status(409).send('email exists');
         }
-        const { email, name, admin, createdAt, updatedAt } = result.dataValues;
-        const data = { email, name, admin, createdAt, updatedAt };
+        const { id, email, name, admin, createdAt, updatedAt } = result.dataValues;
+        const data = { id, email, name, admin, createdAt, updatedAt };
         return res.status(201).send(data);
       })
       .catch((err) => {
