@@ -57,6 +57,11 @@ export default function Ingredients({isAdmin}) {
     setMethodValue(event.target.value)
   }
 
+  const deleteIngrediente = (el) => {
+    // axios.delete('http://localhost:4000' {ingredient_id: `${el.id}`})
+    console.log(el)
+  }
+
 
   function makeEl(el) {
     if(el[1] === undefined){
@@ -69,6 +74,22 @@ export default function Ingredients({isAdmin}) {
       return <div className='showIngredients'><span className='ingredient' onMouseOver={MouseOver} onMouseOut={MouseOut} onClick={addRefrigerator}>{el[0]}</span><span className='ingredient' onMouseOver={MouseOver} onMouseOut={MouseOut} onClick={addRefrigerator}>{el[1]}</span><span className='ingredient' onMouseOver={MouseOver} onMouseOut={MouseOut} onClick={addRefrigerator}>{el[2]}</span><span className='ingredient' onMouseOver={MouseOver} onMouseOut={MouseOut} onClick={addRefrigerator}>{el[3]}</span></div>
     }else{
       return <div className='showIngredients'><span className='ingredient' onMouseOver={MouseOver} onMouseOut={MouseOut} onClick={addRefrigerator}>{el[0]}</span><span className='ingredient' onMouseOver={MouseOver} onMouseOut={MouseOut} onClick={addRefrigerator}>{el[1]}</span><span className='ingredient' onMouseOver={MouseOver} onMouseOut={MouseOut} onClick={addRefrigerator}>{el[2]}</span><span className='ingredient' onMouseOver={MouseOver} onMouseOut={MouseOut} onClick={addRefrigerator}>{el[3]}</span><span className='ingredient' onMouseOver={MouseOver} onMouseOut={MouseOut}>{el[4]}</span></div>
+    }
+  }
+
+  //재료 하나하나
+
+  const makeDelete = (el) => {
+    if(el[1] === undefined){
+      return <div className='showDeleteBtn__Ingredients'><span className='deleteBtn__Ingredient' onClick={() => deleteIngrediente(el[0])}>X 이 식재료 지우기</span></div>
+    }else if(el[2] === undefined){
+      return <div className='showDeleteBtn__Ingredients'><span className='deleteBtn__Ingredient' onClick={() => deleteIngrediente(el[0])}>X 이 식재료 지우기</span><span className='deleteBtn__Ingredient' onClick={() => deleteIngrediente(el[1])}>X 이 식재료 지우기</span></div>
+    }else if(el[3] === undefined){
+      return <div className='showDeleteBtn__Ingredients'><span className='deleteBtn__Ingredient' onClick={() => deleteIngrediente(el[0])}>X 이 식재료 지우기</span><span className='deleteBtn__Ingredient' onClick={() => deleteIngrediente(el[1])}>X 이 식재료 지우기</span><span className='deleteBtn__Ingredient' onClick={() => deleteIngrediente(el[2])}>X 이 식재료 지우기</span></div>
+    }else if(el[4] === undefined){
+      return <div className='showDeleteBtn__Ingredients'><span className='deleteBtn__Ingredient' onClick={() => deleteIngrediente(el[0])}>X 이 식재료 지우기</span><span className='deleteBtn__Ingredient' onClick={() => deleteIngrediente(el[1])}>X 이 식재료 지우기</span><span className='deleteBtn__Ingredient' onClick={() => deleteIngrediente(el[2])}>X 이 식재료 지우기</span><span className='deleteBtn__Ingredient' onClick={() => deleteIngrediente(el[3])}>X 이 식재료 지우기</span></div>
+    }else{
+      return <div className='showDeleteBtn__Ingredients'><span className='deleteBtn__Ingredient' onClick={() => deleteIngrediente(el[0])}>X 이 식재료 지우기</span><span className='deleteBtn__Ingredient' onClick={() => deleteIngrediente(el[1])}>X 이 식재료 지우기</span><span className='deleteBtn__Ingredient' onClick={() => deleteIngrediente(el[2])}>X 이 식재료 지우기</span><span className='deleteBtn__Ingredient' onClick={() => deleteIngrediente(el[3])}>X 이 식재료 지우기</span><span className='deleteBtn__Ingredient' onClick={() => deleteIngrediente(el[4])}>X 이 식재료 지우기</span></div>
     }
   }
 
@@ -93,13 +114,17 @@ export default function Ingredients({isAdmin}) {
       <h3 className='ingredient__title'>식재료 리스트</h3>
       <section className='ingredients__List'>
           {listDivision.map((el) => {
-            return <div className='grocery_row'>{makeEl(el)}</div>
+            return <div className='grocery_row'>
+              {makeEl(el)}
+              {isAdmin ? makeDelete(el) : null}
+            </div>
           })}
+          
       </section>
       <section className='Storage__method'>
         <h3 className='method__description'>식재료 보관방법</h3>
 
-        {true ? <span><input onKeyUp={onChangeName} type='text' placeholder='재료이름을 입력해주세요'></input>
+        {isAdmin ? <span><input onKeyUp={onChangeName} type='text' placeholder='재료이름을 입력해주세요'></input>
         <input onKeyUp={onChangeMethod} type='text' placeholder='보관법을 작성해주세요'>
           </input><button onClick={addIngredients}>추가</button></span> : null}
         

@@ -1,15 +1,18 @@
-form.isInvalid input:invalid {
+/* form.isInvalid input:invalid {
   border-color: red;
-}
+} */
 
+/* input 박스 유효성 검사 실패 */
 .isInvalid {
   border-color: red;
 }
 
+/* input 박스 밑 div 에러 메세지 */
 .errDiv {
   color: red;
 }
 
+/* div 에러메시지 유효성 검사 성공 시 사라짐 */
 .hide {
   display: none;
 }
