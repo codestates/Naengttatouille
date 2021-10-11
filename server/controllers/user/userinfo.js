@@ -29,8 +29,8 @@ module.exports = {
       .then((data) => {
         clearAccessToken(res);
         const userinfo = data.dataValues;
-        const { admin, name, createdAt, updatedAt } = userinfo;
-        const payload = { email, admin, name, createdAt, updatedAt };
+        const { id, admin, name, createdAt, updatedAt } = userinfo;
+        const payload = { id, email, admin, name, createdAt, updatedAt };
         const token = generateAccessToken(payload);
         sendAccessToken(res, token);
         res.status(200).send(payload);
