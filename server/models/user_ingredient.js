@@ -1,6 +1,6 @@
 'use strict';
 const { Model } = require('sequelize');
-const ingredient = require('../controllers/ingredient/ingredient');
+
 module.exports = (sequelize, DataTypes) => {
   class User_ingredient extends Model {
     /**
@@ -11,10 +11,10 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       this.belongsTo(models.User, {
-        foreignKey: 'id',
+        foreignKey: 'user_id',
       });
       this.belongsTo(models.Ingredient, {
-        foreignKey: 'id',
+        foreignKey: 'user_id',
       });
     }
   }
