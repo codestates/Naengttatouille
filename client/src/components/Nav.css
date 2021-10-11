@@ -5,10 +5,11 @@
     border-color: red;
 }
 
-.loginBtn {
-    margin: 15px 10px 15px 0;
-
+.loginBtn .logoutBtn {
+    
 }
+
+
 
 .Logo {
     margin: 15px 0 15px 10px;
@@ -18,3 +19,11 @@
     margin: 0 0 0 15px;
 }
 {/*위 오른쪽 아래 왼쪽*/}
+
+.goSignup .goMypage {
+
+}
+
+.goMain {
+    margin-left: -70%;
+}

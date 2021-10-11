@@ -2,7 +2,7 @@ import React from 'react';
 import './About.css';
 import  {useHistory} from 'react-router-dom';
 
-export default function About() {
+export default function About({isLogin}) {
   const history = useHistory()
 
   function signupHandler() {

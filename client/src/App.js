@@ -6,22 +6,36 @@ import Main from './pages/Main';
 import Mypage from './pages/Mypage';
 import Signup from './pages/Signup';
 import Loading from './components/Loading';
+import Ingredients from './components/Ingredients'
+import Refrigerator from './components/Refrigerator'
 import Nav from './components/Nav';
 import axios from 'axios';
 import './App.css';
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
+
+  const loginHandler = () => {
+    setIsLogin(!isLogin)
+  }
+
+  const handleResponseSuccess = () => {
+    // 엑세스 토큰확인 요청보내는 함수 
+  }
+
   return (
     <BrowserRouter>
       <div className='App'>
         <Switch>
           <Route exact path='/'>
-            <Nav />
-            <About />
+            <Nav isLogin={isLogin} loginHandler={loginHandler} handleResponseSuccess={handleResponseSuccess}/>
+            <About isLogin={isLogin}/>
+            {/* <Loading /> */}
+            {/* <Ingredients /> */}
+            {/* {<Refrigerator />} */}
           </Route>
           <Route path='/login'>
-            <Login />
+            <Login loginHandler={loginHandler}/>
           </Route>
           <Route path='/main'>
             <Nav />

@@ -1,26 +1,38 @@
 import React from 'react';
-import  {useHistory} from 'react-router-dom';
+import  { useHistory} from 'react-router-dom';
 import './Nav.css';
 import axios from 'axios'
 
-export default function Nav({login, accessToken}) {
+export default function Nav({islogin, loginHandler, handleResponseSuccess}) {
   const history = useHistory();
 
-  function loginHandler(){
+  function goLogin(){
     history.push('/login')
   }
 
   function logoutHandler(){
-    axios.post('http://localhost:4000/signout',{headers:{authrozation : accessToken}})
+    axios.post('http://localhost:4000/user/signout')
     .then((res) => {
       if(res.stauts === 205){
-        return history.push('/')
-      }else if(res.status === 401){
-        // return history.push('/') 만약 main이 가능하면 새로고침 안되면 about
+        loginHandler()
+        history.push('/')
       }else{
         // return alert('로그아웃에 실패하였습니다')임시
       }
     })
+  }
+  const goSignup = () => {
+    history.push('/signup')
+  }
+
+  const goMypage = () => {
+    // handleResponseSuccess()
+    history.push('/mypage')
+  }
+
+  const goMain = () => {
+    // handleResponseSuccess()
+    history.push('/main')
   }
 
   function changepPath(){
@@ -28,16 +40,18 @@ export default function Nav({login, accessToken}) {
   }
 
   return(
-    <div className='navigation' onClick={changepPath}>
+    <div className='navigation' >
+      
       <i className='Logo' onClick={changepPath}>로고
         <span className='ServiceName'>냉따뚜이
         </span>
-      </i>
-      {/* {!islogin? <button className='loginBtn' onClick={loginHandler()}>로그인</button> : <button className='logoutBtn' onClick={logoutHandler()}>로그아웃</button>} */}
-      <button className='loginBtn' onClick={loginHandler}>로그인 or 로그아웃</button>{/* 임시 */}
-      {/* <form action='http://localhost:3000/login'>
-        <input type='submit' value='로그인' />
-      </form>   */}
+        </i>
+        <button className='goMain' onClick={goMain}>Main</button>
+      
+      <div className='btn'>
+      {!islogin? <button className='goSignup' onClick={goSignup}>회원가입</button> : <button className='goMypage' onClick={goMypage}>MyPage</button>}
+      {!islogin? <button className='loginBtn' onClick={goLogin}>로그인</button> : <button className='logoutBtn' onClick={logoutHandler}>로그아웃</button>}
+      </div>
     </div>
   ) 
 }
