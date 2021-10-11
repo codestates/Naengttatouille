@@ -69,10 +69,12 @@ export default function UserInput({ item, type, handler, inputInfo }) {
   };
 
   const handleInputValue = (e) => {
+    let value = e.target.value;
     let cv = checkValidity(item, e.target.value);
     setErrMsg(getMessage());
     setIsError(checkErr());
-    handler(item)(e, cv); //상위 컴포넌트에 입력값 전달
+    console.log(value);
+    handler(item)(value, cv, null); //상위 컴포넌트에 입력값 전달
   };
 
   return (
@@ -80,7 +82,13 @@ export default function UserInput({ item, type, handler, inputInfo }) {
       <span>{item}</span>
       <input
         id={item}
-        className={isError ? `isInvalid` : inputInfo.edit && item === 'email' ? 'editEmail' : ``}
+        className={
+          isError
+            ? `isInvalid`
+            : (inputInfo.edit === true || inputInfo.edit === undefined) && item === 'email'
+            ? 'editEmail'
+            : ``
+        }
         type={type}
         onChange={handleInputValue}
         minLength={item === `password` || item === `password confirm` ? 4 : item === `name` ? 2 : 0}
