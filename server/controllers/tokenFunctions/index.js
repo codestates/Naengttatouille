@@ -4,7 +4,7 @@ const { sign, verify } = require('jsonwebtoken');
 module.exports = {
   generateAccessToken: (data) => {
     // 토큰 생성
-    return sign(data, process.env.ACCESS_SECRET, { expiresIn: '60s' });
+    return sign(data, process.env.ACCESS_SECRET, { expiresIn: '300s' });
   },
   sendAccessToken: (res, accessToken) => {
     //토큰 전달
