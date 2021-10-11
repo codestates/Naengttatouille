@@ -1,0 +1,15 @@
+form.isInvalid input:invalid {
+  border-color: red;
+}
+
+.isInvalid {
+  border-color: red;
+}
+
+.errDiv {
+  color: red;
+}
+
+.hide {
+  display: none;
+}
