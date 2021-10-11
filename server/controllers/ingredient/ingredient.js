@@ -3,16 +3,12 @@ const { isAuthorized } = require('../tokenFunctions');
 
 module.exports = {
   get: (req, res) => { // 전체 식재료 가져오기
-    if (!req) {
-      return res.status(400).send('Bad Request');
-    }  
     Ingredient.findAll()
       .then(data => {
-        console.log(data.dataValues);
         if (!data) {
           return res.status(404).send('No contents')
         }
-        const ingredient = data.dataValues;
+        const ingredient = [...data];
         res.status(200).send(ingredient);
       })
       .catch(err => {
@@ -52,8 +48,9 @@ module.exports = {
     if (!userinfo.admin) {
       return res.status(403).send('Not authorized. Only admin available to edit')
     }
-    const { ingredient_name, keep_method } = req.body;
-    Ingredient.destroy({ where: { ingredient_name } }).catch((err) => {
+    const { ingredient_name } = req.body; // 클라이언트 확인
+    Ingredient.destroy({ where: { ingredient_name } })
+      .catch((err) => {
       console.log(err);
       res.status(500).send('Internal Server Error');
     });
