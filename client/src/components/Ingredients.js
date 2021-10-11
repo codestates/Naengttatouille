@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
 import axios from 'axios'
 import './Ingredients.css'
+import { v4 as uuidv4 } from 'uuid';
 
-export default function Ingredients({isAdmin}) {
+export default function Ingredients({
+  isAdmin,
+  isLogin,
+  setGuestRefrigerator,
+  guestRefrigerator}) {
 
   const [exContent, setExContent] = useState('')
   const [nameValue, setNameValue] = useState('')
@@ -44,11 +49,16 @@ export default function Ingredients({isAdmin}) {
     setMethodValue('')
   }
 
-  const addRefrigerator = () => {
+  const addRefrigerator = (event) => {
     axios.post('http://localhost:4000/refrigerator/ingredient') // 냉장고id와 식재료id를 알려줘야함
 
   }
 
+  const addGuestRefrigerator = (event) => {
+    const text = event.target.textContent
+    setGuestRefrigerator([...guestRefrigerator,text])
+  }
+  
   const onChangeName = (event) => {
     setNameValue(event.target.value)
   }
@@ -65,15 +75,15 @@ export default function Ingredients({isAdmin}) {
 
   function makeEl(el) {
     if(el[1] === undefined){
-      return <div className='showIngredients'><span className='ingredient' onMouseOver={MouseOver} onMouseOut={MouseOut} onClick={addRefrigerator}>{el[0]}</span></div>
+      return <div className='showIngredients'><span className='ingredient' onMouseOver={MouseOver} onMouseOut={MouseOut} onClick={isLogin ? addRefrigerator : addGuestRefrigerator}>{el[0]}</span></div>
     }else if(el[2] === undefined){
-      return <div className='showIngredients'><span className='ingredient' onMouseOver={MouseOver} onMouseOut={MouseOut} onClick={addRefrigerator}>{el[0]}</span><span className='ingredient' onMouseOver={MouseOver} onMouseOut={MouseOut} onClick={addRefrigerator}>{el[1]}</span></div>
+      return <div className='showIngredients'><span className='ingredient' onMouseOver={MouseOver} onMouseOut={MouseOut} onClick={isLogin ? addRefrigerator : addGuestRefrigerator}>{el[0]}</span><span className='ingredient' onMouseOver={MouseOver} onMouseOut={MouseOut} onClick={isLogin ? addRefrigerator : addGuestRefrigerator}>{el[1]}</span></div>
     }else if(el[3] === undefined){
-      return <div className='showIngredients'><span className='ingredient' onMouseOver={MouseOver} onMouseOut={MouseOut} onClick={addRefrigerator}>{el[0]}</span><span className='ingredient' onMouseOver={MouseOver} onMouseOut={MouseOut} onClick={addRefrigerator}>{el[1]}</span><span className='ingredient' onMouseOver={MouseOver} onMouseOut={MouseOut} onClick={addRefrigerator}>{el[2]}</span></div>
+      return <div className='showIngredients'><span className='ingredient' onMouseOver={MouseOver} onMouseOut={MouseOut} onClick={isLogin ? addRefrigerator : addGuestRefrigerator}>{el[0]}</span><span className='ingredient' onMouseOver={MouseOver} onMouseOut={MouseOut} onClick={isLogin ? addRefrigerator : addGuestRefrigerator}>{el[1]}</span><span className='ingredient' onMouseOver={MouseOver} onMouseOut={MouseOut} onClick={isLogin ? addRefrigerator : addGuestRefrigerator}>{el[2]}</span></div>
     }else if(el[4] === undefined){
-      return <div className='showIngredients'><span className='ingredient' onMouseOver={MouseOver} onMouseOut={MouseOut} onClick={addRefrigerator}>{el[0]}</span><span className='ingredient' onMouseOver={MouseOver} onMouseOut={MouseOut} onClick={addRefrigerator}>{el[1]}</span><span className='ingredient' onMouseOver={MouseOver} onMouseOut={MouseOut} onClick={addRefrigerator}>{el[2]}</span><span className='ingredient' onMouseOver={MouseOver} onMouseOut={MouseOut} onClick={addRefrigerator}>{el[3]}</span></div>
+      return <div className='showIngredients'><span className='ingredient' onMouseOver={MouseOver} onMouseOut={MouseOut} onClick={isLogin ? addRefrigerator : addGuestRefrigerator}>{el[0]}</span><span className='ingredient' onMouseOver={MouseOver} onMouseOut={MouseOut} onClick={isLogin ? addRefrigerator : addGuestRefrigerator}>{el[1]}</span><span className='ingredient' onMouseOver={MouseOver} onMouseOut={MouseOut} onClick={isLogin ? addRefrigerator : addGuestRefrigerator}>{el[2]}</span><span className='ingredient' onMouseOver={MouseOver} onMouseOut={MouseOut} onClick={isLogin ? addRefrigerator : addGuestRefrigerator}>{el[3]}</span></div>
     }else{
-      return <div className='showIngredients'><span className='ingredient' onMouseOver={MouseOver} onMouseOut={MouseOut} onClick={addRefrigerator}>{el[0]}</span><span className='ingredient' onMouseOver={MouseOver} onMouseOut={MouseOut} onClick={addRefrigerator}>{el[1]}</span><span className='ingredient' onMouseOver={MouseOver} onMouseOut={MouseOut} onClick={addRefrigerator}>{el[2]}</span><span className='ingredient' onMouseOver={MouseOver} onMouseOut={MouseOut} onClick={addRefrigerator}>{el[3]}</span><span className='ingredient' onMouseOver={MouseOver} onMouseOut={MouseOut}>{el[4]}</span></div>
+      return <div className='showIngredients'><span className='ingredient' onMouseOver={MouseOver} onMouseOut={MouseOut} onClick={isLogin ? addRefrigerator : addGuestRefrigerator}>{el[0]}</span><span className='ingredient' onMouseOver={MouseOver} onMouseOut={MouseOut} onClick={isLogin ? addRefrigerator : addGuestRefrigerator}>{el[1]}</span><span className='ingredient' onMouseOver={MouseOver} onMouseOut={MouseOut} onClick={isLogin ? addRefrigerator : addGuestRefrigerator}>{el[2]}</span><span className='ingredient' onMouseOver={MouseOver} onMouseOut={MouseOut} onClick={isLogin ? addRefrigerator : addGuestRefrigerator}>{el[3]}</span><span className='ingredient' onMouseOver={MouseOver} onMouseOut={MouseOut} onClick={isLogin ? addRefrigerator : addGuestRefrigerator}>{el[4]}</span></div>
     }
   }
 
@@ -94,11 +104,6 @@ export default function Ingredients({isAdmin}) {
   }
 
   //삭제하는 버튼
-
-  const mekeDeleteBtn = () => {
-    
-  }
-
   
   
   function MouseOver(event) {
@@ -114,7 +119,7 @@ export default function Ingredients({isAdmin}) {
       <h3 className='ingredient__title'>식재료 리스트</h3>
       <section className='ingredients__List'>
           {listDivision.map((el) => {
-            return <div className='grocery_row'>
+            return <div key={uuidv4()} className='grocery_row'>
               {makeEl(el)}
               {isAdmin ? makeDelete(el) : null}
             </div>
