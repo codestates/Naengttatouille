@@ -6,8 +6,8 @@ import Main from './pages/Main';
 import Mypage from './pages/Mypage';
 import Signup from './pages/Signup';
 import Loading from './components/Loading';
-import Ingredients from './components/Ingredients'
-import Refrigerator from './components/Refrigerator'
+import Ingredients from './components/Ingredients';
+import Refrigerator from './components/Refrigerator';
 import Nav from './components/Nav';
 import axios from 'axios';
 import './App.css';
@@ -15,27 +15,40 @@ import './App.css';
 function App() {
   const [isLogin, setIsLogin] = useState(false);
 
+  const [userInfo, setUserInfo] = useState({
+    email: { data: '', validity: true },
+    password: { data: '', validity: false },
+    'password confirm': { data: '', validity: false },
+    name: { data: '', validity: false },
+    admin: false,
+    edit: false,
+  });
+
+  const userInfoHandler = (key) => (value, validity, boolean) => {
+    console.log('key : ', key);
+    if (key === 'edit' || key === 'admin') setUserInfo({ ...userInfo, [key]: boolean });
+    if (key === 'email' || key === 'password' || key === 'password confirm' || key === 'name')
+      setUserInfo({ ...userInfo, [key]: { data: value, validity: validity } });
+  };
+
   const loginHandler = () => {
-    setIsLogin(!isLogin)
-  }
+    setIsLogin(!isLogin);
+  };
 
   const handleResponseSuccess = () => {
-    // 엑세스 토큰확인 요청보내는 함수 
-  }
+    // 엑세스 토큰확인 요청보내는 함수
+  };
 
   return (
     <BrowserRouter>
       <div className='App'>
         <Switch>
           <Route exact path='/'>
-            <Nav isLogin={isLogin} loginHandler={loginHandler} handleResponseSuccess={handleResponseSuccess}/>
-            <About isLogin={isLogin}/>
-            {/* <Loading /> */}
-            {/* <Ingredients /> */}
-            {/* {<Refrigerator />} */}
+            <Nav isLogin={isLogin} loginHandler={loginHandler} handleResponseSuccess={handleResponseSuccess} />
+            <About isLogin={isLogin} />
           </Route>
           <Route path='/login'>
-            <Login loginHandler={loginHandler}/>
+            <Login userInfo={userInfo} loginHandler={loginHandler} userInfoHandler={userInfoHandler} />
           </Route>
           <Route path='/main'>
             <Nav />
@@ -43,10 +56,10 @@ function App() {
           </Route>
           <Route path='/mypage'>
             <Nav />
-            <Mypage />
+            <Mypage userInfo={userInfo} userInfoHandler={userInfoHandler} />
           </Route>
           <Route path='/signup'>
-            <Signup />
+            <Signup userInfo={userInfo} userInfoHandler={userInfoHandler} />
           </Route>
         </Switch>
       </div>
