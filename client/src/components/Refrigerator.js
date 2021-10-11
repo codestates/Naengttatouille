@@ -1,14 +1,20 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 import './Refrigerator.css'
 
 
-export default function Refrigerator({isAdmin}) {
+export default function Refrigerator({
+  recipeTag, 
+  setRecipeTag,
+  guestRefrigerator,
+  isLogin}) {
 
   const list = ['당근', '양상추', '토마토', '애호박', '양파', '가지', '아스파라거스', '감자', '고구마', '고추', '야채', '이름']
   //  서버구현완료시 삭제
   let listDivision =[]
+  let guestRefrigeratorList = []
 
   let refrigeratorLists
 
@@ -28,22 +34,44 @@ export default function Refrigerator({isAdmin}) {
   }
 
 
-  const addSearchList = () => {
+  const addSearchList = (event) => {
     //main컴포넌트에서 함수 받아서 검색어 저장소에 추가
+    const text = event.target.textContent
+
+    setRecipeTag(recipeTag.push(text))
   }
 
   function makeDivision(list) {
     let copy = list.slice(0)
     while(copy.length > 0){
-    if(copy.length >= 5){
-      listDivision.push(copy.splice(0,5))
-    }else if(copy.length < 5){
-      listDivision.push(copy.splice(0))
+      if(copy.length >= 5){
+       listDivision.push(copy.splice(0,5))
+      }else if(copy.length < 5){
+       listDivision.push(copy.splice(0))
+      }
     }
   }
-  }
-  makeDivision(list)
 
+  const makeGuestRefrigerator = (guestRefrigerator) => {
+    let copy = guestRefrigerator.slice(0)
+    while(copy.length > 0){
+      if(copy.length >= 5){
+        guestRefrigeratorList.push(copy.splice(0,5))
+      }else if(copy.length < 5){
+        listDivision.push(copy.splice(0))
+      }
+    }
+  }
+
+  // const makeList = (list, guestRefrigerator) => {
+  //   if(isLogin){
+  //     makeDivision(list)
+  //   }else{
+  //     makeGuestRefrigerator(guestRefrigeratorList)
+  //   }
+  // }
+  // makeList(list, guestRefrigerator)
+makeDivision(list)
 
   function makeEl(el) {
     if(el[1] === undefined){
@@ -80,7 +108,7 @@ export default function Refrigerator({isAdmin}) {
       <h3 className='Refrigerator__title'>나의 냉장고 속 재료</h3>
       <section className='My__refrigerator'>
         {listDivision.map((el) => {
-            return <div className='grocery_row'>
+            return <div key={uuidv4()} className='grocery_row'>
               {makeEl(el)}
               {makeDelete(el)}
               </div>
