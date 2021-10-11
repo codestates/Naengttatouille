@@ -16,7 +16,6 @@
     padding-left: -5%;
     border: solid;
     border-color: teal;
-    margin-top: 3%;
 }
 
 .ingredient{
@@ -27,24 +26,21 @@
     background-color: skyblue;
 }
 
-.hide {
-    display: none;
-}
-
-.delete {
-    margin-top: 3%;
-    margin-right: -4%;
-}
 .showDeleteBtn {
     border: solid;
     border-color: tomato;
     display: flex;
-    
+    margin-right: 1%;
+    padding-left: -5%;
 }
 
 .deleteBtn:hover{
     background-color: pink;
 }
-.delete {
-    
+.deleteBtn {
+    border: solid;
+    border-color: aqua;
+    height: 5vh;
+    margin-left: 2.3%;
+    width: 15.2vw;
 }
