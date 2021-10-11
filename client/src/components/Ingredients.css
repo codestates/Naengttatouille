@@ -1,0 +1,61 @@
+.title {
+    border: solid;
+    border-color: red;
+    height: 5vh;
+    padding-top: 1%;
+}
+
+.ingredients__List {
+    border: solid;
+    border-color: blue;
+    height: 60vh;
+    margin-top: -2%;
+    overflow-y: auto;
+}
+
+.ingredients__Container {
+    border: solid;
+    border-color: greenyellow;
+    margin: 3% 10% 10% 10%;
+}
+
+.ingredient__Contents {
+    margin-top: -1.6%;
+}
+
+.grocery_row {
+    border-color: black;
+    border: solid;
+    height: 20%;
+    margin: 4.5% 2.5% 2.5% 2.5%;
+}
+
+.ingredient {
+    border: solid;
+    border-color: gray;
+    height: 4vh;
+    width:  15vw;
+    margin-left: 2.5%;
+    margin-top: 3%;
+    
+}
+
+.showIngredients {
+    border: solid;
+    border-color: violet;
+    height: 100%;
+    
+}
+
+.showIngredients {
+    display: flex;
+}
+
+.method__explain {
+    border: solid;
+    border-color: orange;
+    overflow-y: auto;
+    width: 60vw;
+    height: 20vh;
+    margin-left: 20%;
+}

@@ -6,6 +6,8 @@ import Main from './pages/Main';
 import Mypage from './pages/Mypage';
 import Signup from './pages/Signup';
 import Loading from './components/Loading';
+import Ingredients from './components/Ingredients'
+import Refrigerator from './components/Refrigerator'
 import Nav from './components/Nav';
 import axios from 'axios';
 import './App.css';
@@ -13,26 +15,37 @@ import './App.css';
 function App() {
   const [isLogin, setIsLogin] = useState(false);
 
+  const loginHandler = () => {
+    setIsLogin(!isLogin)
+  }
+
+  const handleResponseSuccess = () => {
+    // 엑세스 토큰확인 요청보내는 함수 
+  }
+
   return (
     <BrowserRouter>
       <div className='App'>
         <Switch>
           <Route exact path='/'>
-            <Nav />
-            <About />
+            <Nav isLogin={isLogin} loginHandler={loginHandler} handleResponseSuccess={handleResponseSuccess}/>
+            <About isLogin={isLogin}/>
+            {/* <Loading /> */}
+            {/* <Ingredients /> */}
+            {/* {<Refrigerator />} */}
           </Route>
-          <Route exact path='/login'>
-            <Login />
+          <Route path='/login'>
+            <Login loginHandler={loginHandler}/>
           </Route>
-          <Route exact path='/main'>
+          <Route path='/main'>
             <Nav />
             <Main />
           </Route>
-          <Route exact path='/mypage'>
+          <Route path='/mypage'>
             <Nav />
             <Mypage />
           </Route>
-          <Route exact path='/signup'>
+          <Route path='/signup'>
             <Signup />
           </Route>
         </Switch>
