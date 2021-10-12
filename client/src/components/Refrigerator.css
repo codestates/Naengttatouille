@@ -1,0 +1,47 @@
+.Refrigerator__title {
+    border: solid;
+    border-color: skyblue;
+}
+
+.My__refrigerator {
+    height: 100vh;
+    border: solid;
+    border-color: rgb(126, 126, 241);
+    overflow-y: auto;
+}
+
+.showRefrigerator {
+    display: flex;
+    margin-right: 1%;
+    padding-left: -5%;
+    border: solid;
+    border-color: teal;
+    margin-top: 3%;
+}
+
+.ingredient{
+    height: 5vh;
+}
+
+.ingredient:hover{
+    background-color: skyblue;
+}
+
+.showDeleteBtn__Refrigerator {
+    border: solid;
+    border-color: tomato;
+    display: flex;
+    margin-right: 1%;
+    padding-left: -5%;
+}
+
+.deleteBtn__Refrigerator:hover{
+    background-color: pink;
+}
+.deleteBtn__Refrigerator {
+    border: solid;
+    border-color: aqua;
+    height: 3vh;
+    margin-left: 2.3%;
+    width: 15.2vw;
+}

@@ -1,0 +1,29 @@
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    border: solid;
+    border-color: red;
+}
+
+.loginBtn .logoutBtn {
+    
+}
+
+
+
+.Logo {
+    margin: 15px 0 15px 10px;
+}
+
+.ServiceName {
+    margin: 0 0 0 15px;
+}
+{/*위 오른쪽 아래 왼쪽*/}
+
+.goSignup .goMypage {
+
+}
+
+.goMain {
+    margin-left: -70%;
+}
