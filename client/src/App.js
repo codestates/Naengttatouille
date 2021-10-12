@@ -52,7 +52,7 @@ function App() {
           </Route>
           <Route path='/main'>
             <Nav />
-            <Main isLogin={isLogin}/>
+            <Main isLogin={isLogin} />
           </Route>
           <Route path='/mypage'>
             <Nav />
