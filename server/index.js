@@ -20,6 +20,10 @@ app.use(
 );
 app.use(cookieParser());
 
+app.get('/', (req, res) => {
+  res.status.send('Hello World');
+});
+
 app.use('/user', userRouter);
 app.use('/ingredient', ingredientRouter);
 app.use('/refrigerator', refrigeratorRouter);

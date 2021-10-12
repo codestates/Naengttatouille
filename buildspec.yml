@@ -11,5 +11,5 @@ phases:
 
 artifacts:
   files:
-    - target/naengttatouilleApp-1.0.0-BUILD-SNAPSHOT.war
+    - '**/*'
   base-directory: client/build
