@@ -1,0 +1,66 @@
+.Refrigerator__Container{
+    border: solid;
+    border-color: sienna;
+    height: 50vh;
+    width: 50vw;
+}
+
+.Refrigerator__title {
+    border: solid;
+    border-color: skyblue;
+}
+
+.My__refrigerator {
+    border: solid;
+    border-color: rgb(126, 126, 241);
+    overflow-y: auto;
+    height: 45vh;
+}
+
+.showRefrigerator {
+    display: flex;
+    margin-right: 1%;
+    padding-left: -5%;
+    border: solid;
+    border-color: teal;
+    margin-top: 3%;
+}
+
+.Refrigerator__ingredient{
+    border: solid;
+    border-color: gray;
+    width:  7.5vw;
+    margin-left: 3%;
+    margin-top: 1.5%;
+    height: 5vh;
+}
+
+.Refrigerator__ingredient:hover{
+    background-color: skyblue;
+}
+
+.showDeleteBtn__Refrigerator {
+    border: solid;
+    border-color: tomato;
+    display: flex;
+    margin-right: 1%;
+    padding-left: -5%;
+}
+
+.Refrigerator__grocery_row{
+    height: 20%;
+    margin: 2.25% 1.25% 1.25% 1.25%;
+}
+
+
+.deleteBtn__Refrigerator:hover{
+    background-color: pink;
+}
+.deleteBtn__Refrigerator {
+    border: solid;
+    border-color: aqua;
+    height: 3vh;
+    margin-left: 2.3%;
+    width: 18%;
+    font-size: 11px;
+}
