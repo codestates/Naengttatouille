@@ -8,5 +8,5 @@ sudo touch /etc/authbind/byport/80
 sudo chown ubuntu /etc/authbind/byport/80
 sudo chmod 755 /etc/authbind/byport/80
 
-sudo npx sequelize-cli db:migrate
-sudo npx sequeilze-cli db:seed:all
+sudo sequelize-cli db:migrate
+sudo sequeilze-cli db:seed:all
