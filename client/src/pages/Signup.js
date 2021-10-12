@@ -14,6 +14,11 @@ export default function Signup({ userInfo, userInfoHandler }) {
     if (checkErr()) {
       console.log('failed to submit');
     } else {
+      // console.log(`
+      //       name: ${userInfo.name.validity},
+      //       email: ${userInfo.email.validity},
+      //       password: ${userInfo.password.validity},
+      // `);
       // axios
       //   .post(
       //     'https://localhost:4000/user/signup',
@@ -31,12 +36,12 @@ export default function Signup({ userInfo, userInfoHandler }) {
       //   });
     }
   };
-  console.log('signup1 : ', userInfo.edit);
-  useEffect(() => {
-    userInfoHandler('edit')(null, null, false);
-    return userInfoHandler('edit')(null, null, false);
-  }, []);
-  console.log('signup2 : ', userInfo.edit);
+  // console.log('signup1 : ', userInfo.edit);
+  // useEffect(() => {
+  //   userInfoHandler('edit')(null, null, false);
+  //   return userInfoHandler('edit')(null, null, false);
+  // }, []);
+  // console.log('signup2 : ', userInfo.edit);
 
   return (
     <div>

@@ -31,11 +31,11 @@ export default function Mypage({ userInfo, userInfoHandler }) {
       //   });
     }
   };
-  console.log('mypage1 : ', userInfo.edit);
-  useEffect(() => {
-    userInfoHandler('edit')(null, null, true);
-  }, []);
-  console.log('mypage2 : ', userInfo.edit);
+  // console.log('mypage1 : ', userInfo.edit);
+  // useEffect(() => {
+  //   userInfoHandler('edit')(null, null, true);
+  // }, []);
+  // console.log('mypage2 : ', userInfo.edit);
 
   return (
     <div>

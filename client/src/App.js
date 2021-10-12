@@ -25,7 +25,7 @@ function App() {
   });
 
   const userInfoHandler = (key) => (value, validity, boolean) => {
-    console.log('key : ', key);
+    // console.log('key : ', key);
     if (key === 'edit' || key === 'admin') setUserInfo({ ...userInfo, [key]: boolean });
     if (key === 'email' || key === 'password' || key === 'password confirm' || key === 'name')
       setUserInfo({ ...userInfo, [key]: { data: value, validity: validity } });
@@ -42,6 +42,7 @@ function App() {
   return (
     <BrowserRouter>
       <div className='App'>
+        <Nav />
         <Switch>
           <Route exact path='/'>
             <Nav isLogin={isLogin} loginHandler={loginHandler} handleResponseSuccess={handleResponseSuccess} />
@@ -51,11 +52,11 @@ function App() {
             <Login userInfo={userInfo} loginHandler={loginHandler} userInfoHandler={userInfoHandler} />
           </Route>
           <Route path='/main'>
-            <Nav />
+            {/* <Nav /> */}
             <Main isLogin={isLogin} />
           </Route>
           <Route path='/mypage'>
-            <Nav />
+            {/* <Nav /> */}
             <Mypage userInfo={userInfo} userInfoHandler={userInfoHandler} />
           </Route>
           <Route path='/signup'>
