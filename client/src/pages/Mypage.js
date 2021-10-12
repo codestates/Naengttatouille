@@ -1,41 +1,41 @@
 import React, { useState, useEffect } from 'react';
-// import axios from 'axios';
+import axios from 'axios';
 import UserInput from '../components/UserInput';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 export default function Mypage({ userInfo, userInfoHandler }) {
+  // userInfoHandler('edit')(null, null, true);
+  useEffect(() => userInfoHandler('edit')(null, null, true), []);
+  const history = useHistory();
   const checkErr = () => {
-    for (const key in userInfo) {
-      if (!userInfo[key][`validity`]) return true;
-    }
-    return false;
+    // for (const key in userInfo) {
+    //   if (!userInfo[key][`validity`]) return true;
+    // }
+    // return false;
+    // console.log(userInfo);
+    const emailValidity = userInfo['email'][`validity`];
+    const passValidity = userInfo['password'][`validity`];
+    const confirmValidity = userInfo['password confirm'][`validity`];
+    const nameValidity = userInfo['name'][`validity`];
+    if (emailValidity && passValidity && confirmValidity && nameValidity) return false;
   };
 
   const handleLogin = () => {
     if (checkErr()) {
       console.log('failed to submit');
     } else {
-      // axios.patch(
-      //   `https://localhost:4000/userinfo:${userInfo.email.data}`,
-      //   {
-      //     name: userInfo.name.validity,
-      //     email: userInfo.email.validity,
-      //     password: userInfo.password.validity,
-      //   },
-      //   {
-      //     withCredentials: true, //쿠키 허용
-      //   }
-      // );
-      //   .then((result) => {
-      //     console.log(result.config.data);
-      //   });
+      axios
+        .patch(`http://localhost:4000/user/userinfo?${userInfo.email.data}`, {
+          name: userInfo.name.data,
+          password: userInfo.password.data,
+        })
+        .then((result) => {
+          alert('회원정보 수정에 성공했습니다');
+          // userInfoHandler('edit')(null, null, true);
+          history.push('/');
+        });
     }
   };
-  console.log('mypage1 : ', userInfo.edit);
-  useEffect(() => {
-    userInfoHandler('edit')(null, null, true);
-  }, []);
-  console.log('mypage2 : ', userInfo.edit);
 
   return (
     <div>

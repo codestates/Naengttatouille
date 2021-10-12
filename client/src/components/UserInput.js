@@ -73,8 +73,8 @@ export default function UserInput({ item, type, handler, inputInfo }) {
     let cv = checkValidity(item, e.target.value);
     setErrMsg(getMessage());
     setIsError(checkErr());
-    console.log(value);
-    handler(item)(value, cv, null); //상위 컴포넌트에 입력값 전달
+    // console.log(value);
+    handler(item)(value, cv, false); //상위 컴포넌트에 입력값 전달
   };
 
   return (

@@ -1,53 +1,55 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import UserInput from '../components/UserInput';
+import { Link, useHistory } from 'react-router-dom';
 
 export default function Signup({ userInfo, userInfoHandler }) {
+  useEffect(() => userInfoHandler('edit')(null, null, false), []);
+  const [success, setSuccess] = useState(false);
+  const history = useHistory();
   const checkErr = () => {
-    for (const key in userInfo) {
-      if (!userInfo[key][`validity`]) return true;
-    }
-    return false;
+    // for (const key in userInfo) {
+    //   if (!userInfo[key][`validity`]) return true;
+    // }
+    // return false;
+    // console.log(userInfo);
+    const emailValidity = userInfo['email'][`validity`];
+    const passValidity = userInfo['password'][`validity`];
+    const confirmValidity = userInfo['password confirm'][`validity`];
+    const nameValidity = userInfo['name'][`validity`];
+    if (emailValidity && passValidity && confirmValidity && nameValidity) return false;
   };
 
   const handleLogin = () => {
     if (checkErr()) {
       console.log('failed to submit');
     } else {
-      // axios
-      //   .post(
-      //     'https://localhost:4000/user/signup',
-      //     {
-      //       name: userInfo.name.validity,
-      //       email: userInfo.email.validity,
-      //       password: userInfo.password.validity,
-      //     },
-      //     {
-      //       withCredentials: true, //쿠키 허용
-      //     }
-      //   )
-      //   .then((result) => {
-      //     console.log(result.config.data);
-      //   });
+      axios
+        .post('http://localhost:4000/user/signup', {
+          name: userInfo.name.data,
+          email: userInfo.email.data,
+          password: userInfo.password.data,
+        })
+        .then((result) => {
+          alert('회원가입을 성공했습니다');
+          history.push('/');
+        });
     }
   };
-  console.log('signup1 : ', userInfo.edit);
-  useEffect(() => {
-    userInfoHandler('edit')(null, null, false);
-    return userInfoHandler('edit')(null, null, false);
-  }, []);
-  console.log('signup2 : ', userInfo.edit);
-
+  // useEffect(() => <Link to='/login' />, [success]);
   return (
     <div>
       <h1>Sign Up</h1>
-      <form id='signupForm' method='post' action='https://localhost:4000/user/signup'>
-        <UserInput item='email' type='email' handler={userInfoHandler} inputInfo={userInfo} />
-        <UserInput item='password' type='password' handler={userInfoHandler} inputInfo={userInfo} />
-        <UserInput item='password confirm' type='password' handler={userInfoHandler} inputInfo={userInfo} />
-        <UserInput item='name' type='text' handler={userInfoHandler} inputInfo={userInfo} />
-      </form>
-      <button type={checkErr() ? 'button' : 'submit'} onClick={handleLogin} form='signupForm'>
+
+      {/* <form id='signupForm' method='post' action='http://localhost:4000/user/signup'> */}
+      <UserInput item='email' type='email' handler={userInfoHandler} inputInfo={userInfo} />
+      <UserInput item='password' type='password' handler={userInfoHandler} inputInfo={userInfo} />
+      <UserInput item='password confirm' type='password' handler={userInfoHandler} inputInfo={userInfo} />
+      <UserInput item='name' type='text' handler={userInfoHandler} inputInfo={userInfo} />
+      {/* </form> */}
+      {/* {success ? <Link to='/login' /> : null} */}
+      <button type='button' onClick={handleLogin}>
+        {/* <button type={checkErr() ? 'button' : 'submit'} onClick={handleLogin} form='signupForm'> */}
         Sign Up
       </button>
     </div>

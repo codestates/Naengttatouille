@@ -98,11 +98,15 @@ export default function Recipe({ recipeTags, handleRecipeTags }) {
           {videoInfo.map((video) => {
             return (
               <li className='vid__one'>
-                <img className='thumbnail' src={video.videoThumbnail} alt='thumbnail' />
-                <span className='vid__info'>
+                <a className='vid__info' href={video.url} target='_blank' rel='noreferrer'>
+                  <img className='thumbnail' src={video.videoThumbnail} alt='thumbnail' />
+                </a>
+                <a className='vid__info' href={video.url} target='_blank' rel='noreferrer'>
+                  {/* <span className='vid__info'> */}
                   <div className='title'>{video.videoTitle}</div>
                   <div className='description'>{video.videoDescription}</div>
-                </span>
+                  {/* </span> */}
+                </a>
               </li>
             );
           })}
