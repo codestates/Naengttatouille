@@ -7,6 +7,7 @@ import Recipe from '../components/Recipe';
 export default function Main({ isLogin }) {
   const [guestRefrigerator, setGuestRefrigerator] = useState([]);
   const [recipeTags, setRecipeTags] = useState(['배', '사과']);
+  const [guestRecipeTags, setGuestRecipeTags] = useState([])
   console.log(recipeTags);
   const handleRecipeTags = (str, tag) => {
     if (str === 'add') setRecipeTags([...recipeTags, tag]);
@@ -36,6 +37,8 @@ export default function Main({ isLogin }) {
             // setRecipeTag={setRecipeTags}
             handleRecipeTags={handleRecipeTags}
             isLogin={isLogin}
+            guestRecipeTags={guestRecipeTags}
+            setGuestRecipeTags={setGuestRecipeTags}
           />
         </div>
       </div>
