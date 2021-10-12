@@ -26,7 +26,10 @@ function App() {
 
   const userInfoHandler = (key) => (value, validity, boolean) => {
     // console.log('key : ', key);
-    if (key === 'edit' || key === 'admin') setUserInfo({ ...userInfo, [key]: boolean });
+    if (key === 'edit' || key === 'admin') {
+      setUserInfo({ ...userInfo, [key]: boolean });
+      console.log(`${key} changed to : ${userInfo[key]}`);
+    }
     if (key === 'email' || key === 'password' || key === 'password confirm' || key === 'name')
       setUserInfo({ ...userInfo, [key]: { data: value, validity: validity } });
   };
@@ -42,10 +45,11 @@ function App() {
   return (
     <BrowserRouter>
       <div className='App'>
-        <Nav />
+        <Nav isLogin={isLogin} loginHandler={loginHandler} handleResponseSuccess={handleResponseSuccess} />
+
         <Switch>
           <Route exact path='/'>
-            <Nav isLogin={isLogin} loginHandler={loginHandler} handleResponseSuccess={handleResponseSuccess} />
+            {/* <Nav isLogin={isLogin} loginHandler={loginHandler} handleResponseSuccess={handleResponseSuccess} /> */}
             <About isLogin={isLogin} />
           </Route>
           <Route path='/login'>
