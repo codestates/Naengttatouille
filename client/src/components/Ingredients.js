@@ -115,7 +115,7 @@ export default function Ingredients({
   }
 
   return (
-    <div className='ingredient__Contents'>
+    <div className='ingredient__Container'>
       <h3 className='ingredient__title'>식재료 리스트</h3>
       <section className='ingredients__List'>
           {listDivision.map((el) => {
@@ -127,7 +127,7 @@ export default function Ingredients({
           
       </section>
       <section className='Storage__method'>
-        <h3 className='method__description'>식재료 보관방법</h3>
+        <span className='method__description'>식재료 보관방법</span>
 
         {isAdmin ? <span><input onKeyUp={onChangeName} type='text' placeholder='재료이름을 입력해주세요'></input>
         <input onKeyUp={onChangeMethod} type='text' placeholder='보관법을 작성해주세요'>

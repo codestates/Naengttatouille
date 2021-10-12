@@ -1,49 +1,39 @@
-.title {
+.ingredient__Container {
     border: solid;
-    border-color: red;
-    height: 5vh;
-    padding-top: 1%;
+    border-color: blue;
+    height: 50vh;
+    width: 50vw;
 }
 
 .ingredients__List {
-    border: solid;
-    border-color: blue;
-    height: 60vh;
-    margin-top: -2%;
+    flex-wrap: wrap;
+    margin-top: -1%;
     overflow-y: auto;
-}
-
-.ingredients__Container {
     border: solid;
-    border-color: greenyellow;
-    margin: 3% 10% 10% 10%;
-}
-
-.ingredient__Contents {
-    margin-top: -1.6%;
+    border-color: chartreuse;
 }
 
 .grocery_row {
     border-color: black;
     border: solid;
-    height: 20%;
-    margin: 4.5% 2.5% 2.5% 2.5%;
+    height: 10%;
+    margin: 2.25% 1.25% 1.25% 1.25%;
 }
 
 .ingredient {
     border: solid;
     border-color: gray;
-    height: 4vh;
-    width:  15vw;
-    margin-left: 2.5%;
-    margin-top: 3%;
+    width:  7.5vw;
+    margin-left: 3%;
+    margin-top: 1.5%;
+    height: 5vh;
     
 }
 
 .showIngredients {
     border: solid;
     border-color: violet;
-    height: 100%;
+    height: 50%;
     
 }
 
@@ -55,8 +45,8 @@
     border: solid;
     border-color: orange;
     overflow-y: auto;
-    width: 60vw;
-    height: 20vh;
+    width: 30vw;
+    height: 6vh;
     margin-left: 20%;
 }
 
@@ -64,16 +54,16 @@
     border: solid;
     border-color: tomato;
     display: flex;
-    margin-right: 1%;
-    padding-left: -5%;
+    margin-right: 0.5%;
+    padding-left: -2.5%;
 }
 
 .deleteBtn__Ingredient {
     border: solid;
     border-color: aqua;
-    height: 5vh;
-    margin-left: 2.3%;
-    width: 15.2vw;
+    height: 2.5vh;
+    margin-left: 1.15%;
+    width: 7.6vw;
 }
 
 .deleteBtn__Ingredient:hover {

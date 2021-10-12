@@ -5,9 +5,8 @@ import Refrigerator from '../components/Refrigerator';
 import Recipe from '../components/Recipe';
 
 export default function Main({ isLogin }) {
-  const [guestRefrigerator, setGuestRefrigerator] = useState([]);
+  const [guestRefrigerator, setGuestRefrigerator] = useState(['당근','양상추','토마토','애호박','양파','가지']);
   const [recipeTags, setRecipeTags] = useState(['배', '사과']);
-  const [guestRecipeTags, setGuestRecipeTags] = useState([])
   console.log(recipeTags);
   const handleRecipeTags = (str, tag) => {
     if (str === 'add') setRecipeTags([...recipeTags, tag]);
@@ -22,14 +21,6 @@ export default function Main({ isLogin }) {
   return (
     <div>
       <div id='ingredients'>
-        <div id='grocery'>
-          <Ingredients
-            guestRefrigerator={guestRefrigerator}
-            setGuestRefrigerator={setGuestRefrigerator}
-            isLogin={isLogin}
-            guestRefrigerator={guestRefrigerator}
-          />
-        </div>
         <div id='refrigerator'>
           <Refrigerator
             guestRefrigerator={guestRefrigerator}
@@ -37,8 +28,14 @@ export default function Main({ isLogin }) {
             // setRecipeTag={setRecipeTags}
             handleRecipeTags={handleRecipeTags}
             isLogin={isLogin}
-            guestRecipeTags={guestRecipeTags}
-            setGuestRecipeTags={setGuestRecipeTags}
+          />
+        </div>
+        <div id='grocery'>
+          <Ingredients
+            guestRefrigerator={guestRefrigerator}
+            setGuestRefrigerator={setGuestRefrigerator}
+            isLogin={isLogin}
+            guestRefrigerator={guestRefrigerator}
           />
         </div>
       </div>

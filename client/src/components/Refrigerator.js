@@ -53,10 +53,6 @@ export default function Refrigerator({
     handleRecipeTags('add', text);
   };
   
-  const addGuestTag = (event) => {
-    const text = event.target.textContent
-    setGuestRecipeTags([...guestRefrigerator, text]);
-  }
 
   function makeDivision(list) {
     let copy = list.slice(0);
@@ -79,23 +75,21 @@ export default function Refrigerator({
       }
     }
   };
-  console.log(makeGuestRefrigerator(guestRefrigerator))
 
-  // const makeList = (list, guestRefrigerator) => {
-  //   if(isLogin){
-  //     makeDivision(list)
-  //   }else{
-  //     makeGuestRefrigerator(guestRefrigeratorList)
-  //   }
-  // }
-  // makeList(list, guestRefrigerator)
-  makeDivision(list);
+  const makeList = (list, guestRefrigerator) => {
+    if(isLogin){
+      makeDivision(list)
+    }else{
+      makeGuestRefrigerator(guestRefrigerator)
+    }
+  }
+  makeList(list, guestRefrigerator)
 
   function makeEl(el) {
     if (el[1] === undefined) {
       return (
         <div className='showRefrigerator'>
-          <span onClick={isLogin ? addSearchList : addGuestTag} className='ingredient'>
+          <span onClick={addSearchList} className='Refrigerator__ingredient'>
             {el[0]}
           </span>
         </div>
@@ -103,10 +97,10 @@ export default function Refrigerator({
     } else if (el[2] === undefined) {
       return (
         <div className='showRefrigerator'>
-          <span onClick={isLogin ? addSearchList : addGuestTag} className='ingredient'>
+          <span onClick={addSearchList} className='Refrigerator__ingredient'>
             {el[0]}
           </span>
-          <span onClick={isLogin ? addSearchList : addGuestTag} className='ingredient'>
+          <span onClick={addSearchList} className='Refrigerator__ingredient'>
             {el[1]}
           </span>
         </div>
@@ -114,13 +108,13 @@ export default function Refrigerator({
     } else if (el[3] === undefined) {
       return (
         <div className='showRefrigerator'>
-          <span onClick={isLogin ? addSearchList : addGuestTag} className='ingredient'>
+          <span onClick={addSearchList} className='Refrigerator__ingredient'>
             {el[0]}
           </span>
-          <span onClick={isLogin ? addSearchList : addGuestTag} className='ingredient'>
+          <span onClick={addSearchList} className='Refrigerator__ingredient'>
             {el[1]}
           </span>
-          <span onClick={isLogin ? addSearchList : addGuestTag} className='ingredient'>
+          <span onClick={addSearchList} className='Refrigerator__ingredient'>
             {el[2]}
           </span>
         </div>
@@ -128,16 +122,16 @@ export default function Refrigerator({
     } else if (el[4] === undefined) {
       return (
         <div className='showRefrigerator'>
-          <span onClick={isLogin ? addSearchList : addGuestTag} className='ingredient'>
+          <span onClick={addSearchList} className='Refrigerator__ingredient'>
             {el[0]}
           </span>
-          <span onClick={isLogin ? addSearchList : addGuestTag} className='ingredient'>
+          <span onClick={addSearchList} className='Refrigerator__ingredient'>
             {el[1]}
           </span>
-          <span onClick={isLogin ? addSearchList : addGuestTag} className='ingredient'>
+          <span onClick={addSearchList} className='Refrigerator__ingredient'>
             {el[2]}
           </span>
-          <span onClick={isLogin ? addSearchList : addGuestTag} className='ingredient'>
+          <span onClick={addSearchList} className='Refrigerator__ingredient'>
             {el[3]}
           </span>
         </div>
@@ -145,19 +139,19 @@ export default function Refrigerator({
     } else {
       return (
         <div className='showRefrigerator'>
-          <span onClick={isLogin ? addSearchList : addGuestTag} className='ingredient'>
+          <span onClick={addSearchList} className='Refrigerator__ingredient'>
             {el[0]}
           </span>
-          <span onClick={isLogin ? addSearchList : addGuestTag} className='ingredient'>
+          <span onClick={addSearchList} className='Refrigerator__ingredient'>
             {el[1]}
           </span>
-          <span onClick={isLogin ? addSearchList : addGuestTag} className='ingredient'>
+          <span onClick={addSearchList} className='Refrigerator__ingredient'>
             {el[2]}
           </span>
-          <span onClick={isLogin ? addSearchList : addGuestTag} className='ingredient'>
+          <span onClick={addSearchList} className='Refrigerator__ingredient'>
             {el[3]}
           </span>
-          <span onClick={isLogin ? addSearchList : addGuestTag} className='ingredient'>
+          <span onClick={addSearchList} className='Refrigerator__ingredient'>
             {el[4]}
           </span>
         </div>
@@ -241,16 +235,23 @@ export default function Refrigerator({
   //재료 데이터를 가져와서 클릭시 작동하는 함수에 재료의 데이터를 전해줘야함
 
   return (
-    <div>
-      <h3 className='Refrigerator__title'>나의 냉장고 속 재료</h3>
+    <div className='Refrigerator__Container'>
+      <span className='Refrigerator__title'>나의 냉장고 속 재료</span>
       <section className='My__refrigerator'>
-        {listDivision.map((el) => {
+        {isLogin ? listDivision.map((el) => {
           return (
-            <div key={uuidv4()} className='grocery_row'>
+            <div key={uuidv4()} className='Refrigerator__grocery_row'>
               {makeEl(el)}
               {makeDelete(el)}
             </div>
           );
+        }) : guestRefrigeratorList.map((el) => {
+          return (
+            <div key={uuidv4()} className='Refrigerator__grocery_row'>
+              {makeEl(el)}
+              {makeDelete(el)}
+            </div>
+          )
         })}
       </section>
     </div>
