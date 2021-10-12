@@ -51,7 +51,7 @@ export default function Nav({ isLogin, loginHandler, handleResponseSuccess }) {
       </button>
 
       <div className='btn'>
-        {isLogin ? (
+        {!isLogin ? (
           <button className='goSignup' onClick={goSignup}>
             회원가입
           </button>
@@ -60,7 +60,7 @@ export default function Nav({ isLogin, loginHandler, handleResponseSuccess }) {
             MyPage
           </button>
         )}
-        {isLogin ? (
+        {!isLogin ? (
           <button className='loginBtn' onClick={goLogin}>
             로그인
           </button>

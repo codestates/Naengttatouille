@@ -105,7 +105,6 @@ export default function Ingredients({
 
   //삭제하는 버튼
   
-  
   function MouseOver(event) {
     event.target.style.background = 'red'
     // setExContent(explains.kind) 상태변경으로 설명 변경해주기
@@ -116,7 +115,7 @@ export default function Ingredients({
 
   return (
     <div className='ingredient__Container'>
-      <h3 className='ingredient__title'>식재료 리스트</h3>
+      <div className='ingredient__title'>식재료 리스트</div>
       <section className='ingredients__List'>
           {listDivision.map((el) => {
             return <div key={uuidv4()} className='grocery_row'>
