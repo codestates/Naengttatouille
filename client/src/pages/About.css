@@ -2,7 +2,7 @@
     display: flex;
     width: 100%;
     height: 80%;
-    background-image: url(../야채배경.jpeg);
+    background-image: url(./vegesimg.jpeg);
     align-items: center;
     justify-content: center;
 }
