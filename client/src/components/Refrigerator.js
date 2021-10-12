@@ -4,7 +4,13 @@ import { v4 as uuidv4 } from 'uuid';
 
 import './Refrigerator.css';
 
-export default function Refrigerator({ recipeTag, handleRecipeTags, guestRefrigerator, isLogin }) {
+export default function Refrigerator({ 
+  recipeTag, 
+  handleRecipeTags, 
+  guestRefrigerator, 
+  isLogin,
+  guestRecipeTags,
+  setGuestRecipeTags }) {
   const list = [
     '당근',
     '양상추',
@@ -46,6 +52,11 @@ export default function Refrigerator({ recipeTag, handleRecipeTags, guestRefrige
     // setRecipeTag(recipeTag.push(text))
     handleRecipeTags('add', text);
   };
+  
+  const addGuestTag = (event) => {
+    const text = event.target.textContent
+    setGuestRecipeTags([...guestRefrigerator, text]);
+  }
 
   function makeDivision(list) {
     let copy = list.slice(0);
@@ -64,10 +75,11 @@ export default function Refrigerator({ recipeTag, handleRecipeTags, guestRefrige
       if (copy.length >= 5) {
         guestRefrigeratorList.push(copy.splice(0, 5));
       } else if (copy.length < 5) {
-        listDivision.push(copy.splice(0));
+        guestRefrigeratorList.push(copy.splice(0));
       }
     }
   };
+  console.log(makeGuestRefrigerator(guestRefrigerator))
 
   // const makeList = (list, guestRefrigerator) => {
   //   if(isLogin){
@@ -83,7 +95,7 @@ export default function Refrigerator({ recipeTag, handleRecipeTags, guestRefrige
     if (el[1] === undefined) {
       return (
         <div className='showRefrigerator'>
-          <span onClick={addSearchList} className='ingredient'>
+          <span onClick={isLogin ? addSearchList : addGuestTag} className='ingredient'>
             {el[0]}
           </span>
         </div>
@@ -91,10 +103,10 @@ export default function Refrigerator({ recipeTag, handleRecipeTags, guestRefrige
     } else if (el[2] === undefined) {
       return (
         <div className='showRefrigerator'>
-          <span onClick={addSearchList} className='ingredient'>
+          <span onClick={isLogin ? addSearchList : addGuestTag} className='ingredient'>
             {el[0]}
           </span>
-          <span onClick={addSearchList} className='ingredient'>
+          <span onClick={isLogin ? addSearchList : addGuestTag} className='ingredient'>
             {el[1]}
           </span>
         </div>
@@ -102,13 +114,13 @@ export default function Refrigerator({ recipeTag, handleRecipeTags, guestRefrige
     } else if (el[3] === undefined) {
       return (
         <div className='showRefrigerator'>
-          <span onClick={addSearchList} className='ingredient'>
+          <span onClick={isLogin ? addSearchList : addGuestTag} className='ingredient'>
             {el[0]}
           </span>
-          <span onClick={addSearchList} className='ingredient'>
+          <span onClick={isLogin ? addSearchList : addGuestTag} className='ingredient'>
             {el[1]}
           </span>
-          <span onClick={addSearchList} className='ingredient'>
+          <span onClick={isLogin ? addSearchList : addGuestTag} className='ingredient'>
             {el[2]}
           </span>
         </div>
@@ -116,16 +128,16 @@ export default function Refrigerator({ recipeTag, handleRecipeTags, guestRefrige
     } else if (el[4] === undefined) {
       return (
         <div className='showRefrigerator'>
-          <span onClick={addSearchList} className='ingredient'>
+          <span onClick={isLogin ? addSearchList : addGuestTag} className='ingredient'>
             {el[0]}
           </span>
-          <span onClick={addSearchList} className='ingredient'>
+          <span onClick={isLogin ? addSearchList : addGuestTag} className='ingredient'>
             {el[1]}
           </span>
-          <span onClick={addSearchList} className='ingredient'>
+          <span onClick={isLogin ? addSearchList : addGuestTag} className='ingredient'>
             {el[2]}
           </span>
-          <span onClick={addSearchList} className='ingredient'>
+          <span onClick={isLogin ? addSearchList : addGuestTag} className='ingredient'>
             {el[3]}
           </span>
         </div>
@@ -133,19 +145,19 @@ export default function Refrigerator({ recipeTag, handleRecipeTags, guestRefrige
     } else {
       return (
         <div className='showRefrigerator'>
-          <span onClick={addSearchList} className='ingredient'>
+          <span onClick={isLogin ? addSearchList : addGuestTag} className='ingredient'>
             {el[0]}
           </span>
-          <span onClick={addSearchList} className='ingredient'>
+          <span onClick={isLogin ? addSearchList : addGuestTag} className='ingredient'>
             {el[1]}
           </span>
-          <span onClick={addSearchList} className='ingredient'>
+          <span onClick={isLogin ? addSearchList : addGuestTag} className='ingredient'>
             {el[2]}
           </span>
-          <span onClick={addSearchList} className='ingredient'>
+          <span onClick={isLogin ? addSearchList : addGuestTag} className='ingredient'>
             {el[3]}
           </span>
-          <span onClick={addSearchList} className='ingredient'>
+          <span onClick={isLogin ? addSearchList : addGuestTag} className='ingredient'>
             {el[4]}
           </span>
         </div>
