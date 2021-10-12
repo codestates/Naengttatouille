@@ -1,15 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { Switch, Route, Redirect, BrowserRouter } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import About from './pages/About';
 import Login from './pages/Login';
 import Main from './pages/Main';
 import Mypage from './pages/Mypage';
 import Signup from './pages/Signup';
-import Loading from './components/Loading';
-import Ingredients from './components/Ingredients';
-import Refrigerator from './components/Refrigerator';
 import Nav from './components/Nav';
-import axios from 'axios';
 import './App.css';
 
 function App() {
@@ -25,10 +21,8 @@ function App() {
   });
 
   const userInfoHandler = (key) => (value, validity, boolean) => {
-    // console.log('key : ', key);
     if (key === 'edit' || key === 'admin') {
       setUserInfo({ ...userInfo, [key]: boolean });
-      // console.log(`${key} changed to : ${userInfo[key]}`);
     }
     if (key === 'email' || key === 'password' || key === 'password confirm' || key === 'name')
       setUserInfo({ ...userInfo, [key]: { data: value, validity: validity } });
