@@ -33,6 +33,10 @@ export default function Signup({ userInfo, userInfoHandler }) {
         .then((result) => {
           alert('회원가입을 성공했습니다');
           history.push('/');
+        })
+        .catch((err) => {
+          console.log(err);
+          alert('회원가입을 실패했습니다');
         });
     }
   };

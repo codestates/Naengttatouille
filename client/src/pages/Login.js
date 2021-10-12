@@ -22,10 +22,17 @@ export default function Login({ userInfo, userInfoHandler, loginHandler }) {
           email: userInfo.email.data,
           password: userInfo.password.data,
         })
-        .then((result) => {
+        .then((response) => {
           // console.log('response : ', result.config.data);
           loginHandler();
+          userInfoHandler('admin')(null, null, response.data.admin);
+          console.log('login success', userInfo);
           history.push('/main');
+        })
+        .catch((err) => {
+          alert('로그인에 실패했습니다');
+          userInfoHandler('failed login');
+          // console.log('login failed', userInfo);
         });
     }
   };

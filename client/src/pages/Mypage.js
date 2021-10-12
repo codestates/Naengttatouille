@@ -13,14 +13,13 @@ export default function Mypage({ userInfo, userInfoHandler }) {
     // }
     // return false;
     // console.log(userInfo);
-    const emailValidity = userInfo['email'][`validity`];
     const passValidity = userInfo['password'][`validity`];
     const confirmValidity = userInfo['password confirm'][`validity`];
     const nameValidity = userInfo['name'][`validity`];
-    if (emailValidity && passValidity && confirmValidity && nameValidity) return false;
+    if (passValidity && confirmValidity && nameValidity) return false;
   };
 
-  const handleLogin = () => {
+  const requestEdit = () => {
     if (checkErr()) {
       console.log('failed to submit');
     } else {
@@ -31,8 +30,11 @@ export default function Mypage({ userInfo, userInfoHandler }) {
         })
         .then((result) => {
           alert('회원정보 수정에 성공했습니다');
-          // userInfoHandler('edit')(null, null, true);
           history.push('/');
+        })
+        .catch((err) => {
+          console.log(err);
+          alert('회원정보 수정에 실패했습니다');
         });
     }
   };
@@ -40,13 +42,15 @@ export default function Mypage({ userInfo, userInfoHandler }) {
   return (
     <div>
       <h1>Mypage</h1>
-      <form id='signupForm' method='patch' action={`https://localhost:4000/userinfo:${userInfo.email.data}`}>
+      <form>
+        {/* <form id='signupForm' method='patch' action={`https://localhost:4000/userinfo:${userInfo.email.data}`}> */}
         <UserInput item='email' type='email' handler={userInfoHandler} inputInfo={userInfo} />
         <UserInput item='password' type='password' handler={userInfoHandler} inputInfo={userInfo} />
         <UserInput item='password confirm' type='password' handler={userInfoHandler} inputInfo={userInfo} />
         <UserInput item='name' type='text' handler={userInfoHandler} inputInfo={userInfo} />
       </form>
-      <button type={checkErr() ? 'button' : 'submit'} onClick={handleLogin} form='signupForm'>
+      <button type='button' onClick={requestEdit}>
+        {/* <button type={checkErr() ? 'button' : 'submit'} onClick={requestEdit} form='signupForm'> */}
         Edit Profile
       </button>
     </div>

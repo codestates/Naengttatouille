@@ -16,7 +16,7 @@ function App() {
   const [isLogin, setIsLogin] = useState(false);
 
   const [userInfo, setUserInfo] = useState({
-    email: { data: '', validity: true },
+    email: { data: '', validity: false },
     password: { data: '', validity: false },
     'password confirm': { data: '', validity: false },
     name: { data: '', validity: false },
@@ -28,10 +28,19 @@ function App() {
     // console.log('key : ', key);
     if (key === 'edit' || key === 'admin') {
       setUserInfo({ ...userInfo, [key]: boolean });
-      console.log(`${key} changed to : ${userInfo[key]}`);
+      // console.log(`${key} changed to : ${userInfo[key]}`);
     }
     if (key === 'email' || key === 'password' || key === 'password confirm' || key === 'name')
       setUserInfo({ ...userInfo, [key]: { data: value, validity: validity } });
+    if (key === 'init')
+      setUserInfo({
+        email: { data: '', validity: false },
+        password: { data: '', validity: false },
+        'password confirm': { data: '', validity: false },
+        name: { data: '', validity: false },
+        admin: false,
+        edit: false,
+      });
   };
 
   const loginHandler = () => {
@@ -45,26 +54,34 @@ function App() {
   return (
     <BrowserRouter>
       <div className='App'>
-        <Nav isLogin={isLogin} loginHandler={loginHandler} handleResponseSuccess={handleResponseSuccess} />
+        <Nav
+          isLogin={isLogin}
+          userInfo={userInfo}
+          loginHandler={loginHandler}
+          userInfoHandler={userInfoHandler}
+          handleResponseSuccess={handleResponseSuccess}
+        />
 
         <Switch>
           <Route exact path='/'>
-            {/* <Nav isLogin={isLogin} loginHandler={loginHandler} handleResponseSuccess={handleResponseSuccess} /> */}
-            <About isLogin={isLogin} />
+            <About isLogin={isLogin} userInfo={userInfo} />
           </Route>
           <Route path='/login'>
-            <Login userInfo={userInfo} loginHandler={loginHandler} userInfoHandler={userInfoHandler} />
+            <Login
+              isLogin={isLogin}
+              userInfo={userInfo}
+              loginHandler={loginHandler}
+              userInfoHandler={userInfoHandler}
+            />
           </Route>
           <Route path='/main'>
-            {/* <Nav /> */}
-            <Main isLogin={isLogin} />
+            <Main isLogin={isLogin} userInfo={userInfo} />
           </Route>
           <Route path='/mypage'>
-            {/* <Nav /> */}
-            <Mypage userInfo={userInfo} userInfoHandler={userInfoHandler} />
+            <Mypage isLogin={isLogin} userInfo={userInfo} userInfoHandler={userInfoHandler} />
           </Route>
           <Route path='/signup'>
-            <Signup userInfo={userInfo} userInfoHandler={userInfoHandler} />
+            <Signup isLogin={isLogin} userInfo={userInfo} userInfoHandler={userInfoHandler} />
           </Route>
         </Switch>
       </div>
