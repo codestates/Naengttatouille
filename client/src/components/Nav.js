@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import './Nav.css';
 import axios from 'axios';
 
-export default function Nav({ isLogin, loginHandler, handleResponseSuccess }) {
+export default function Nav({ isLogin, loginHandler, userInfoHandler, handleResponseSuccess }) {
   const history = useHistory();
 
   function goLogin() {
@@ -15,6 +15,7 @@ export default function Nav({ isLogin, loginHandler, handleResponseSuccess }) {
       .post('http://localhost:4000/user/signout')
       .then((res) => {
         loginHandler();
+        userInfoHandler('init');
         history.push('/');
       })
       .catch((err) => {

@@ -4,15 +4,9 @@ import UserInput from '../components/UserInput';
 import { Link, useHistory } from 'react-router-dom';
 
 export default function Mypage({ userInfo, userInfoHandler }) {
-  // userInfoHandler('edit')(null, null, true);
   useEffect(() => userInfoHandler('edit')(null, null, true), []);
   const history = useHistory();
   const checkErr = () => {
-    // for (const key in userInfo) {
-    //   if (!userInfo[key][`validity`]) return true;
-    // }
-    // return false;
-    // console.log(userInfo);
     const passValidity = userInfo['password'][`validity`];
     const confirmValidity = userInfo['password confirm'][`validity`];
     const nameValidity = userInfo['name'][`validity`];
@@ -21,7 +15,7 @@ export default function Mypage({ userInfo, userInfoHandler }) {
 
   const requestEdit = () => {
     if (checkErr()) {
-      console.log('failed to submit');
+      console.log('failed to mypage submit');
     } else {
       axios
         .patch(`http://localhost:4000/user/userinfo?${userInfo.email.data}`, {
@@ -33,7 +27,7 @@ export default function Mypage({ userInfo, userInfoHandler }) {
           history.push('/');
         })
         .catch((err) => {
-          console.log(err);
+          console.log('mypage faild Error : ', err);
           alert('회원정보 수정에 실패했습니다');
         });
     }
@@ -43,14 +37,12 @@ export default function Mypage({ userInfo, userInfoHandler }) {
     <div>
       <h1>Mypage</h1>
       <form>
-        {/* <form id='signupForm' method='patch' action={`https://localhost:4000/userinfo:${userInfo.email.data}`}> */}
         <UserInput item='email' type='email' handler={userInfoHandler} inputInfo={userInfo} />
         <UserInput item='password' type='password' handler={userInfoHandler} inputInfo={userInfo} />
         <UserInput item='password confirm' type='password' handler={userInfoHandler} inputInfo={userInfo} />
         <UserInput item='name' type='text' handler={userInfoHandler} inputInfo={userInfo} />
       </form>
       <button type='button' onClick={requestEdit}>
-        {/* <button type={checkErr() ? 'button' : 'submit'} onClick={requestEdit} form='signupForm'> */}
         Edit Profile
       </button>
     </div>

@@ -45,7 +45,6 @@ export default function Recipe({ recipeTags, handleRecipeTags }) {
 
     axios.defaults.baseURL = 'https://www.googleapis.com/youtube/v3';
     await axios.get('/search', { params }).then((response) => {
-      console.log(response);
       const searchResult = response.data.items;
       searchResult.map((video) => {
         const videoId = video.id.videoId; //영상 id
