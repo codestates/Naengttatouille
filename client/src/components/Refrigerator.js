@@ -10,7 +10,9 @@ export default function Refrigerator({
   guestRefrigerator, 
   isLogin,
   guestRecipeTags,
-  setGuestRecipeTags }) {
+  setGuestRecipeTags,
+  userInfo,
+  setGuestRefrigerator }) {
   const list = [
     '당근',
     '양상추',
@@ -31,7 +33,7 @@ export default function Refrigerator({
 
   let refrigeratorLists;
 
-  const getRefrigeratorLists = () => {
+  const getRefrigeratorLists = (userInfo) => {
     // axios.get('http://localhost:4000/refrigerator')//유저 아이디 줘야함
     // .then((res) => {
     //   refrigeratorLists에 정보 push
@@ -44,6 +46,10 @@ export default function Refrigerator({
     // .then((res) => {
     // })
   };
+
+  const deleteGuestRefrigerator = (el) => {
+    setGuestRefrigerator(guestRefrigerator.filter((data) => data !== el))
+  }
 
   const addSearchList = (event) => {
     //main컴포넌트에서 함수 받아서 검색어 저장소에 추가
@@ -163,7 +169,7 @@ export default function Refrigerator({
     if (el[1] === undefined) {
       return (
         <div className='showDeleteBtn__Refrigerator'>
-          <span className='deleteBtn__Refrigerator' onClick={() => deleteRefrigerator(el[0])}>
+          <span className='deleteBtn__Refrigerator' onClick={isLogin ? () => deleteRefrigerator(el[0]) : () => deleteGuestRefrigerator(el[0])}>
             X 냉장고에서 지우기
           </span>
         </div>
@@ -171,10 +177,10 @@ export default function Refrigerator({
     } else if (el[2] === undefined) {
       return (
         <div className='showDeleteBtn__Refrigerator'>
-          <span className='deleteBtn__Refrigerator' onClick={() => deleteRefrigerator(el[0])}>
+          <span className='deleteBtn__Refrigerator' onClick={isLogin? () => deleteRefrigerator(el[0]) : () => deleteGuestRefrigerator(el[0])}>
             X 냉장고에서 지우기
           </span>
-          <span className='deleteBtn__Refrigerator' onClick={() => deleteRefrigerator(el[1])}>
+          <span className='deleteBtn__Refrigerator' onClick={isLogin ? () => deleteRefrigerator(el[1]) : () => deleteGuestRefrigerator(el[1])}>
             X 냉장고에서 지우기
           </span>
         </div>
@@ -182,13 +188,13 @@ export default function Refrigerator({
     } else if (el[3] === undefined) {
       return (
         <div className='showDeleteBtn__Refrigerator'>
-          <span className='deleteBtn__Refrigerator' onClick={() => deleteRefrigerator(el[0])}>
+          <span className='deleteBtn__Refrigerator' onClick={isLogin? () => deleteRefrigerator(el[0]) : () => deleteGuestRefrigerator(el[0])}>
             X 냉장고에서 지우기
           </span>
-          <span className='deleteBtn__Refrigerator' onClick={() => deleteRefrigerator(el[1])}>
+          <span className='deleteBtn__Refrigerator' onClick={isLogin ? () => deleteRefrigerator(el[1]) : () => deleteGuestRefrigerator(el[1])}>
             X 냉장고에서 지우기
           </span>
-          <span className='deleteBtn__Refrigerator' onClick={() => deleteRefrigerator(el[2])}>
+          <span className='deleteBtn__Refrigerator' onClick={isLogin ? () => deleteRefrigerator(el[2]) : () => deleteGuestRefrigerator(el[2])}>
             X 냉장고에서 지우기
           </span>
         </div>
@@ -196,16 +202,16 @@ export default function Refrigerator({
     } else if (el[4] === undefined) {
       return (
         <div className='showDeleteBtn__Refrigerator'>
-          <span className='deleteBtn__Refrigerator' onClick={() => deleteRefrigerator(el[0])}>
+          <span className='deleteBtn__Refrigerator' onClick={isLogin? () => deleteRefrigerator(el[0]) : () => deleteGuestRefrigerator(el[0])}>
             X 냉장고에서 지우기
           </span>
-          <span className='deleteBtn__Refrigerator' onClick={() => deleteRefrigerator(el[1])}>
+          <span className='deleteBtn__Refrigerator' onClick={isLogin ? () => deleteRefrigerator(el[1]) : () => deleteGuestRefrigerator(el[1])}>
             X 냉장고에서 지우기
           </span>
-          <span className='deleteBtn__Refrigerator' onClick={() => deleteRefrigerator(el[2])}>
+          <span className='deleteBtn__Refrigerator' onClick={isLogin ? () => deleteRefrigerator(el[2]) : () => deleteGuestRefrigerator(el[2])}>
             X 냉장고에서 지우기
           </span>
-          <span className='deleteBtn__Refrigerator' onClick={() => deleteRefrigerator(el[3])}>
+          <span className='deleteBtn__Refrigerator' onClick={isLogin ? () => deleteRefrigerator(el[3]) : () => deleteGuestRefrigerator(el[3])}>
             X 냉장고에서 지우기
           </span>
         </div>
@@ -213,19 +219,19 @@ export default function Refrigerator({
     } else {
       return (
         <div className='showDeleteBtn__Refrigerator'>
-          <span className='deleteBtn__Refrigerator' onClick={() => deleteRefrigerator(el[0])}>
+          <span className='deleteBtn__Refrigerator' onClick={isLogin? () => deleteRefrigerator(el[0]) : () => deleteGuestRefrigerator(el[0])}>
             X 냉장고에서 지우기
           </span>
-          <span className='deleteBtn__Refrigerator' onClick={() => deleteRefrigerator(el[1])}>
+          <span className='deleteBtn__Refrigerator' onClick={isLogin ? () => deleteRefrigerator(el[1]) : () => deleteGuestRefrigerator(el[1])}>
             X 냉장고에서 지우기
           </span>
-          <span className='deleteBtn__Refrigerator' onClick={() => deleteRefrigerator(el[2])}>
+          <span className='deleteBtn__Refrigerator' onClick={isLogin ? () => deleteRefrigerator(el[2]) : () => deleteGuestRefrigerator(el[2])}>
             X 냉장고에서 지우기
           </span>
-          <span className='deleteBtn__Refrigerator' onClick={() => deleteRefrigerator(el[3])}>
+          <span className='deleteBtn__Refrigerator' onClick={isLogin ? () => deleteRefrigerator(el[3]) : () => deleteGuestRefrigerator(el[3])}>
             X 냉장고에서 지우기
           </span>
-          <span className='deleteBtn__Refrigerator' onClick={() => deleteRefrigerator(el[4])}>
+          <span className='deleteBtn__Refrigerator' onClick={isLogin ? () => deleteRefrigerator(el[4]) : () => deleteGuestRefrigerator(el[4])}>
             X 냉장고에서 지우기
           </span>
         </div>

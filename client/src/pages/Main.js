@@ -27,6 +27,8 @@ export default function Main({ isLogin, userInfo }) {
             // setRecipeTag={setRecipeTags}
             handleRecipeTags={handleRecipeTags}
             isLogin={isLogin}
+            userInfo={userInfo}
+            setGuestRefrigerator={setGuestRefrigerator}
           />
         </div>
         <div id='grocery'>

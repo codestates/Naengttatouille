@@ -53,8 +53,11 @@ export default function Ingredients({
     setMethodValue('')
   }
 
-  const addRefrigerator = (event) => {
-    axios.post('http://localhost:4000/refrigerator/ingredient') // 냉장고id와 식재료id를 알려줘야함
+  const addRefrigerator = async(event) => {
+    let text = event.target.textContent
+    let filtered = ingredientData.filter((el) => el.name === text)
+    console.log(filtered)
+    axios.post(`http://localhost:4000/refrigerator/${filtered[0].ingredient_id}`) 
 
   }
 
@@ -140,7 +143,7 @@ export default function Ingredients({
           })}
       </section>
       <section className='Storage__method'>
-        <span className='method__description'>식재료 보관방법</span>
+        <div className='method__description'>식재료 보관방법</div>
 
         {userInfo.admin ? <span><input onKeyUp={onChangeName} type='text' placeholder='재료이름을 입력해주세요'></input>
         <input onKeyUp={onChangeMethod} type='text' placeholder='보관법을 작성해주세요'>
