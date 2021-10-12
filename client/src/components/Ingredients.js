@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios'
 import './Ingredients.css'
 import { v4 as uuidv4 } from 'uuid';
@@ -15,20 +15,20 @@ export default function Ingredients({
 
   const list = ['당근', '양상추', '토마토', '애호박', '양파', '가지', '아스파라거스', '감자', '고구마', '고추', '야채', '이름']
   let listDivision = []
-    //'1','2','3','4','5','6','7','8','9','10'
-    let realList 
-    let explains
+    let realList = []
 
   const getIngredients = () => {
-    // axios.get('http://localhost:4000/ingredient')
-    // .then((res) => {
-    //   realList.push(res.목록)
-    // })
-    // .catch(err => console.log(err))
+    axios.get('http://localhost:4000/ingredient')
+    .then((res) => {
+      res.data.map(el => realList.push(el.name))
+    })
   }
-  getIngredients()
 
+  useEffect(()=>getIngredients(), [])
 
+  makeDivision(list)
+  console.log(realList)
+  
   function makeDivision(list) { //인자에 realList를 넣어줘야 함
     let copy = list.slice(0)
     while(copy.length > 0){
@@ -38,10 +38,7 @@ export default function Ingredients({
       listDivision.push(copy.splice(0))
     }
   }
-
-
   }
-  makeDivision(list)
 
   const addIngredients = () => {
     axios.post('http://localhost:4000/ingredient', {ingredient_name : `${nameValue}`, keep_method: `${methodValue}`})
