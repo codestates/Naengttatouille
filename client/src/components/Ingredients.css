@@ -11,12 +11,13 @@
     overflow-y: auto;
     border: solid;
     border-color: chartreuse;
+    height: 75%;
 }
 
 .grocery_row {
     border-color: black;
     border: solid;
-    height: 10%;
+    height: 10vh;
     margin: 2.25% 1.25% 1.25% 1.25%;
 }
 
@@ -48,6 +49,7 @@
     width: 30vw;
     height: 6vh;
     margin-left: 20%;
+    font-size: 12px;
 }
 
 .showDeleteBtn__Ingredients{
@@ -62,8 +64,9 @@
     border: solid;
     border-color: aqua;
     height: 2.5vh;
-    margin-left: 1.15%;
-    width: 7.6vw;
+    margin-left: 3%;
+    width: 7.5vw;
+    font-size: x-small;
 }
 
 .deleteBtn__Ingredient:hover {

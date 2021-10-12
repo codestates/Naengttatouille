@@ -4,7 +4,7 @@ import Ingredients from '../components/Ingredients';
 import Refrigerator from '../components/Refrigerator';
 import Recipe from '../components/Recipe';
 
-export default function Main({ isLogin }) {
+export default function Main({ isLogin, userInfo }) {
   const [guestRefrigerator, setGuestRefrigerator] = useState(['당근', '양상추', '토마토', '애호박', '양파', '가지']);
   const [recipeTags, setRecipeTags] = useState([]);
   const handleRecipeTags = (str, tag) => {
@@ -34,6 +34,7 @@ export default function Main({ isLogin }) {
             guestRefrigerator={guestRefrigerator}
             setGuestRefrigerator={setGuestRefrigerator}
             isLogin={isLogin}
+            userInfo={userInfo}
           />
         </div>
       </div>
