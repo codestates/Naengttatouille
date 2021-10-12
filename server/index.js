@@ -14,7 +14,7 @@ const {
 app.use(express.json());
 app.use(
   cors({
-    // origin: [process.env.CLIENT],
+    origin: *,
     methods: ['GET', 'POST', 'OPTIONS', 'PATCH', 'DELETE'],
   })
 );
