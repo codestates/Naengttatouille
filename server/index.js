@@ -25,7 +25,7 @@ app.use('/user', userRouter);
 app.use('/ingredient', ingredientRouter);
 app.use('/refrigerator', refrigeratorRouter);
 
-const PORT = AWS.HTTP_PORT || AWS.HTTPS_PORT;
+const PORT = process.env.HTTP_PORT || process.env.HTTPS_PORT;
 let server;
 if (fs.existsSync('./key.pem') && fs.existsSync('./cert.pem')) {
   const privateKey = fs.readFileSync(__dirname + '/key.pem', 'utf8');
