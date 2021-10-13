@@ -7,12 +7,15 @@ axios.defaults.withCredentials = true;
 
 export default function Login({ userInfo, userInfoHandler, loginHandler }) {
   const history = useHistory();
+  //[input tag 앞의 텍스트, input type]의 배열
   const inputBoxList = [
     ['email', 'email'],
     ['password', 'password'],
   ];
 
+  //각 인풋 박스의 유효성 검사 결과 불린값 배열
   const [currentErrList, setCurrentErrorList] = useState([]);
+  //현재 유저가 input에 입력중인 텍스트 값
   const [inputInfo, setInputInfo] = useState({});
 
   const handleInputInfo = (key) => (value) => {
@@ -35,7 +38,7 @@ export default function Login({ userInfo, userInfoHandler, loginHandler }) {
         })
         .then((response) => {
           loginHandler();
-          loginHandler(response.data);
+          userInfoHandler(response.data);
           history.push('/main');
         })
         .catch((err) => {
@@ -53,6 +56,7 @@ export default function Login({ userInfo, userInfoHandler, loginHandler }) {
         inputBoxList={inputBoxList}
         userInfoHandler={userInfoHandler}
         userInfo={userInfo}
+        inputInfo={inputInfo}
         handleInputInfo={handleInputInfo}
         handleCurrentErrorList={handleCurrentErrorList}
       />

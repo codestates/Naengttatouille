@@ -2,7 +2,16 @@ import React, { useState, useEffect } from 'react';
 import './UserInput.css';
 const Validity = require('../functions/validationFunctions');
 
-export default function UserInput({ item, type, userInfoHandler, userInfo, edit, handleInputInfo, handleErrState }) {
+export default function UserInput({
+  item,
+  type,
+  userInfoHandler,
+  userInfo,
+  inputInfo,
+  edit,
+  handleInputInfo,
+  handleErrState,
+}) {
   const validity = new Validity(userInfo);
   const errDivClassName = `${item}_err`;
   const [errMsg, setErrMsg] = useState('');
@@ -10,7 +19,7 @@ export default function UserInput({ item, type, userInfoHandler, userInfo, edit,
 
   const handleInputValue = (e) => {
     let value = e.target.value;
-    validity.checkValidity(userInfo, item, value);
+    validity.checkValidity(inputInfo, item, value);
     setErrMsg(validity.getMessage());
     setIsError(validity.checkErr());
     handleErrState(item, validity.checkErr());
@@ -28,8 +37,8 @@ export default function UserInput({ item, type, userInfoHandler, userInfo, edit,
         onChange={handleInputValue}
         minLength={item === `password` || item === `password confirm` ? 4 : item === `name` ? 2 : 0}
         maxLength={item === `password` || item === `password confirm` ? 16 : item === `name` ? 8 : 99}
-        placeholder={edit ? userInfo.email : false}
-        disabled={edit ? true : false}
+        placeholder={edit && item === `email` ? userInfo.email : false}
+        disabled={edit && item === `email` ? true : false}
         required
       />
       <div id={`${errDivClassName} `} className={`errDiv ${isError ? `` : `hide`}`}>
