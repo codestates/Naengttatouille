@@ -11,32 +11,59 @@ import axios from 'axios';
 
 function App() {
   const history = useHistory();
-  const [isLogin, setIsLogin] = useState(false);
-  const [userInfo, setUserInfo] = useState({
+  const initUser = {
     user_id: '',
     email: '',
     password: '',
     'password confirm': '',
     name: '',
     admin: false,
-  });
+  };
+  const [isLogin, setIsLogin] = useState(false);
+  const [userInfo, setUserInfo] = useState(initUser);
 
   const userInfoHandler = (data) => {
     setUserInfo(data);
   };
 
-
   const loginHandler = () => {
-    setIsLogin(!isLogin);
+    setIsLogin(true);
+    console.log('로그인');
   };
 
-  const isAuthenticated = () => {};
-  const handleResponseSuccess = () => {
-    axios.get('https://localhost:4000/auth').then((res) => {
-      isAuthenticated();
-      return res;
+  const logoutHandler = () => {
+    axios.post('https://localhost:4000/user/signout').then((res) => {
+      setIsLogin(false);
+      alert(`${userInfo}님 이용해주셔서 감사합니다`);
+      userInfoHandler(initUser);
+      history.push('/');
+      console.log('로그아웃');
     });
   };
+
+  const isAuthenticated = async () => {
+    await axios
+      .get('http://localhost:4000/user/auth')
+      .then((response) => {
+        loginHandler();
+        userInfoHandler(response.data);
+        console.log('🚀 ~ file: App.js ~ line 49 ~ .then ~ response.data', response.data);
+        console.log('토큰 유지 중');
+        return response.data;
+      })
+      .catch((error) => {
+        logoutHandler();
+        console.log('토큰 만료, 로그아웃');
+      });
+  };
+
+  // const handleResponseSuccess = () => {
+  //   isAuthenticated();
+  // };
+
+  useEffect(() => {
+    isAuthenticated();
+  }, []);
 
   return (
     <BrowserRouter>
@@ -44,11 +71,10 @@ function App() {
         <Nav
           isLogin={isLogin}
           userInfo={userInfo}
-          loginHandler={loginHandler}
+          loginHandler={loginHandler} //=>이 함수 사용하시는 부분을 logoutHandler로 바꾸신 후에 삭제해주세요
+          logoutHandler={logoutHandler}
           userInfoHandler={userInfoHandler}
-          handleResponseSuccess={handleResponseSuccess}
         />
-
         <Switch>
           <Route exact path='/'>
             <About isLogin={isLogin} userInfo={userInfo} />
@@ -59,7 +85,6 @@ function App() {
               userInfo={userInfo}
               loginHandler={loginHandler}
               userInfoHandler={userInfoHandler}
-              setUserInfo={setUserInfo}
             ></Login>
           </Route>
           <Route path='/main'>
