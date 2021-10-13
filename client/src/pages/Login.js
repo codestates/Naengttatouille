@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Link, useHistory } from 'react-router-dom';
 import { checkErr, ShowInput } from '../functions/InputUserDataFunc';
 
-// axios.defaults.withCredentials = true;
+axios.defaults.withCredentials = true;
 
 export default function Login({ userInfo, userInfoHandler, loginHandler, setUserInfo }) {
   const history = useHistory();
