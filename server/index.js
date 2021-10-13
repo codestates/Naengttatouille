@@ -14,12 +14,13 @@ const {
 app.use(express.json());
 app.use(
   cors({
-    // origin: [process.env.CLIENT],
+    origin: true,
     methods: ['GET', 'POST', 'OPTIONS', 'PATCH', 'DELETE'],
+    credentials: true,
   })
 );
 app.use(cookieParser());
-
+app.get('/', (req, res) => res.send('hello world!'));
 app.use('/user', userRouter);
 app.use('/ingredient', ingredientRouter);
 app.use('/refrigerator', refrigeratorRouter);
