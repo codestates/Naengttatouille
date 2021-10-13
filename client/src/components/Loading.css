@@ -1,0 +1,11 @@
+.loadingpage {
+    border: solid;
+    border-color: red;
+    height: 100vh;
+}
+
+.lodingContent {
+    border: solid;
+    border-color: blue;
+    margin-top: 35%;
+}

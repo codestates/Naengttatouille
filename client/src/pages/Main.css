@@ -1,0 +1,14 @@
+#grocery{
+    position: absolute;
+    left: 50%;
+    top: 8.2%;
+}
+#refrigerator{
+    position: absolute;
+    top: 8.2%;
+}
+
+#recipe{
+    position: absolute;
+    top: 58.2%;
+}
