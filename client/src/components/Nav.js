@@ -43,30 +43,28 @@ export default function Nav({ isLogin, loginHandler, userInfoHandler, handleResp
 
   return (
     <div className='navigation'>
-      <i className='Logo' onClick={changepPath}>
-        로고
-        <span className='ServiceName'>냉따뚜이</span>
-      </i>
+        <span className='ServiceName' onClick={changepPath}>
+Naengttatouille</span>
       <button className='goMain' onClick={goMain}>
         Main
       </button>
 
       <div className='btn'>
         {!isLogin ? (
-          <button className='goSignup' onClick={goSignup}>
-            회원가입
+          <button className='goSignup__goMypage' onClick={goSignup}>
+            SingUp
           </button>
         ) : (
-          <button className='goMypage' onClick={goMypage}>
+          <button className='goSignup__goMypage' onClick={goMypage}>
             MyPage
           </button>
         )}
         {!isLogin ? (
-          <button className='loginBtn' onClick={goLogin}>
-            로그인
+          <button className='loginBtn__logoutBtn' onClick={goLogin}>
+            Signin
           </button>
         ) : (
-          <button className='logoutBtn' onClick={logoutHandler}>
+          <button className='loginBtn__logoutBtn' onClick={logoutHandler}>
             로그아웃
           </button>
         )}
