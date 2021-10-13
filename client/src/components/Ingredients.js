@@ -19,13 +19,6 @@ export default function Ingredients({
   // const list = ['당근', '양상추', '토마토', '애호박', '양파', '가지', '아스파라거스', '감자', '고구마', '고추', '야채', '이름']
   let listDivision = []
   let realList = []
-  // const getIngredients = () => {
-  //   axios.get('http://localhost:4000/ingredient')
-  //   .then((res) => {
-  //     res.data.map(el => realList.push(el.name))
-  //   })
-  // }
-  
   const makeDivision = (realList) => { 
     const copy = realList.slice(0)
     while(copy.length > 0){
@@ -49,9 +42,12 @@ export default function Ingredients({
   },[])
 
   const addIngredients = () => {
-    axios.post('http://localhost:4000/ingredient', {ingredient_name : `${nameValue}`, keep_method: `${methodValue}`})
+    axios.post('http://localhost:4000/ingredient', {name : `${nameValue}`, keep_method: `${methodValue}`})
+    // console.log(nameValue)
+    // console.log(methodValue)
     setNameValue('')
     setMethodValue('')
+    window.location.reload()
   }
 
   const addRefrigerator = async(event) => {
@@ -59,7 +55,6 @@ export default function Ingredients({
     let filtered = ingredientData.filter((el) => el.name === text)
     console.log(filtered)
     axios.post(`http://localhost:4000/refrigerator/${filtered[0].ingredient_id}`) 
-    window.location.reload()
   }
 
 
@@ -75,7 +70,6 @@ export default function Ingredients({
   const onChangeMethod = (event) => {
     setMethodValue(event.target.value)
   }
-
   const deleteIngrediente = async(el) => {
     let filtered = ingredientData.filter((data) => data.name === el)
     axios.delete(`http://localhost:4000/ingredient/${filtered[0].ingredient_id}`)
@@ -84,7 +78,7 @@ export default function Ingredients({
     let arr = await axios.get('http://localhost:4000/ingredient')
     .then((res) => res.data)
     console.log(arr)
-    // window.location.reload();
+    window.location.reload();
     
   }
 
@@ -146,8 +140,8 @@ export default function Ingredients({
       <section className='Storage__method'>
         <div className='method__description'>식재료 보관방법</div>
 
-        {userInfo.admin ? <span><input onKeyUp={onChangeName} type='text' placeholder='재료이름을 입력해주세요'></input>
-        <input onKeyUp={onChangeMethod} type='text' placeholder='보관법을 작성해주세요'>
+        {userInfo.admin ? <span><input onKeyUp={(e) => onChangeName(e)} type='text' placeholder='재료이름을 입력해주세요'></input>
+        <input onKeyUp={(e) => onChangeMethod(e)} type='text' placeholder='보관법을 작성해주세요'>
           </input><button onClick={addIngredients}>추가</button></span> : null}
         
         <div className='method__explain'>{exContent}</div>
