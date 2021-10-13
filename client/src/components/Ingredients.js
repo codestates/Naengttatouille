@@ -41,6 +41,7 @@ export default function Ingredients({
     .then(res => {
       return res.data
     })
+    // console.log(realList1)
     let realList = await realList1.map(el => el.name)
     setIngredientData(realList1)
     makeDivision(realList)
