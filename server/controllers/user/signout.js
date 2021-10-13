@@ -4,6 +4,8 @@ module.exports = {
   post: (req, res) => {
     const userinfo = isAuthorized(req);
     clearAccessToken(res);
-    return res.status(205).send(userinfo);
+    const { user_id, email, name, admin, createdAt, updatedAt } = userinfo;
+    const data = { user_id, email, name, admin, createdAt, updatedAt };
+    return res.status(205).send(data);
   },
 };
