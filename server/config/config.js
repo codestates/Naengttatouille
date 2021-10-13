@@ -1,3 +1,4 @@
+require('../../scripts').config();
 module.exports = {
   development: {
     username: DATABASE_USERNAME,

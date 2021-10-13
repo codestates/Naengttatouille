@@ -1,3 +1,4 @@
+require('../scripts').config();
 const fs = require('fs');
 const https = require('https');
 const cors = require('cors');
@@ -13,7 +14,7 @@ const {
 app.use(express.json());
 app.use(
   cors({
-    origin: true,
+    origin: CLIENT,
     methods: ['GET', 'POST', 'OPTIONS', 'PATCH', 'DELETE'],
   })
 );
