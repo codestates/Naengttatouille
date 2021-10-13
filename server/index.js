@@ -20,7 +20,7 @@ app.use(
   })
 );
 app.use(cookieParser());
-app.get('/', (req, res) => res.send('hello world'));
+app.get('/', (req, res) => res.send('hello world!'));
 app.use('/user', userRouter);
 app.use('/ingredient', ingredientRouter);
 app.use('/refrigerator', refrigeratorRouter);
