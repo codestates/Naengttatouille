@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Switch, Route, BrowserRouter } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Switch, Route, BrowserRouter, useHistory } from 'react-router-dom';
 import About from './pages/About';
 import Login from './pages/Login';
 import Main from './pages/Main';
@@ -7,43 +7,78 @@ import Mypage from './pages/Mypage';
 import Signup from './pages/Signup';
 import Nav from './components/Nav';
 import './App.css';
+import axios from 'axios';
 
 function App() {
+  const history = useHistory();
   const [isLogin, setIsLogin] = useState(false);
+  const [userInfo, setUserInfo] = useState(null);
 
-  const [userInfo, setUserInfo] = useState({
-    email: { data: '', validity: false },
-    password: { data: '', validity: false },
-    'password confirm': { data: '', validity: false },
-    name: { data: '', validity: false },
-    admin: false,
-    edit: false,
-  });
-
-  const userInfoHandler = (key) => (value, validity, boolean) => {
-    if (key === 'edit' || key === 'admin') {
-      setUserInfo({ ...userInfo, [key]: boolean });
-    }
-    if (key === 'email' || key === 'password' || key === 'password confirm' || key === 'name')
-      setUserInfo({ ...userInfo, [key]: { data: value, validity: validity } });
-    if (key === 'init')
-      setUserInfo({
-        email: { data: '', validity: false },
-        password: { data: '', validity: false },
-        'password confirm': { data: '', validity: false },
-        name: { data: '', validity: false },
-        admin: false,
-        edit: false,
-      });
+  const userInfoHandler = (data) => {
+    setUserInfo(data);
   };
+
+  // const userInfoHandler = (key) => (value) => {
+  //   setUserInfo({ ...userInfo, [key]: value });
+  // };
+
+  // const [userInfo, setUserInfo] = useState({
+  //   user_id: '',
+  //   email: { data: '', validity: false },
+  //   password: { data: '', validity: false },
+  //   'password confirm': { data: '', validity: false },
+  //   name: { data: '', validity: false },
+  //   admin: false,
+  //   edit: false,
+  // });
+
+  // const userInfoHandler = (key) => (value, validity, boolean) => {
+  //   if (key === 'edit' || key === 'admin') {
+  //     setUserInfo({ ...userInfo, [key]: boolean });
+  //   }
+  //   if (key === 'user_id') {
+  //     setUserInfo({ ...userInfo, [key]: value });
+  //   }
+  //   if (key === 'email' || key === 'password' || key === 'password confirm' || key === 'name')
+  //     setUserInfo({ ...userInfo, [key]: { data: value, validity: validity } });
+  //   if (key === 'init')
+  //     setUserInfo({
+  //       user_id: { data: '', validity: false },
+  //       email: { data: '', validity: false },
+  //       password: { data: '', validity: false },
+  //       'password confirm': { data: '', validity: false },
+  //       name: { data: '', validity: false },
+  //       admin: false,
+  //       edit: false,
+  //     });
+  // };
 
   const loginHandler = () => {
     setIsLogin(!isLogin);
   };
 
+  const isAuthenticated = () => {};
   const handleResponseSuccess = () => {
-    // 엑세스 토큰확인 요청보내는 함수
+    axios.get('https://localhost:4000/auth').then((res) => {
+      isAuthenticated();
+      return res;
+    });
   };
+  // const handleLogout = () => {
+  //   axios.post('https://localhost:4000/signout').then((res) => {
+  //     setUserinfo(null);
+  //     setIsLogin(false);
+  //     history.push('/');
+  //   });
+  // };
+
+  // useEffect(() => {
+  //   console.log(userInfo);
+  // });
+
+  // useEffect(() => {
+  //   console.log(userInfo);
+  // }, [userInfo]);
 
   return (
     <BrowserRouter>
@@ -66,7 +101,8 @@ function App() {
               userInfo={userInfo}
               loginHandler={loginHandler}
               userInfoHandler={userInfoHandler}
-            />
+              setUserInfo={setUserInfo}
+            ></Login>
           </Route>
           <Route path='/main'>
             <Main isLogin={isLogin} userInfo={userInfo} />
