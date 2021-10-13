@@ -61,3 +61,16 @@
   width:100%;
   transition:800ms ease all;
 }
+
+.about__intro__title{
+  font-weight: 800;
+  font-size: 40px;
+}
+.about__intro{
+  margin-left: 30%;
+  margin-top: 3%;
+}
+
+.about__signup__btn{
+  margin-top: 10%;
+}

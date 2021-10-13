@@ -5,7 +5,7 @@ import { checkErr, ShowInput } from '../functions/InputUserDataFunc';
 
 axios.defaults.withCredentials = true;
 
-export default function Login({ userInfo, userInfoHandler, loginHandler, setUserInfo }) {
+export default function Login({ userInfo, userInfoHandler, loginHandler }) {
   const history = useHistory();
   const inputBoxList = [
     ['email', 'email'],
@@ -35,7 +35,8 @@ export default function Login({ userInfo, userInfoHandler, loginHandler, setUser
         })
         .then((response) => {
           loginHandler();
-          setUserInfo(response.data);
+          loginHandler(response.data);
+          history.push('/main');
         })
         .catch((err) => {
           handleInputInfo('init');

@@ -15,46 +15,43 @@ export default function Refrigerator({
   setGuestRefrigerator,
   ingredientData }) {
   const [userLists, setUserLists] = useState([])
-  //  서버구현완료시 삭제
+  const [userListDivision, setUserListDivision] = useState([])
   let listDivision = [];
   let guestRefrigeratorList = [];
 
-  let refrigeratorLists;
+  const [refrigeratorAll, setRefrigeratorAll] = useState([])
 
-  // const getRefrigeratorLists = async (userInfo) => {
-  //   let userLists1 = await axios.get('http://localhost:4000/refrigerator')//유저 아이디 줘야함
-  //   .then((res) => {
-  //   })
-  //   console.log(userLists1)
-  // };
-  // getRefrigeratorLists();
 
   useEffect(async() => {
+    if(isLogin){
       let userLists1 = await axios.get('http://localhost:4000/refrigerator')
       .then((res) => {
         return res.data
       })
-      userLists1.map((el) => {
-        setUserLists([...userLists, el.name])
-      })
+      let userList2 = await userLists1.map(el => el.name)
+      function makeDivision(list) {
+        let copy = list.slice(0);
+        while (copy.length > 0) {
+          if (copy.length >= 5) {
+            listDivision.push(copy.splice(0, 5));
+          } else if (copy.length < 5) {
+            listDivision.push(copy.splice(0));
+          }
+        }
+      }
+      makeDivision(userList2)
+      setUserListDivision(listDivision)
+    }
+    
     
   },[])
 
-  // useEffect(async()=> {
-  //   let realList1 = await axios.get('http://localhost:4000/ingredient')
-  //   .then(res => {
-  //     return res.data
-  //   })
-  //   // console.log(realList1)
-  //   let realList = await realList1.map(el => el.name)
-  //   setIngredientData(realList1)
-  //   makeDivision(realList)
-  //   setDivision(listDivision)
-  // },[])
-
-  const deleteRefrigerator = (el) => {
-    console.log(userLists)
-    console.log(el)
+  const deleteRefrigerator = async(el) => {
+    let refrigeratorNameData = userListDivision.reduce((acc, cur) => {
+      return acc.concat(cur)
+    })
+    let refrigeratorData = await await axios.get('http://localhost:4000/refrigerator')
+    // let filtered = refrigeratorData.data
   };
 
   const deleteGuestRefrigerator = (el) => {
@@ -69,16 +66,6 @@ export default function Refrigerator({
   };
   
 
-  function makeDivision(list) {
-    let copy = list.slice(0);
-    while (copy.length > 0) {
-      if (copy.length >= 5) {
-        listDivision.push(copy.splice(0, 5));
-      } else if (copy.length < 5) {
-        listDivision.push(copy.splice(0));
-      }
-    }
-  }
 
   const makeGuestRefrigerator = (guestRefrigerator) => {
     let copy = guestRefrigerator.slice(0);
@@ -90,15 +77,8 @@ export default function Refrigerator({
       }
     }
   };
+  makeGuestRefrigerator(guestRefrigerator)
 
-  const makeList = (userLists, guestRefrigerator) => {
-    if(isLogin){
-      makeDivision(userLists)
-    }else{
-      makeGuestRefrigerator(guestRefrigerator)
-    }
-  }
-  makeList(userLists, guestRefrigerator)
 
   function makeEl(el) {
     if (el[1] === undefined) {
@@ -253,7 +233,7 @@ export default function Refrigerator({
     <div className='Refrigerator__Container'>
       <span className='Refrigerator__title'>나의 냉장고 속 재료</span>
       <section className='My__refrigerator'>
-        {isLogin ? listDivision.map((el) => {
+        {isLogin ? userListDivision.map((el) => {
           return (
             <div key={uuidv4()} className='Refrigerator__grocery_row'>
               {makeEl(el)}
