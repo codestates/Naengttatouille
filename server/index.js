@@ -1,4 +1,4 @@
-require('../scripts').config();
+require('aws-sdk').config();
 const fs = require('fs');
 const https = require('https');
 const cors = require('cors');

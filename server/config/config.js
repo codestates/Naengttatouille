@@ -1,4 +1,4 @@
-require('../../scripts').config();
+require('aws-sdk').config();
 module.exports = {
   development: {
     username: DATABASE_USERNAME,

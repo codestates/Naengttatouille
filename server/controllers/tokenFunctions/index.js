@@ -1,4 +1,4 @@
-require('../../../scripts').config();
+require('aws-sdk').config();
 const { sign, verify } = require('jsonwebtoken');
 
 module.exports = {

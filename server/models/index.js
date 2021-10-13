@@ -1,5 +1,5 @@
 'use strict';
-require('../../scripts').config();
+require('aws-sdk').config();
 
 const fs = require('fs');
 const path = require('path');
