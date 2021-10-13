@@ -16,6 +16,7 @@ export default function Refrigerator({
   ingredientData }) {
   const [userLists, setUserLists] = useState([])
   //  서버구현완료시 삭제
+  const [userListDivision, setUserListDivision] = useState([])
   let listDivision = [];
   let guestRefrigeratorList = [];
 
@@ -30,13 +31,18 @@ export default function Refrigerator({
   // getRefrigeratorLists();
 
   useEffect(async() => {
+    if(isLogin){
       let userLists1 = await axios.get('http://localhost:4000/refrigerator')
       .then((res) => {
         return res.data
       })
-      userLists1.map((el) => {
-        setUserLists([...userLists, el.name])
-      })
+      let userList2 = await userLists1.map(el => el.name)
+      setUserLists(userList2)
+      makeDivision(userLists)
+      setUserListDivision(listDivision)
+      window.location.reload()
+    }
+    
     
   },[])
 
@@ -90,15 +96,16 @@ export default function Refrigerator({
       }
     }
   };
+  makeGuestRefrigerator(guestRefrigerator)
 
-  const makeList = (userLists, guestRefrigerator) => {
-    if(isLogin){
-      makeDivision(userLists)
-    }else{
-      makeGuestRefrigerator(guestRefrigerator)
-    }
-  }
-  makeList(userLists, guestRefrigerator)
+  // const makeList = (userLists, guestRefrigerator) => {
+  //   if(isLogin){
+  //     makeDivision(userLists)
+  //   }else{
+  //     makeGuestRefrigerator(guestRefrigerator)
+  //   }
+  // }
+  // makeList(userLists, guestRefrigerator)
 
   function makeEl(el) {
     if (el[1] === undefined) {
@@ -253,7 +260,7 @@ export default function Refrigerator({
     <div className='Refrigerator__Container'>
       <span className='Refrigerator__title'>나의 냉장고 속 재료</span>
       <section className='My__refrigerator'>
-        {isLogin ? listDivision.map((el) => {
+        {isLogin ? userListDivision.map((el) => {
           return (
             <div key={uuidv4()} className='Refrigerator__grocery_row'>
               {makeEl(el)}

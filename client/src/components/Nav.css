@@ -5,6 +5,7 @@
     border-color: red;
     position: fixed;
     width: 100%;
+    height: 5%;
 }
 
 .loginBtn .logoutBtn {
@@ -13,19 +14,136 @@
 
 
 
-.Logo {
+/* .Logo {
     margin: 15px 0 15px 10px;
-}
+    font-weight: 500;
+} */
 
 .ServiceName {
     margin: 0 0 0 15px;
+    font-size: 30px;
+    font-weight: 1000;
+    color: greenyellow;
+    font: italic 2em "Fira Sans", serif;
 }
 {/*위 오른쪽 아래 왼쪽*/}
 
-.goSignup .goMypage {
 
+/* button1 */
+
+.goMain,
+.goMain::after {
+  -webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+  -o-transition: all 0.3s;
+	transition: all 0.3s;
 }
 
 .goMain {
-    margin-left: -70%;
+  background: none;
+  border: 3px solid hotpink;
+  border-radius: 5px;
+  color: hotpink;
+  display: block;
+  font-size: 0.2em;
+  font-weight: bold;
+  /* margin: 1em auto; */
+  margin-left: -5%;
+  padding: 2em 6em;
+  position: relative;
+  text-transform: uppercase;
 }
+
+.goMain::before,
+.goMain::after {
+  background: #fff;
+  content: '';
+  position: absolute;
+  z-index: -1;
+}
+
+.goMain:hover {
+  color: #2ecc71;
+}
+
+
+.goMain::after {
+  height: 0;
+  left: 0;
+  top: 0;
+  width: 100%;
+}
+
+.goMain:hover:after {
+  height: 100%;
+}
+
+/* button2 */
+
+  .goSignup__goMypage,
+.goSignup__goMypage::after {
+  -webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+  -o-transition: all 0.3s;
+	transition: all 0.3s;
+}
+
+.goSignup__goMypage {
+  background: none;
+  border: 3px solid black;
+  border-radius: 5px;
+  color: black;
+  font-size: 0.2em;
+  font-weight: bold;
+  margin: 1em auto;
+  padding: 2em 6em;
+  position: relative;
+}
+
+.goSignup__goMypage::before,
+.goSignup__goMypage::after {
+  background: #fff;
+  content: '';
+  position: absolute; 
+  z-index: -1;
+}
+.goSignup__goMypage:hover {
+    color: #2ecc71;
+  }
+
+
+/* button3 */
+
+
+.loginBtn__logoutBtn,
+.loginBtn__logoutBtn::after {
+  -webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+  -o-transition: all 0.3s;
+	transition: all 0.3s;
+}
+
+.loginBtn__logoutBtn {
+  background: none;
+  border: 3px solid black;
+  border-radius: 5px;
+  color: black;
+  font-size: 0.2em;
+  font-weight: bold;
+  margin: 1em auto;
+  padding: 2em 6em;
+  position: relative;
+}
+
+.loginBtn__logoutBtn::before,
+.loginBtn__logoutBtn::after {
+  background: #fff;
+  content: '';
+  position: absolute; 
+z-index: -1;
+}
+
+.loginBtn__logoutBtn:hover {
+  color: #2ecc71;
+}
+
