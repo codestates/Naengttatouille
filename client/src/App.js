@@ -12,46 +12,20 @@ import axios from 'axios';
 function App() {
   const history = useHistory();
   const [isLogin, setIsLogin] = useState(false);
-  const [userInfo, setUserInfo] = useState(null);
+  const [userInfo, setUserInfo] = useState({
+    user_id: '',
+    email: { data: '', validity: false },
+    password: { data: '', validity: false },
+    'password confirm': { data: '', validity: false },
+    name: { data: '', validity: false },
+    admin: false,
+    edit: false,
+  });
 
   const userInfoHandler = (data) => {
     setUserInfo(data);
   };
 
-  // const userInfoHandler = (key) => (value) => {
-  //   setUserInfo({ ...userInfo, [key]: value });
-  // };
-
-  // const [userInfo, setUserInfo] = useState({
-  //   user_id: '',
-  //   email: { data: '', validity: false },
-  //   password: { data: '', validity: false },
-  //   'password confirm': { data: '', validity: false },
-  //   name: { data: '', validity: false },
-  //   admin: false,
-  //   edit: false,
-  // });
-
-  // const userInfoHandler = (key) => (value, validity, boolean) => {
-  //   if (key === 'edit' || key === 'admin') {
-  //     setUserInfo({ ...userInfo, [key]: boolean });
-  //   }
-  //   if (key === 'user_id') {
-  //     setUserInfo({ ...userInfo, [key]: value });
-  //   }
-  //   if (key === 'email' || key === 'password' || key === 'password confirm' || key === 'name')
-  //     setUserInfo({ ...userInfo, [key]: { data: value, validity: validity } });
-  //   if (key === 'init')
-  //     setUserInfo({
-  //       user_id: { data: '', validity: false },
-  //       email: { data: '', validity: false },
-  //       password: { data: '', validity: false },
-  //       'password confirm': { data: '', validity: false },
-  //       name: { data: '', validity: false },
-  //       admin: false,
-  //       edit: false,
-  //     });
-  // };
 
   const loginHandler = () => {
     setIsLogin(!isLogin);
@@ -64,21 +38,6 @@ function App() {
       return res;
     });
   };
-  // const handleLogout = () => {
-  //   axios.post('https://localhost:4000/signout').then((res) => {
-  //     setUserinfo(null);
-  //     setIsLogin(false);
-  //     history.push('/');
-  //   });
-  // };
-
-  // useEffect(() => {
-  //   console.log(userInfo);
-  // });
-
-  // useEffect(() => {
-  //   console.log(userInfo);
-  // }, [userInfo]);
 
   return (
     <BrowserRouter>
