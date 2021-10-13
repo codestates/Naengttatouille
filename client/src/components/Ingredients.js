@@ -59,7 +59,7 @@ export default function Ingredients({
     let filtered = ingredientData.filter((el) => el.name === text)
     console.log(filtered)
     axios.post(`http://localhost:4000/refrigerator/${filtered[0].ingredient_id}`) 
-    
+    window.location.reload()
   }
 
 

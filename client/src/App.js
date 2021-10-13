@@ -32,11 +32,10 @@ function App() {
   };
 
   const logoutHandler = () => {
-    axios.post('https://localhost:4000/user/signout').then((res) => {
+    axios.post('http://localhost:4000/user/signout').then((res) => {
       setIsLogin(false);
       alert(`${userInfo}님 이용해주셔서 감사합니다`);
       userInfoHandler(initUser);
-      history.push('/');
       console.log('로그아웃');
     });
   };
