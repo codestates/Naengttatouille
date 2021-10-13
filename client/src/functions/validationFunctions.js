@@ -1,7 +1,7 @@
 module.exports = class Validity {
   //유효성 검사 상태 객체
   //isValidity true : 오류 없음 false : 오류 있음
-  constructor(userInfo) {
+  constructor(inputInfo) {
     this.inputStart = { isValidity: false, message: '' };
     this.valueMissing = { isValidity: true, message: `입력값이 필요합니다` };
     this.mailTypeMatch = { isValidity: true, message: `이메일 형식에 맞게 입력하세요` };
@@ -33,7 +33,7 @@ module.exports = class Validity {
   }
 
   //입력 형식에 따른 유효성 검사
-  checkValidity(userInfo, item, str) {
+  checkValidity(inputInfo, item, str) {
     this.inputStart.isValidity = true;
     if (str.length === 0) {
       this[`valueMissing`][`isValidity`] = str.length !== 0;
@@ -53,7 +53,7 @@ module.exports = class Validity {
         return str.length >= 4 && str.length <= 16;
       }
     } else if (item === `password confirm`) {
-      const pw = userInfo.password;
+      const pw = inputInfo.password;
       this[`passMismatch`][`isValidity`] = pw === str;
       return pw === str;
     } else if (item === `name`) {

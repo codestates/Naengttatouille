@@ -2,30 +2,43 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import UserInput from '../components/UserInput';
 import { Link, useHistory } from 'react-router-dom';
+import { checkErr, ShowInput } from '../functions/InputUserDataFunc';
 
-export default function Mypage({ userInfo, userInfoHandler }) {
-  useEffect(() => userInfoHandler('edit')(null, null, true), []);
+export default function Mypage({ isLogin, userInfo, userInfoHandler }) {
   const history = useHistory();
-  const checkErr = () => {
-    const emailValidity = userInfo['email'][`validity`];
-    const passValidity = userInfo['password'][`validity`];
-    const confirmValidity = userInfo['password confirm'][`validity`];
-    const nameValidity = userInfo['name'][`validity`];
-    if (emailValidity && passValidity && confirmValidity && nameValidity) return false;
+
+  const inputBoxList = [
+    ['email', 'email'],
+    ['password', 'password'],
+    ['password confirm', 'password'],
+    ['name', 'text'],
+  ];
+
+  //각 인풋 박스의 유효성 검사 결과 불린값 배열
+  const [currentErrList, setCurrentErrorList] = useState([]);
+  //현재 유저가 input에 입력중인 텍스트 값
+  const [inputInfo, setInputInfo] = useState({});
+
+  const handleInputInfo = (key) => (value) => {
+    if (key === 'init') setInputInfo({});
+    else setInputInfo({ ...inputInfo, [key]: value });
+  };
+
+  const handleCurrentErrorList = (errList) => {
+    setCurrentErrorList(errList);
   };
 
   const requestEdit = () => {
-    if (checkErr()) {
+    if (checkErr(currentErrList)) {
       console.log('failed to mypage submit');
     } else {
       axios
-        .patch(`http://localhost:4000/user/userinfo?${userInfo.email.data}`, {
-          name: userInfo.name.data,
-          password: userInfo.password.data,
+        .patch(`http://localhost:4000/user/userinfo?${userInfo.user_id}`, {
+          email: inputInfo.email,
+          password: inputInfo.password,
         })
         .then((result) => {
           alert('회원정보 수정에 성공했습니다');
-          history.push('/');
         })
         .catch((err) => {
           console.log('mypage faild Error : ', err);
@@ -34,15 +47,22 @@ export default function Mypage({ userInfo, userInfoHandler }) {
     }
   };
 
+  useEffect(() => {
+    if (!isLogin) history.push('/');
+  }, []);
+
   return (
     <div>
       <h1>Mypage</h1>
-      <form>
-        <UserInput item='email' type='email' handler={userInfoHandler} userInfo={userInfo} edit={true} />
-        <UserInput item='password' type='password' handler={userInfoHandler} userInfo={userInfo} />
-        <UserInput item='password confirm' type='password' handler={userInfoHandler} userInfo={userInfo} />
-        <UserInput item='name' type='text' handler={userInfoHandler} userInfo={userInfo} />
-      </form>
+      <ShowInput
+        edit={true}
+        inputBoxList={inputBoxList}
+        userInfoHandler={userInfoHandler}
+        userInfo={userInfo}
+        inputInfo={inputInfo}
+        handleInputInfo={handleInputInfo}
+        handleCurrentErrorList={handleCurrentErrorList}
+      />
       <button type='button' onClick={requestEdit}>
         Edit Profile
       </button>
