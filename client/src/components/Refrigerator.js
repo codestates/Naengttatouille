@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import './Refrigerator.css';
@@ -12,39 +12,49 @@ export default function Refrigerator({
   guestRecipeTags,
   setGuestRecipeTags,
   userInfo,
-  setGuestRefrigerator }) {
-  const list = [
-    '당근',
-    '양상추',
-    '토마토',
-    '애호박',
-    '양파',
-    '가지',
-    '아스파라거스',
-    '감자',
-    '고구마',
-    '고추',
-    '야채',
-    '이름',
-  ];
+  setGuestRefrigerator,
+  ingredientData }) {
+  const [userLists, setUserLists] = useState([])
   //  서버구현완료시 삭제
   let listDivision = [];
   let guestRefrigeratorList = [];
 
   let refrigeratorLists;
 
-  const getRefrigeratorLists = (userInfo) => {
-    // axios.get('http://localhost:4000/refrigerator')//유저 아이디 줘야함
-    // .then((res) => {
-    //   refrigeratorLists에 정보 push
-    // })
-  };
-  getRefrigeratorLists();
+  // const getRefrigeratorLists = async (userInfo) => {
+  //   let userLists1 = await axios.get('http://localhost:4000/refrigerator')//유저 아이디 줘야함
+  //   .then((res) => {
+  //   })
+  //   console.log(userLists1)
+  // };
+  // getRefrigeratorLists();
+
+  useEffect(async() => {
+      let userLists1 = await axios.get('http://localhost:4000/refrigerator')
+      .then((res) => {
+        return res.data
+      })
+      userLists1.map((el) => {
+        setUserLists([...userLists, el.name])
+      })
+    
+  },[])
+
+  // useEffect(async()=> {
+  //   let realList1 = await axios.get('http://localhost:4000/ingredient')
+  //   .then(res => {
+  //     return res.data
+  //   })
+  //   // console.log(realList1)
+  //   let realList = await realList1.map(el => el.name)
+  //   setIngredientData(realList1)
+  //   makeDivision(realList)
+  //   setDivision(listDivision)
+  // },[])
 
   const deleteRefrigerator = (el) => {
-    // axios.delete('http://localhost:4000/refrigerator/ingredient' {ingredient_id: el.id})//유져아이디,재료아이디
-    // .then((res) => {
-    // })
+    console.log(userLists)
+    console.log(el)
   };
 
   const deleteGuestRefrigerator = (el) => {
@@ -54,7 +64,6 @@ export default function Refrigerator({
   const addSearchList = (event) => {
     //main컴포넌트에서 함수 받아서 검색어 저장소에 추가
     const text = event.target.textContent;
-
     // setRecipeTag(recipeTag.push(text))
     handleRecipeTags('add', text);
   };
@@ -82,14 +91,14 @@ export default function Refrigerator({
     }
   };
 
-  const makeList = (list, guestRefrigerator) => {
+  const makeList = (userLists, guestRefrigerator) => {
     if(isLogin){
-      makeDivision(list)
+      makeDivision(userLists)
     }else{
       makeGuestRefrigerator(guestRefrigerator)
     }
   }
-  makeList(list, guestRefrigerator)
+  makeList(userLists, guestRefrigerator)
 
   function makeEl(el) {
     if (el[1] === undefined) {
