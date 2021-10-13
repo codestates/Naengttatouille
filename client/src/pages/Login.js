@@ -1,54 +1,47 @@
-import React, { useState, useEffect } from 'react';
-// import axios from 'axios';
+import React, { useEffect } from 'react';
+import axios from 'axios';
 import UserInput from '../components/UserInput';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
-export default function Login({ userInfo, userInfoHandler }) {
+export default function Login({ userInfo, userInfoHandler, loginHandler }) {
+  useEffect(() => userInfoHandler('edit')(null, null, false), []);
+  const history = useHistory();
   const checkErr = () => {
-    for (const key in userInfo) {
-      if (!userInfo[key][`validity`]) return true;
-    }
+    if (!userInfo['email'][`validity`] && !userInfo['password'][`validity`]) return true;
     return false;
   };
 
   const handleLogin = () => {
     if (checkErr()) {
-      console.log('failed to submit');
+      console.log('failed to login submit');
     } else {
-      // axios
-      //   .post(
-      //     'https://localhost:4000/user/signin',
-      //     {
-      //       name: userInfo.name.validity,
-      //       email: userInfo.email.validity,
-      //       password: userInfo.password.validity,
-      //     },
-      //     {
-      //       withCredentials: true, //쿠키 허용
-      //     }
-      //   )
-      //   .then((result) => {
-      //     console.log(result.config.data);
-      //   });
+      axios
+        .post('http://localhost:4000/user/signin', {
+          email: userInfo.email.data,
+          password: userInfo.password.data,
+        })
+        .then((response) => {
+          loginHandler();
+          userInfoHandler('admin')(null, null, response.data.admin);
+          console.log('login success');
+          history.push('/main');
+        })
+        .catch((err) => {
+          userInfoHandler('init');
+          console.log('login faild Error : ', err);
+          alert('로그인에 실패했습니다');
+        });
     }
   };
-  console.log('login1 : ', userInfo.edit);
-  useEffect(() => {
-    userInfoHandler('edit')(null, null, false);
-    return userInfoHandler('edit')(null, null, false);
-  }, []);
-  console.log('login2 : ', userInfo.edit);
   return (
     <div>
       <h1>Sign In</h1>
-      <form id='signinForm' method='post' action='/user/signin'>
-        <UserInput item='email' type='email' handler={userInfoHandler} inputInfo={userInfo} />
-        <UserInput item='password' type='password' handler={userInfoHandler} inputInfo={userInfo} />
-      </form>
+      <UserInput item='email' type='email' handler={userInfoHandler} inputInfo={userInfo} />
+      <UserInput item='password' type='password' handler={userInfoHandler} inputInfo={userInfo} />
       <Link to='/signup'>
         <button type='button'>Sign Up</button>
       </Link>
-      <button type={checkErr() ? 'button' : 'submit'} onClick={handleLogin}>
+      <button type={'button'} onClick={handleLogin}>
         Sign In
       </button>
     </div>

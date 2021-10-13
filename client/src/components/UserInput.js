@@ -5,8 +5,6 @@ export default function UserInput({ item, type, handler, inputInfo }) {
   const errDivClassName = `${item}_err`;
   const [errMsg, setErrMsg] = useState('');
   const [isError, setIsError] = useState(false);
-  // const passMinLength = 4;
-  // const passMaxLength = 16;
 
   useEffect(() => {}, []);
 
@@ -73,8 +71,7 @@ export default function UserInput({ item, type, handler, inputInfo }) {
     let cv = checkValidity(item, e.target.value);
     setErrMsg(getMessage());
     setIsError(checkErr());
-    console.log(value);
-    handler(item)(value, cv, null); //상위 컴포넌트에 입력값 전달
+    handler(item)(value, cv, false); //상위 컴포넌트에 입력값 전달
   };
 
   return (
@@ -103,62 +100,3 @@ export default function UserInput({ item, type, handler, inputInfo }) {
     </div>
   );
 }
-
-// const input = document.getElementsByClassName(item);
-// const errDiv = document.getElementsByClassName(errDivClassName);
-
-// function passMatch(p1, p2) {
-//   if (p1 === p2) {
-//     inputInfo[item]['validity'] = true;
-//     input.nextSibling.classList.add('hide');
-//     return true;
-//   } else {
-//     inputInfo[item]['validity'] = false;
-//     input.nextSibling.classList.remove('hide');
-//     return false;
-//   }
-// }
-
-// const validityMessage = {
-//   badInput: '잘못된 입력입니다.',
-//   patternMismatch: '패턴에 맞게 입력하세요',
-//   rangeOverflow: '범위를 초과하였습니다',
-//   rangeUnderflow: '범위에 미달하였습니다',
-//   stepMismatch: '간격에 맞게 입력하세요',
-//   tooLong: '비밀번호는 16글자 이하여야 합니다',
-//   tooShort: '비밀번호는 4~16자 입니다',
-//   typeMismatch: `형식에 맞게 입력하세요`,
-//   valueMissing: '이 필드를 반드시 입력하세요',
-// };
-
-// function getMessage(validity) {
-//   //입력값 오류에 따른 오류 메시지 반환
-//   for (const key in validityMessage) {
-//     if (validity[key]) {
-//       return validityMessage[key];
-//     }
-//   }
-// }
-
-// function showError(input) {
-//   // input.setCustomValidity(getMessage(input.validity) || ''); //툴팁 메세지 변경
-//   document.forms[0].classList.add('isInvalid'); // 검증 후 오류일 시 isInvalid 클래스명 추가(css용)
-//   input.nextSibling.textContent = getMessage(input.validity); //에러 메시지 출력
-// }
-
-/*querySelectorAll('input').forEach((input) => {}) 의 형식은
-  컴포넌트가 반복사용될 시에 input이 여러개 되므로 여러 엘리먼트가 선택된다.
-  이것은 forEach로 해결될 거라고 생각했지만 전부 같은 메세지가 할당되는 로직 오류가 발생하여 채택하지 않았다. */
-
-// if (input) {
-//   input.addEventListener('invalid', (e) => {
-//     e.preventDefault(); // 브라우져 툴팁 숨김
-
-//     if (inputInfo.password.data !== inputInfo['password confirm']) {
-//       console.log(
-//         `비밀번호 불일치 ${inputInfo.password} !== ${inputInfo['password confirm']}`
-//       );
-//     }
-//     showError(input);
-//   });
-// }
