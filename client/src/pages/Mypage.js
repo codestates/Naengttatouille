@@ -7,10 +7,11 @@ export default function Mypage({ userInfo, userInfoHandler }) {
   useEffect(() => userInfoHandler('edit')(null, null, true), []);
   const history = useHistory();
   const checkErr = () => {
+    const emailValidity = userInfo['email'][`validity`];
     const passValidity = userInfo['password'][`validity`];
     const confirmValidity = userInfo['password confirm'][`validity`];
     const nameValidity = userInfo['name'][`validity`];
-    if (passValidity && confirmValidity && nameValidity) return false;
+    if (emailValidity && passValidity && confirmValidity && nameValidity) return false;
   };
 
   const requestEdit = () => {
@@ -37,10 +38,10 @@ export default function Mypage({ userInfo, userInfoHandler }) {
     <div>
       <h1>Mypage</h1>
       <form>
-        <UserInput item='email' type='email' handler={userInfoHandler} inputInfo={userInfo} />
-        <UserInput item='password' type='password' handler={userInfoHandler} inputInfo={userInfo} />
-        <UserInput item='password confirm' type='password' handler={userInfoHandler} inputInfo={userInfo} />
-        <UserInput item='name' type='text' handler={userInfoHandler} inputInfo={userInfo} />
+        <UserInput item='email' type='email' handler={userInfoHandler} userInfo={userInfo} edit={true} />
+        <UserInput item='password' type='password' handler={userInfoHandler} userInfo={userInfo} />
+        <UserInput item='password confirm' type='password' handler={userInfoHandler} userInfo={userInfo} />
+        <UserInput item='name' type='text' handler={userInfoHandler} userInfo={userInfo} />
       </form>
       <button type='button' onClick={requestEdit}>
         Edit Profile

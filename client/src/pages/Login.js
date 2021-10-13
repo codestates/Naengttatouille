@@ -1,43 +1,60 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import UserInput from '../components/UserInput';
 import { Link, useHistory } from 'react-router-dom';
+import { checkErr, ShowInput } from '../functions/InputUserDataFunc';
 
-export default function Login({ userInfo, userInfoHandler, loginHandler }) {
-  useEffect(() => userInfoHandler('edit')(null, null, false), []);
+// axios.defaults.withCredentials = true;
+
+export default function Login({ userInfo, userInfoHandler, loginHandler, setUserInfo }) {
   const history = useHistory();
-  const checkErr = () => {
-    if (!userInfo['email'][`validity`] && !userInfo['password'][`validity`]) return true;
-    return false;
+  const inputBoxList = [
+    ['email', 'email'],
+    ['password', 'password'],
+  ];
+
+  const [currentErrList, setCurrentErrorList] = useState([]);
+  const [inputInfo, setInputInfo] = useState({});
+
+  const handleInputInfo = (key) => (value) => {
+    if (key === 'init') setInputInfo({});
+    else setInputInfo({ ...inputInfo, [key]: value });
   };
 
-  const handleLogin = () => {
-    if (checkErr()) {
+  const handleCurrentErrorList = (errList) => {
+    setCurrentErrorList(errList);
+  };
+
+  const handleLogin = async () => {
+    if (checkErr(currentErrList)) {
       console.log('failed to login submit');
     } else {
-      axios
+      await axios
         .post('http://localhost:4000/user/signin', {
-          email: userInfo.email.data,
-          password: userInfo.password.data,
+          email: inputInfo.email,
+          password: inputInfo.password,
         })
         .then((response) => {
           loginHandler();
-          userInfoHandler('admin')(null, null, response.data.admin);
-          console.log('login success');
-          history.push('/main');
+          setUserInfo(response.data);
         })
         .catch((err) => {
-          userInfoHandler('init');
+          handleInputInfo('init');
           console.log('login faild Error : ', err);
           alert('로그인에 실패했습니다');
+          return 'err';
         });
     }
   };
   return (
     <div>
       <h1>Sign In</h1>
-      <UserInput item='email' type='email' handler={userInfoHandler} inputInfo={userInfo} />
-      <UserInput item='password' type='password' handler={userInfoHandler} inputInfo={userInfo} />
+      <ShowInput
+        inputBoxList={inputBoxList}
+        userInfoHandler={userInfoHandler}
+        userInfo={userInfo}
+        handleInputInfo={handleInputInfo}
+        handleCurrentErrorList={handleCurrentErrorList}
+      />
       <Link to='/signup'>
         <button type='button'>Sign Up</button>
       </Link>
