@@ -14,14 +14,14 @@ const {
 app.use(express.json());
 app.use(
   cors({
-    // origin: [process.env.CLIENT],
+//     origin: [process.env.CLIENT],
     methods: ['GET', 'POST', 'OPTIONS', 'PATCH', 'DELETE'],
   })
 );
 app.use(cookieParser());
 
 app.get('/', (req, res) => {
-  res.status.send('Hello World');
+  res.status(200).send('Hello World');
 });
 
 app.use('/user', userRouter);
