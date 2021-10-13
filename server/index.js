@@ -14,8 +14,9 @@ const {
 app.use(express.json());
 app.use(
   cors({
-    // origin: [process.env.CLIENT],
+    origin: true,
     methods: ['GET', 'POST', 'OPTIONS', 'PATCH', 'DELETE'],
+    credentials: true,
   })
 );
 app.use(cookieParser());
