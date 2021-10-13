@@ -14,12 +14,11 @@ function App() {
   const [isLogin, setIsLogin] = useState(false);
   const [userInfo, setUserInfo] = useState({
     user_id: '',
-    email: { data: '', validity: false },
-    password: { data: '', validity: false },
-    'password confirm': { data: '', validity: false },
-    name: { data: '', validity: false },
+    email: '',
+    password: '',
+    'password confirm': '',
+    name: '',
     admin: false,
-    edit: false,
   });
 
   const userInfoHandler = (data) => {
