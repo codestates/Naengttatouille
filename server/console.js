@@ -1,10 +1,11 @@
+require('dotenv').config();
 console.log(
-  DATABASE_HOST,
-  DATABASE_USERNAME,
-  DATABASE_PASSWORD,
-  DATABASE_PORT,
-  DATABASE_NAME,
-  ACCESS_SECRET,
-  NODE_ENV,
-  HTTPS_PORT
+  process.env.DATABASE_HOST,
+  process.env.DATABASE_USERNAME,
+  process.env.DATABASE_PASSWORD,
+  process.env.DATABASE_PORT,
+  process.env.DATABASE_NAME,
+  process.env.ACCESS_SECRET,
+  process.env.NODE_ENV,
+  process.env.HTTPS_PORT
 );
