@@ -1,10 +1,9 @@
-require('dotenv').config();
 const { sign, verify } = require('jsonwebtoken');
 
 module.exports = {
   generateAccessToken: (data) => {
     // 토큰 생성
-    return sign(data, process.env.ACCESS_SECRET, { expiresIn: '300s' });
+    return sign(data, ACCESS_SECRET, { expiresIn: '300s' });
   },
   sendAccessToken: (res, accessToken) => {
     //토큰 전달
@@ -16,7 +15,7 @@ module.exports = {
 
     if (accessToken) {
       try {
-        return verify(accessToken, process.env.ACCESS_SECRET);
+        return verify(accessToken, ACCESS_SECRET);
       } catch (err) {
         return null;
       }
