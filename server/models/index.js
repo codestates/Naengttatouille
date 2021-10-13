@@ -1,5 +1,6 @@
 'use strict';
-require('aws-sdk').config();
+const AWS = require('aws-sdk');
+AWS.config();
 
 const fs = require('fs');
 const path = require('path');
@@ -11,7 +12,7 @@ const db = {};
 
 let sequelize;
 if (config.use_env_variable) {
-  sequelize = new Sequelize([config.use_env_variable], config);
+  sequelize = new Sequelize(AWS[config.use_env_variable], config);
 } else {
   sequelize = new Sequelize(
     config.database,

@@ -1,4 +1,5 @@
-require('aws-sdk').config();
+const AWS = require('aws-sdk');
+AWS.config();
 const fs = require('fs');
 const https = require('https');
 const cors = require('cors');
@@ -14,7 +15,7 @@ const {
 app.use(express.json());
 app.use(
   cors({
-    origin: CLIENT,
+    origin: AWS.CLIENT,
     methods: ['GET', 'POST', 'OPTIONS', 'PATCH', 'DELETE'],
   })
 );
@@ -28,7 +29,7 @@ app.use('/user', userRouter);
 app.use('/ingredient', ingredientRouter);
 app.use('/refrigerator', refrigeratorRouter);
 
-const PORT = HTTP_PORT || HTTPS_PORT;
+const PORT = AWS.HTTP_PORT || AWS.HTTPS_PORT;
 let server;
 if (fs.existsSync('./key.pem') && fs.existsSync('./cert.pem')) {
   const privateKey = fs.readFileSync(__dirname + '/key.pem', 'utf8');
