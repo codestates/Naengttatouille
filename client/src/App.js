@@ -71,7 +71,6 @@ function App() {
         <Nav
           isLogin={isLogin}
           userInfo={userInfo}
-          loginHandler={loginHandler} //=>이 함수 사용하시는 부분을 logoutHandler로 바꾸신 후에 삭제해주세요
           logoutHandler={logoutHandler}
           userInfoHandler={userInfoHandler}
         />
