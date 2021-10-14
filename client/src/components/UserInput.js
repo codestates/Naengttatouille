@@ -28,40 +28,45 @@ export default function UserInput({
     // userInfoHandler({ [item]: value }); //상위 컴포넌트에 입력값 전달
   };
   return (
-    <div id='userinput-container' className='f10'>
+    <div>
       <div className='input-group'>
-        <span className='input-name'>{item}</span>
-        <input
-          id={item}
-          className={isError ? `isInvalid input ` : `input`}
-          type={type}
-          onChange={handleInputValue}
-          minLength={
-            item === `password` || item === `password confirm`
-              ? 4
-              : item === `name`
-              ? 2
-              : 0
-          }
-          maxLength={
-            item === `password` || item === `password confirm`
-              ? 16
-              : item === `name`
-              ? 8
-              : 99
-          }
-          disabled={edit && item === `email` ? true : undefined}
-          required={edit && item === `email` ? false : undefined}
-          value={edit && item === `email` ? userInfo.email : undefined}
+        <div className='userinput-group f10'>
+          <span className='input-name f10'>{item}</span>
+          <input
+            id={item}
+            className={
+              isError ? `isInvalid f10 input-value` : `f10 input-value`
+            }
+            type={type}
+            onChange={handleInputValue}
+            minLength={
+              item === `password` || item === `password confirm`
+                ? 4
+                : item === `name`
+                ? 2
+                : 0
+            }
+            maxLength={
+              item === `password` || item === `password confirm`
+                ? 16
+                : item === `name`
+                ? 8
+                : 99
+            }
+            disabled={edit && item === `email` ? true : undefined}
+            required={edit && item === `email` ? false : undefined}
+            value={edit && item === `email` ? userInfo.email : undefined}
+          >
+            {/* {edit && item === `email` ? userInfo.email : false} */}
+          </input>
+        </div>
+
+        <div
+          id={`${errDivClassName} `}
+          className={`errDiv ${isError ? `` : `hide f10`}`}
         >
-          {/* {edit && item === `email` ? userInfo.email : false} */}
-        </input>
-      </div>
-      <div
-        id={`${errDivClassName} `}
-        className={`errDiv ${isError ? `` : `hide`}`}
-      >
-        {errMsg}
+          {errMsg}
+        </div>
       </div>
     </div>
   );
