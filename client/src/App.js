@@ -21,6 +21,14 @@ function App() {
   };
   const [isLogin, setIsLogin] = useState(false);
   const [userInfo, setUserInfo] = useState(initUser);
+  const hosts = [
+    [0, 'http://localhost:4000'],
+    [1, 'http://ec2-15-164-96-52.ap-northeast-2.compute.amazonaws.com'],
+  ];
+  const whereConnect = () => {
+    for (let host of hosts) if (host[0]) return host[1];
+  };
+  const connect = whereConnect();
 
   const userInfoHandler = (data) => {
     setUserInfo(data);
@@ -41,19 +49,21 @@ function App() {
   };
 
   const isAuthenticated = async () => {
-    await axios
-      .get('http://localhost:4000/user/auth')
-      .then((response) => {
-        loginHandler();
-        userInfoHandler(response.data);
-        console.log('🚀 ~ file: App.js ~ line 49 ~ .then ~ response.data', response.data);
-        console.log('토큰 유지 중');
-        return response.data;
-      })
-      .catch((error) => {
-        logoutHandler();
-        console.log('토큰 만료, 로그아웃');
-      });
+    try {
+      await axios
+        .get('http://localhost:4000/user/auth')
+        .then((response) => {
+          loginHandler();
+          userInfoHandler(response.data);
+          console.log('토큰 유지 중');
+          return response.data;
+        })
+        .catch((error) => {
+          console.log('인증 오류 : ', error, '----------------');
+        });
+    } catch (error) {
+      console.log('authenticated try catch: ', error, '----------------');
+    }
   };
 
   // const handleResponseSuccess = () => {
@@ -67,7 +77,12 @@ function App() {
   return (
     <BrowserRouter>
       <div className='App'>
-        <Nav isLogin={isLogin} userInfo={userInfo} logoutHandler={logoutHandler} userInfoHandler={userInfoHandler} />
+        <Nav
+          isLogin={isLogin}
+          userInfo={userInfo}
+          logoutHandler={logoutHandler}
+          userInfoHandler={userInfoHandler}
+        />
         <Switch>
           <Route exact path='/'>
             <About isLogin={isLogin} userInfo={userInfo} />
@@ -84,10 +99,18 @@ function App() {
             <Main isLogin={isLogin} userInfo={userInfo} />
           </Route>
           <Route path='/mypage'>
-            <Mypage isLogin={isLogin} userInfo={userInfo} userInfoHandler={userInfoHandler} />
+            <Mypage
+              isLogin={isLogin}
+              userInfo={userInfo}
+              userInfoHandler={userInfoHandler}
+            />
           </Route>
           <Route path='/signup'>
-            <Signup isLogin={isLogin} userInfo={userInfo} userInfoHandler={userInfoHandler} />
+            <Signup
+              isLogin={isLogin}
+              userInfo={userInfo}
+              userInfoHandler={userInfoHandler}
+            />
           </Route>
         </Switch>
       </div>

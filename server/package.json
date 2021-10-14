@@ -1,11 +1,10 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js",
-    "test": "mocha tests/**.test.js --sort --exit --reporter @mochajs/json-file-reporter"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
@@ -17,6 +16,7 @@
   "author": "DevChild",
   "license": "ISC",
   "dependencies": {
+    "aws-sdk": "^2.1006.0",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
