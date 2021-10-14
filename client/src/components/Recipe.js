@@ -1,79 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import './Recipe.css';
 import thumbnailImg from '../thumbnail.png';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-export default function Recipe({ recipeTags, handleRecipeTags }) {
-  const searchStr = `${recipeTags.join()} 레시피`;
-  const handleTag = (str, tag) => {
-    //태그관리
-    handleRecipeTags(str, tag);
-  };
-  const [videoList, setVideoList] = useState([]);
-
-  axios.defaults.baseURL = 'https://www.googleapis.com/youtube/v3';
-  const api_key = 'AIzaSyC1yj060gnMdEUBCnp-Sm1u20KuwxQ9b20';
-  const getYoutubeVideo = async () => {
-    const params = {
-      key: api_key,
-      part: 'snippet',
-      q: searchStr,
-      maxResults: 5,
-      type: 'video',
-    };
-
-    await axios
-      .get('/search', { params })
-      .then((response) => {
-        console.log(response.data);
-        const searchResult = response.data.items;
-        return searchResult.map((video) => {
-          const videoId = video.id.videoId; //영상 id
-          const videoTitle = video.snippet.title; //제목
-          const videoDescription = video.snippet.description; //설명
-          const videoThumbnail = video.snippet.thumbnails.high.url; //썸네일
-          const url = `https://www.youtube.com/watch?v=${videoId}`;
-          return {
-            videoId: videoId,
-            videoTitle: videoTitle,
-            videoDescription: videoDescription,
-            videoThumbnail: videoThumbnail,
-            url: url,
-          };
-        });
-      })
-      .then((data) => setVideoList(data));
-  };
+export default function Recipe({videoList}) {
 
   return (
-    <ul className='selected'>
-      <div className='recipe__tagAndSearch'>
-        <span className='tag__box'>
-          {recipeTags.map((tag) => {
+    <div className='recipe'>
+        <ul>
+          {videoList?.map((video) => {
             return (
-              <span key={tag} className='tag' onClick={() => handleTag('delete', tag)}>
-                {tag}
-              </span>
-            );
-          })}
-          <button className='unchecked_tags' onClick={() => handleTag('deleteAll', '')}>
-            전체 선택 취소
-          </button>
-        </span>
-        <button type='button' className='recipe_search' onClick={getYoutubeVideo}>
-          레시피 검색
-        </button>
-      </div>
-      <section className='vid'>
-        <ul className='vid__list'>
-          {videoList.map((video) => {
-            return (
-              <li key={video.videoId} className='vid__one'>
-                <a className='vid__info' href={video.url} target='_blank' rel='noreferrer'>
-                  <img className='thumbnail' src={video.videoThumbnail} alt='thumbnail' />
+              <li key={video.videoId} className='recipe__content'>
+                <a className='video' href={video.url} target='_blank' rel='noreferrer'>
+                  <img src={video.videoThumbnail} alt='thumbnail' />
                 </a>
-                <a className='vid__info' href={video.url} target='_blank' rel='noreferrer'>
+                <a className='text' href={video.url} target='_blank' rel='noreferrer'>
                   <div className='title'>{video.videoTitle}</div>
                   <div className='description'>{video.videoDescription}</div>
                 </a>
@@ -81,9 +22,10 @@ export default function Recipe({ recipeTags, handleRecipeTags }) {
             );
           })}
         </ul>
-        <button className='more'>더보기</button>
-      </section>
-    </ul>
+        <div className="button__more">
+          <button>더보기</button>
+        </div>
+      </div>
   );
 }
 
