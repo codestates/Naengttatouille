@@ -6,7 +6,7 @@ import Recipe from '../components/Recipe';
 import Search from '../components/Search';
 
 export default function Main({ isLogin, userInfo }) {
-  const [guestRefrigerator, setGuestRefrigerator] = useState(['당근', '양상추', '토마토', '애호박', '양파', '가지']);
+  const [guestRefrigerator, setGuestRefrigerator] = useState(['당근', '양배추', '깐 마늘', '대파', '양파', '브로콜리']);
   const [recipeTags, setRecipeTags] = useState([]);
   const [state, setState] = useState(true);
   const handleRecipeTags = (str, tag) => {
