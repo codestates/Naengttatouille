@@ -1,6 +1,6 @@
 .ingredients {
     width: 100vw;
-    height: 600px;
+    height: 85vh;
 }
 
 .grocery {
@@ -19,7 +19,7 @@
     top: 58.2%;
 } */
 
-.ingredients{
+.container__all{
     background-image: url(../background-Main.jpg);
     background-size: 100% auto;
 }
