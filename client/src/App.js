@@ -21,14 +21,14 @@ function App() {
   };
   const [isLogin, setIsLogin] = useState(false);
   const [userInfo, setUserInfo] = useState(initUser);
-  const hosts = [
-    [0, 'http://localhost:4000'],
-    [1, 'http://ec2-15-164-96-52.ap-northeast-2.compute.amazonaws.com'],
-  ];
-  const whereConnect = () => {
-    for (let host of hosts) if (host[0]) return host[1];
-  };
-  const connect = whereConnect();
+  // const hosts = [
+  //   [0, 'http://localhost:4000'],
+  //   [1, 'http://ec2-15-164-96-52.ap-northeast-2.compute.amazonaws.com'],
+  // ];
+  // const whereConnect = () => {
+  //   for (let host of hosts) if (host[0]) return host[1];
+  // };
+  // const connect = whereConnect();
 
   const userInfoHandler = (data) => {
     setUserInfo(data);
@@ -40,7 +40,7 @@ function App() {
   };
 
   const logoutHandler = () => {
-    axios.post('http://localhost:4000/user/signout').then((res) => {
+    axios.post(`http://localhost:4000/user/signout`).then((res) => {
       setIsLogin(false);
       // alert(`${userInfo.name}님 이용해주셔서 감사합니다`);
       userInfoHandler(initUser);
@@ -51,7 +51,7 @@ function App() {
   const isAuthenticated = async () => {
     try {
       await axios
-        .get('http://localhost:4000/user/auth')
+        .get(`http://localhost:4000/user/auth`)
         .then((response) => {
           loginHandler();
           userInfoHandler(response.data);

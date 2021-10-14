@@ -1,8 +1,8 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-
 import './Refrigerator.css';
+require('dotenv').config();
 
 export default function Refrigerator({ 
   recipeTag, 
@@ -23,7 +23,7 @@ export default function Refrigerator({
   const [refrigeratorAll, setRefrigeratorAll] = useState([])
 
   useEffect(async() => {
-      let userLists1 = await axios.get('http://localhost:4000/refrigerator')
+      let userLists1 = await axios.get(`http://localhost:4000/refrigerator`)
       .then((res) => {
         return res.data
       })
@@ -47,7 +47,7 @@ export default function Refrigerator({
     let refrigeratorNameData = userListDivision.reduce((acc, cur) => {
       return acc.concat(cur)
     })
-    let refrigeratorData = await axios.get('http://localhost:4000/refrigerator')
+    let refrigeratorData = await axios.get(`http://localhost:4000/refrigerator`)
     let filtered = refrigeratorData.data.filter(res => res.name === el)
     axios.delete(`http://localhost:4000/refrigerator/${filtered[0].ingredient_id}`)
     // setState(!state)

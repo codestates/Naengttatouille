@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios'
 import './Ingredients.css'
 import { v4 as uuidv4 } from 'uuid';
-
+require('dotenv').config();
 
 export default function Ingredients({
   isLogin,
@@ -35,7 +35,7 @@ export default function Ingredients({
 
   useEffect(async()=> {
     
-    let realList1 = await axios.get('http://localhost:4000/ingredient')
+    let realList1 = await axios.get(`http://localhost:4000/ingredient`)
     .then(res => {
       return res.data
     })
@@ -47,7 +47,7 @@ export default function Ingredients({
   },[])
 
   const addIngredients = () => {
-    axios.post('http://localhost:4000/ingredient', {name : `${nameValue}`, keep_method: `${methodValue}`})
+    axios.post(`http://localhost:4000/ingredient`, {name : `${nameValue}`, keep_method: `${methodValue}`})
     // console.log(nameValue)
     // console.log(methodValue)
     setNameValue('')
@@ -81,7 +81,7 @@ export default function Ingredients({
     axios.delete(`http://localhost:4000/ingredient/${filtered[0].ingredient_id}`)
     .then(res => console.log(res))
     
-    let arr = await axios.get('http://localhost:4000/ingredient')
+    let arr = await axios.get(`http://localhost:4000/ingredient`)
     .then((res) => res.data)
     console.log(arr)
     window.location.reload();
@@ -123,7 +123,7 @@ export default function Ingredients({
   const MouseOver =  async(event) => {
     event.target.style.background = 'skyblue'
     let text = event.target.textContent
-    let data = await axios.get('http://localhost:4000/ingredient').then((res) => res.data)
+    let data = await axios.get(`http://localhost:4000/ingredient`).then((res) => res.data)
     let filtered = data.filter((el) => el.name === text)
     setExContent(filtered[0].keep_method)
   }

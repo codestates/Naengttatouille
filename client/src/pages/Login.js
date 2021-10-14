@@ -34,7 +34,7 @@ export default function Login({ userInfo, userInfoHandler, loginHandler }) {
     } else {
       try {
         await axios
-          .post('http://localhost:4000/user/signin', {
+          .post(`http://localhost:4000/user/signin`, {
             email: inputInfo.email,
             password: inputInfo.password,
           })

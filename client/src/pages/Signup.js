@@ -33,7 +33,7 @@ export default function Signup({ userInfo, userInfoHandler }) {
       console.log('failed to sign up submit');
     } else {
       axios
-        .post('http://localhost:4000/user/signup', {
+        .post(`http://localhost:4000/user/signup`, {
           name: inputInfo.name,
           email: inputInfo.email,
           password: inputInfo.password,
