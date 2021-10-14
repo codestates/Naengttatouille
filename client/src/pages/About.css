@@ -22,7 +22,13 @@
 } */
 
 .about__intro {
-  width: 10em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  width: 212px;
   /* border: solid;
   border-color: white; */
   color: white;
