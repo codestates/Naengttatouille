@@ -16,3 +16,30 @@
 .hide {
   display: none;
 }
+
+.input-group {
+  width: 310px;
+  margin-right: 0px;
+  justify-content: left;
+  /* border: 5px solid aqua; */
+
+  /* display: flex;
+  justify-content: left;
+  align-items: center;
+  padding-left: 0;
+  left: 20px; */
+}
+
+.f10 {
+  flex: 1 1 auto;
+}
+
+.input-name {
+  /* padding-left: 0; */
+  font-size: large;
+}
+
+.input {
+  /* background-color: palegreen; */
+  margin-right: 0px;
+}

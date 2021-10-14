@@ -25,52 +25,54 @@
   color: white;
 }
 
-.about__signup__btn{
-  background:#F82F62;
-  color:#fff;
-  border:none;
-  position:relative;
-  height:60px;
-  font-size:1.6em;
-  padding:0 2em;
-  cursor:pointer;
-  transition:800ms ease all;
-  outline:none;
+.about__signup__btn {
+  background: #f82f62;
+  color: #fff;
+  border: none;
+  position: relative;
+  height: 60px;
+  font-size: 1.6em;
+  padding: 0 2em;
+  cursor: pointer;
+  transition: 800ms ease all;
+  outline: none;
 }
-.about__signup__btn:hover{
-  background:#fff;
-  color:#1AAB8A;
+.about__signup__btn:hover {
+  background: #fff;
+  color: #1aab8a;
 }
-.about__signup__btn:before,.about__signup__btn:after{
-  content:'';
-  position:absolute;
-  top:0;
-  right:0;
-  height:2px;
-  width:0;
-  background: #1AAB8A;
-  transition:400ms ease all;
+.about__signup__btn:before,
+.about__signup__btn:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 2px;
+  width: 0;
+  background: #1aab8a;
+  transition: 400ms ease all;
 }
-.about__signup__btn:after{
-  right:inherit;
-  top:inherit;
-  left:0;
-  bottom:0;
+.about__signup__btn:after {
+  right: inherit;
+  top: inherit;
+  left: 0;
+  bottom: 0;
 }
-.about__signup__btn:hover:before,.about__signup__btn:hover:after{
-  width:100%;
-  transition:800ms ease all;
+.about__signup__btn:hover:before,
+.about__signup__btn:hover:after {
+  width: 100%;
+  transition: 800ms ease all;
 }
 
-.about__intro__title{
+.about__intro__title {
   font-weight: 800;
   font-size: 40px;
 }
-.about__intro{
+.about__intro {
   margin-left: 30%;
   margin-top: 3%;
 }
 
-.about__signup__btn{
+.about__signup__btn {
   margin-top: 10%;
 }

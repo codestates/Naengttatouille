@@ -46,7 +46,10 @@ function App() {
       .then((response) => {
         loginHandler();
         userInfoHandler(response.data);
-        console.log('🚀 ~ file: App.js ~ line 49 ~ .then ~ response.data', response.data);
+        console.log(
+          '🚀 ~ file: App.js ~ line 49 ~ .then ~ response.data',
+          response.data
+        );
         console.log('토큰 유지 중');
         return response.data;
       })
@@ -89,10 +92,18 @@ function App() {
             <Main isLogin={isLogin} userInfo={userInfo} />
           </Route>
           <Route path='/mypage'>
-            <Mypage isLogin={isLogin} userInfo={userInfo} userInfoHandler={userInfoHandler} />
+            <Mypage
+              isLogin={isLogin}
+              userInfo={userInfo}
+              userInfoHandler={userInfoHandler}
+            />
           </Route>
           <Route path='/signup'>
-            <Signup isLogin={isLogin} userInfo={userInfo} userInfoHandler={userInfoHandler} />
+            <Signup
+              isLogin={isLogin}
+              userInfo={userInfo}
+              userInfoHandler={userInfoHandler}
+            />
           </Route>
         </Switch>
       </div>
