@@ -35,7 +35,7 @@ export default function Ingredients({
 
   useEffect(async()=> {
     
-    let realList1 = await axios.get(`${process.env.REACT_APP_API_URL}/ingredient`)
+    let realList1 = await axios.get(`http://localhost:4000/ingredient`)
     .then(res => {
       return res.data
     })
@@ -47,7 +47,7 @@ export default function Ingredients({
   },[])
 
   const addIngredients = () => {
-    axios.post(`${process.env.REACT_APP_API_URL}/ingredient`, {name : `${nameValue}`, keep_method: `${methodValue}`})
+    axios.post(`http://localhost:4000/ingredient`, {name : `${nameValue}`, keep_method: `${methodValue}`})
     // console.log(nameValue)
     // console.log(methodValue)
     setNameValue('')
@@ -58,7 +58,7 @@ export default function Ingredients({
   const addRefrigerator = async(event) => {
     let text = event.target.textContent
     let filtered = ingredientData.filter((el) => el.name === text)
-    axios.post(`${process.env.REACT_APP_API_URL}/refrigerator/${filtered[0].ingredient_id}`) 
+    axios.post(`http://localhost:4000/refrigerator/${filtered[0].ingredient_id}`) 
     // setState(!state)
     window.location.reload()
   }
@@ -78,10 +78,10 @@ export default function Ingredients({
   }
   const deleteIngrediente = async(el) => {
     let filtered = ingredientData.filter((data) => data.name === el)
-    axios.delete(`${process.env.REACT_APP_API_URL}/ingredient/${filtered[0].ingredient_id}`)
+    axios.delete(`http://localhost:4000/ingredient/${filtered[0].ingredient_id}`)
     .then(res => console.log(res))
     
-    let arr = await axios.get(`${process.env.REACT_APP_API_URL}/ingredient`)
+    let arr = await axios.get(`http://localhost:4000/ingredient`)
     .then((res) => res.data)
     console.log(arr)
     window.location.reload();
@@ -123,7 +123,7 @@ export default function Ingredients({
   const MouseOver =  async(event) => {
     event.target.style.background = 'skyblue'
     let text = event.target.textContent
-    let data = await axios.get(`${process.env.REACT_APP_API_URL}/ingredient`).then((res) => res.data)
+    let data = await axios.get(`http://localhost:4000/ingredient`).then((res) => res.data)
     let filtered = data.filter((el) => el.name === text)
     setExContent(filtered[0].keep_method)
   }

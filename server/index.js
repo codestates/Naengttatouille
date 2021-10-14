@@ -10,7 +10,7 @@ const { userRouter, ingredientRouter, refrigeratorRouter } = require('./routes')
 app.use(express.json());
 app.use(
   cors({
-    origin: process.env.CLIENT || true,
+    origin: true,
     methods: ['GET', 'POST', 'OPTIONS', 'PATCH', 'DELETE'],
     credentials: true,
   })

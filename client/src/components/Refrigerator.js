@@ -23,7 +23,7 @@ export default function Refrigerator({
   const [refrigeratorAll, setRefrigeratorAll] = useState([])
 
   useEffect(async() => {
-      let userLists1 = await axios.get(`${process.env.REACT_APP_API_URL}/refrigerator`)
+      let userLists1 = await axios.get(`http://localhost:4000/refrigerator`)
       .then((res) => {
         return res.data
       })
@@ -47,9 +47,9 @@ export default function Refrigerator({
     let refrigeratorNameData = userListDivision.reduce((acc, cur) => {
       return acc.concat(cur)
     })
-    let refrigeratorData = await axios.get(`${process.env.REACT_APP_API_URL}/refrigerator`)
+    let refrigeratorData = await axios.get(`http://localhost:4000/refrigerator`)
     let filtered = refrigeratorData.data.filter(res => res.name === el)
-    axios.delete(`${process.env.REACT_APP_API_URL}/refrigerator/${filtered[0].ingredient_id}`)
+    axios.delete(`http://localhost:4000/refrigerator/${filtered[0].ingredient_id}`)
     // setState(!state)
     window.location.reload()
   };

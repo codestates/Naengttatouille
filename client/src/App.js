@@ -40,7 +40,7 @@ function App() {
   };
 
   const logoutHandler = () => {
-    axios.post(`${process.env.REACT_APP_API_URL}/user/signout`).then((res) => {
+    axios.post(`http://localhost:4000/user/signout`).then((res) => {
       setIsLogin(false);
       // alert(`${userInfo.name}님 이용해주셔서 감사합니다`);
       userInfoHandler(initUser);
@@ -51,7 +51,7 @@ function App() {
   const isAuthenticated = async () => {
     try {
       await axios
-        .get(`${process.env.REACT_APP_API_URL}/user/auth`)
+        .get(`http://localhost:4000/user/auth`)
         .then((response) => {
           loginHandler();
           userInfoHandler(response.data);

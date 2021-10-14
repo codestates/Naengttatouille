@@ -36,7 +36,7 @@ export default function Mypage({ isLogin, userInfo, userInfoHandler }) {
       console.log('**************', inputInfo);
       try {
         axios
-          .patch(`${process.env.REACT_APP_API_URL}/user/userinfo/${userInfo.user_id}`, {
+          .patch(`http://localhost:4000/user/userinfo/${userInfo.user_id}`, {
             name: inputInfo.name,
             password: inputInfo.password,
           })
