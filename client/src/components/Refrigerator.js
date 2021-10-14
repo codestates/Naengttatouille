@@ -159,7 +159,7 @@ export default function Refrigerator({
       return (
         <div className='showDeleteBtn__Refrigerator'>
           <span className='deleteBtn__Refrigerator' onClick={isLogin ? () => deleteRefrigerator(el[0]) : () => deleteGuestRefrigerator(el[0])}>
-            X 냉장고에서 지우기
+            X 삭제
           </span>
         </div>
       );
@@ -167,10 +167,10 @@ export default function Refrigerator({
       return (
         <div className='showDeleteBtn__Refrigerator'>
           <span className='deleteBtn__Refrigerator' onClick={isLogin? () => deleteRefrigerator(el[0]) : () => deleteGuestRefrigerator(el[0])}>
-            X 냉장고에서 지우기
+            X 삭제
           </span>
           <span className='deleteBtn__Refrigerator' onClick={isLogin ? () => deleteRefrigerator(el[1]) : () => deleteGuestRefrigerator(el[1])}>
-            X 냉장고에서 지우기
+            X 삭제
           </span>
         </div>
       );
@@ -178,13 +178,13 @@ export default function Refrigerator({
       return (
         <div className='showDeleteBtn__Refrigerator'>
           <span className='deleteBtn__Refrigerator' onClick={isLogin? () => deleteRefrigerator(el[0]) : () => deleteGuestRefrigerator(el[0])}>
-            X 냉장고에서 지우기
+            X 삭제
           </span>
           <span className='deleteBtn__Refrigerator' onClick={isLogin ? () => deleteRefrigerator(el[1]) : () => deleteGuestRefrigerator(el[1])}>
-            X 냉장고에서 지우기
+            X 삭제
           </span>
           <span className='deleteBtn__Refrigerator' onClick={isLogin ? () => deleteRefrigerator(el[2]) : () => deleteGuestRefrigerator(el[2])}>
-            X 냉장고에서 지우기
+            X 삭제
           </span>
         </div>
       );
@@ -192,16 +192,16 @@ export default function Refrigerator({
       return (
         <div className='showDeleteBtn__Refrigerator'>
           <span className='deleteBtn__Refrigerator' onClick={isLogin? () => deleteRefrigerator(el[0]) : () => deleteGuestRefrigerator(el[0])}>
-            X 냉장고에서 지우기
+            X 삭제
           </span>
           <span className='deleteBtn__Refrigerator' onClick={isLogin ? () => deleteRefrigerator(el[1]) : () => deleteGuestRefrigerator(el[1])}>
-            X 냉장고에서 지우기
+            X 삭제
           </span>
           <span className='deleteBtn__Refrigerator' onClick={isLogin ? () => deleteRefrigerator(el[2]) : () => deleteGuestRefrigerator(el[2])}>
-            X 냉장고에서 지우기
+            X 삭제
           </span>
           <span className='deleteBtn__Refrigerator' onClick={isLogin ? () => deleteRefrigerator(el[3]) : () => deleteGuestRefrigerator(el[3])}>
-            X 냉장고에서 지우기
+            X 삭제
           </span>
         </div>
       );
@@ -209,19 +209,19 @@ export default function Refrigerator({
       return (
         <div className='showDeleteBtn__Refrigerator'>
           <span className='deleteBtn__Refrigerator' onClick={isLogin? () => deleteRefrigerator(el[0]) : () => deleteGuestRefrigerator(el[0])}>
-            X 냉장고에서 지우기
+            X 삭제
           </span>
           <span className='deleteBtn__Refrigerator' onClick={isLogin ? () => deleteRefrigerator(el[1]) : () => deleteGuestRefrigerator(el[1])}>
-            X 냉장고에서 지우기
+            X 삭제
           </span>
           <span className='deleteBtn__Refrigerator' onClick={isLogin ? () => deleteRefrigerator(el[2]) : () => deleteGuestRefrigerator(el[2])}>
-            X 냉장고에서 지우기
+            X 삭제
           </span>
           <span className='deleteBtn__Refrigerator' onClick={isLogin ? () => deleteRefrigerator(el[3]) : () => deleteGuestRefrigerator(el[3])}>
-            X 냉장고에서 지우기
+            X 삭제
           </span>
           <span className='deleteBtn__Refrigerator' onClick={isLogin ? () => deleteRefrigerator(el[4]) : () => deleteGuestRefrigerator(el[4])}>
-            X 냉장고에서 지우기
+            X 삭제
           </span>
         </div>
       );
@@ -231,7 +231,7 @@ export default function Refrigerator({
 
   return (
     <div className='Refrigerator__Container'>
-      <span className='Refrigerator__title'>나의 냉장고 속 재료</span>
+      <h3 className='Refrigerator__title'>나의 냉장고 속 재료</h3>
       <section className='My__refrigerator'>
         {isLogin ? userListDivision.map((el) => {
           return (

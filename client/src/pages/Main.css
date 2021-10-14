@@ -18,3 +18,8 @@
     position: absolute;
     top: 58.2%;
 } */
+
+.ingredients{
+    background-image: url(../background-Main.jpg);
+    background-size: 100% auto;
+}
