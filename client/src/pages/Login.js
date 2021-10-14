@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { Link, useHistory } from 'react-router-dom';
 import { checkErr, ShowInput } from '../functions/InputUserDataFunc';
@@ -8,12 +8,15 @@ axios.defaults.withCredentials = true;
 
 export default function Login({ userInfo, userInfoHandler, loginHandler }) {
   const history = useHistory();
+  //[input tag 앞의 텍스트, input type]의 배열
   const inputBoxList = [
     ['email', 'email'],
     ['password', 'password'],
   ];
 
+  //각 인풋 박스의 유효성 검사 결과 불린값 배열
   const [currentErrList, setCurrentErrorList] = useState([]);
+  //현재 유저가 input에 입력중인 텍스트 값
   const [inputInfo, setInputInfo] = useState({});
 
   const handleInputInfo = (key) => (value) => {
@@ -29,25 +32,26 @@ export default function Login({ userInfo, userInfoHandler, loginHandler }) {
     if (checkErr(currentErrList)) {
       console.log('failed to login submit');
     } else {
-      await axios
-        .post(
-          'http://ec2-15-164-96-52.ap-northeast-2.compute.amazonaws.com/user/signin',
-          {
+      try {
+        await axios
+          .post('http://localhost:4000/user/signin', {
             email: inputInfo.email,
             password: inputInfo.password,
-          }
-        )
-        .then((response) => {
-          loginHandler();
-          loginHandler(response.data);
-          history.push('/main');
-        })
-        .catch((err) => {
-          handleInputInfo('init');
-          console.log('login faild Error : ', err);
-          alert('로그인에 실패했습니다');
-          return 'err';
-        });
+          })
+          .then((response) => {
+            loginHandler();
+            userInfoHandler(response.data);
+            history.push('/main');
+          })
+          .catch((err) => {
+            handleInputInfo('init');
+            console.log('login faild Error : ', err);
+            alert('로그인에 실패했습니다');
+            return 'err';
+          });
+      } catch (err) {
+        console.log('login try catch err : ', err, '---------------');
+      }
     }
   };
   return (
@@ -66,6 +70,7 @@ export default function Login({ userInfo, userInfoHandler, loginHandler }) {
               inputBoxList={inputBoxList}
               userInfoHandler={userInfoHandler}
               userInfo={userInfo}
+              inputInfo={inputInfo}
               handleInputInfo={handleInputInfo}
               handleCurrentErrorList={handleCurrentErrorList}
             />
@@ -79,7 +84,11 @@ export default function Login({ userInfo, userInfoHandler, loginHandler }) {
               </button>
             </Link>
             <div className='f10'></div>
-            <button className='f30 button' type='button' onClick={handleLogin}>
+            <button
+              className='f30 button'
+              type={'button'}
+              onClick={handleLogin}
+            >
               Sign In
             </button>
             <div className='f20'></div>

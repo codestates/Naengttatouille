@@ -7,6 +7,7 @@ export default function UserInput({
   type,
   userInfoHandler,
   userInfo,
+  inputInfo,
   edit,
   handleInputInfo,
   handleErrState,
@@ -18,13 +19,13 @@ export default function UserInput({
 
   const handleInputValue = (e) => {
     let value = e.target.value;
-    validity.checkValidity(userInfo, item, value);
+    validity.checkValidity(inputInfo, item, value);
     setErrMsg(validity.getMessage());
     setIsError(validity.checkErr());
     handleErrState(item, validity.checkErr());
     // validity.show(); //오류 상태 확인
     handleInputInfo(item)(value);
-    userInfoHandler({ [item]: value }); //상위 컴포넌트에 입력값 전달
+    // userInfoHandler({ [item]: value }); //상위 컴포넌트에 입력값 전달
   };
   return (
     <div id='userinput-container' className='f10'>
@@ -49,10 +50,12 @@ export default function UserInput({
               ? 8
               : 99
           }
-          placeholder={edit ? userInfo.email : false}
-          disabled={edit ? true : false}
-          required
-        />
+          disabled={edit && item === `email` ? true : undefined}
+          required={edit && item === `email` ? false : undefined}
+          value={edit && item === `email` ? userInfo.email : undefined}
+        >
+          {/* {edit && item === `email` ? userInfo.email : false} */}
+        </input>
       </div>
       <div
         id={`${errDivClassName} `}
