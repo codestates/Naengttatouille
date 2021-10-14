@@ -10,7 +10,7 @@ const { userRouter, ingredientRouter, refrigeratorRouter } = require('./routes')
 app.use(express.json());
 app.use(
   cors({
-    origin: true,
+    origin: process.env.CLIENT || true,
     methods: ['GET', 'POST', 'OPTIONS', 'PATCH', 'DELETE'],
     credentials: true,
   })
@@ -21,7 +21,7 @@ app.use('/user', userRouter);
 app.use('/ingredient', ingredientRouter);
 app.use('/refrigerator', refrigeratorRouter);
 
-const PORT = process.env.HTTPS_PORT || 4000;
+const PORT = process.env.HTTPS_PORT || process.env.HTTP_PORT;
 let server;
 if (fs.existsSync('./key.pem') && fs.existsSync('./cert.pem')) {
   const privateKey = fs.readFileSync(__dirname + '/key.pem', 'utf8');
