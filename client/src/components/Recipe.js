@@ -3,7 +3,7 @@ import './Recipe.css';
 import thumbnailImg from '../thumbnail.png';
 import { Link } from 'react-router-dom';
 
-export default function Recipe({videoList}) {
+export default function Recipe({getYoutubeVideo, videoList, nextPageUrl}) {
 
   return (
     <div className='recipe'>
@@ -23,8 +23,8 @@ export default function Recipe({videoList}) {
           })}
         </ul>
         <div className="button__more">
-          <button>더보기</button>
-        </div>
+        <button onClick={() => getYoutubeVideo(nextPageUrl)}>더보기</button>
+      </div>
       </div>
   );
 }
