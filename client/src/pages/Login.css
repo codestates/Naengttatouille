@@ -1,0 +1,141 @@
+* {
+  box-sizing: border-box;
+}
+
+#container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: whitesmoke;
+  position: absolute;
+  top: 5%;
+  height: 95%;
+}
+
+#content {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  min-width: 700px;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.left-section {
+  width: 540px;
+  height: 350px;
+  border-radius: 20px;
+}
+
+.login-img {
+  background-image: url(../sample.jpg);
+  background-position: 20% 20%;
+  background-size: 100% 90%;
+  background-size: cover;
+}
+
+.right-section {
+  display: flex;
+  flex-direction: column;
+  width: 350px;
+  height: 350px;
+  border-radius: 20px;
+}
+
+.h1-parent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* .inputs {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  align-items: center;
+} */
+
+/* .input {
+  flex: 1 1 auto;
+  height: 120px;
+  margin-left: 0;
+} */
+
+.userinputs {
+  display: flex;
+  flex-direction: column;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.button {
+  color: white;
+  font-size: medium;
+  width: 40px;
+  height: 40px;
+  border-radius: 25px;
+  background-color: rgb(255, 174, 0);
+  border: none;
+}
+
+.button,
+.button::after {
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
+}
+
+.button:hover {
+  background-color: rgb(140, 228, 0);
+}
+
+.max {
+  width: 100%;
+  height: 100%;
+}
+
+.max-width {
+  width: 100%;
+}
+
+.f10 {
+  flex: 1 1 auto;
+  /* border: 4px solid green; */
+}
+
+.f15 {
+  flex: 1.5 1 auto;
+  /* border: 4px solid green; */
+}
+
+.f20 {
+  flex: 2 1 auto;
+  /* border: 4px solid blue; */
+}
+
+.f22 {
+  flex: 2.2 1 auto;
+  /* border: 4px solid blue; */
+}
+
+.f30 {
+  flex: 3 1 auto;
+  /* border: 4px solid green; */
+}
+
+.f40 {
+  flex: 4 1 auto;
+  /* border: 4px solid green; */
+}
+
+/* .f10 {
+  flex: 1 1 auto;
+  border: 4px solid red;
+} */

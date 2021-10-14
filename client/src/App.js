@@ -77,7 +77,12 @@ function App() {
   return (
     <BrowserRouter>
       <div className='App'>
-        <Nav isLogin={isLogin} userInfo={userInfo} logoutHandler={logoutHandler} userInfoHandler={userInfoHandler} />
+        <Nav
+          isLogin={isLogin}
+          userInfo={userInfo}
+          logoutHandler={logoutHandler}
+          userInfoHandler={userInfoHandler}
+        />
         <Switch>
           <Route exact path='/'>
             <About isLogin={isLogin} userInfo={userInfo} />
@@ -94,10 +99,18 @@ function App() {
             <Main isLogin={isLogin} userInfo={userInfo} />
           </Route>
           <Route path='/mypage'>
-            <Mypage isLogin={isLogin} userInfo={userInfo} userInfoHandler={userInfoHandler} />
+            <Mypage
+              isLogin={isLogin}
+              userInfo={userInfo}
+              userInfoHandler={userInfoHandler}
+            />
           </Route>
           <Route path='/signup'>
-            <Signup isLogin={isLogin} userInfo={userInfo} userInfoHandler={userInfoHandler} />
+            <Signup
+              isLogin={isLogin}
+              userInfo={userInfo}
+              userInfoHandler={userInfoHandler}
+            />
           </Route>
         </Switch>
       </div>

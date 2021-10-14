@@ -28,22 +28,39 @@ export default function UserInput({
     // userInfoHandler({ [item]: value }); //상위 컴포넌트에 입력값 전달
   };
   return (
-    <div>
-      <span>{item}</span>
-      <input
-        id={item}
-        className={isError ? `isInvalid` : ``}
-        type={type}
-        onChange={handleInputValue}
-        minLength={item === `password` || item === `password confirm` ? 4 : item === `name` ? 2 : 0}
-        maxLength={item === `password` || item === `password confirm` ? 16 : item === `name` ? 8 : 99}
-        disabled={edit && item === `email` ? true : undefined}
-        required={edit && item === `email` ? false : undefined}
-        value={edit && item === `email` ? userInfo.email : undefined}
+    <div id='userinput-container' className='f10'>
+      <div className='input-group'>
+        <span className='input-name'>{item}</span>
+        <input
+          id={item}
+          className={isError ? `isInvalid input ` : `input`}
+          type={type}
+          onChange={handleInputValue}
+          minLength={
+            item === `password` || item === `password confirm`
+              ? 4
+              : item === `name`
+              ? 2
+              : 0
+          }
+          maxLength={
+            item === `password` || item === `password confirm`
+              ? 16
+              : item === `name`
+              ? 8
+              : 99
+          }
+          disabled={edit && item === `email` ? true : undefined}
+          required={edit && item === `email` ? false : undefined}
+          value={edit && item === `email` ? userInfo.email : undefined}
+        >
+          {/* {edit && item === `email` ? userInfo.email : false} */}
+        </input>
+      </div>
+      <div
+        id={`${errDivClassName} `}
+        className={`errDiv ${isError ? `` : `hide`}`}
       >
-        {/* {edit && item === `email` ? userInfo.email : false} */}
-      </input>
-      <div id={`${errDivClassName} `} className={`errDiv ${isError ? `` : `hide`}`}>
         {errMsg}
       </div>
     </div>
