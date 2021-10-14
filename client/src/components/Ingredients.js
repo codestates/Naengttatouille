@@ -14,13 +14,12 @@ export default function Ingredients({
   const [exContent, setExContent] = useState('')
   const [nameValue, setNameValue] = useState('')
   const [methodValue, setMethodValue] = useState('')
-  // const [realList, setRealList] = useState([])
   const [division, setDivision] = useState([])
+  const [divisionForGuest, setDivisionForGuest] = useState([])
   const [ingredientData, setIngredientData] = useState('')
 
-  // const list = ['당근', '양상추', '토마토', '애호박', '양파', '가지', '아스파라거스', '감자', '고구마', '고추', '야채', '이름']
+  let guestDivision = []
   let listDivision = []
-  let realList = []
   const makeDivision = (realList) => { 
     const copy = realList.slice(0)
     while(copy.length > 0){
@@ -31,16 +30,33 @@ export default function Ingredients({
       }
     }
   }
+
+
   useEffect(async()=> {
+    if(isLogin){
     let realList1 = await axios.get('http://localhost:4000/ingredient')
     .then(res => {
       return res.data
     })
-    // console.log(realList1)
     let realList = await realList1.map(el => el.name)
     setIngredientData(realList1)
     makeDivision(realList)
     setDivision(listDivision)
+    }
+
+    const guestMakeDivision = (guestRefrigerator) => { 
+      const copy = guestRefrigerator.slice(0)
+      while(copy.length > 0){
+      if(copy.length >= 5){
+          guestDivision.push(copy.splice(0,5))
+        }else if(copy.length < 5){
+          guestDivision.push(copy.splice(0))
+        }
+      }
+    }
+    guestMakeDivision(guestRefrigerator)
+    setDivisionForGuest(guestDivision)
+    console.log(guestRefrigerator)
   },[])
 
   const addIngredients = () => {
@@ -116,26 +132,31 @@ export default function Ingredients({
 
   //삭제하는 버튼
   
-  function MouseOver(event) {
+  const MouseOver =  async(event) => {
     event.target.style.background = 'red'
     let text = event.target.textContent
-    let filtered = ingredientData.filter((el) => el.name === text)
-    setExContent(filtered[0].keep_method)
-    // setExContent(explains.kind) 상태변경으로 설명 변경해주기
+    let data = await axios.get('http://localhost:4000/ingredient').then((res) => res.data)
+    let filtered = data.filter((el) => el.name === text)
+    console.log(data)
+    // setExContent(filtered[0].keep_method)
+    // console.log(filtered)
   }
   function MouseOut(event) {
     event.target.style.background = ''
     setExContent('')
   }
-
   return (
     <div className='ingredient__Container'>
       <div className='ingredient__title'>식재료 리스트</div>
       <section className='ingredients__List'>
-          {division.map((el) => {
+          {isLogin ? division.map((el) => {
             return <div key={uuidv4()} className='grocery_row'>
               {makeEl(el)}
               {userInfo.admin ? makeDelete(el) : null}
+            </div>
+          }) : divisionForGuest.map((el) => {
+            return <div key={uuidv4()} className='grocery_row'>
+              {makeEl(el)}
             </div>
           })}
       </section>
