@@ -1,18 +1,15 @@
 .navigation {
-    display: flex;
-    justify-content: space-between;
-    /* border: solid;
+  display: flex;
+  justify-content: space-between;
+  /* border: solid;
     border-color: red; */
-    position: fixed;
-    width: 100%;
-    height: 5%;
+  position: fixed;
+  width: 100%;
+  height: 5%;
 }
 
 .loginBtn .logoutBtn {
-    
 }
-
-
 
 /* .Logo {
     margin: 15px 0 15px 10px;
@@ -20,23 +17,24 @@
 } */
 
 .ServiceName {
-    margin: 0 0 0 5%;
-    font-size: 30px;
-    font-weight: ;
-    color: hotpink;
-    font: italic 2.5em "Fira Sans", serif;
+  margin: 0 0 0 5%;
+  font-size: 30px;
+  font-weight: ;
+  color: hotpink;
+  font: italic 2.5em 'Fira Sans', serif;
 }
-{/*위 오른쪽 아래 왼쪽*/}
-
+/* {
+  위 오른쪽 아래 왼쪽
+} */
 
 /* button1 */
 
 .goMain,
 .goMain::after {
   -webkit-transition: all 0.3s;
-	-moz-transition: all 0.3s;
+  -moz-transition: all 0.3s;
   -o-transition: all 0.3s;
-	transition: all 0.3s;
+  transition: all 0.3s;
 }
 
 .goMain {
@@ -66,7 +64,6 @@
   color: #2ecc71;
 }
 
-
 .goMain::after {
   height: 0;
   left: 0;
@@ -80,12 +77,12 @@
 
 /* button2 */
 
-  .goSignup__goMypage,
+.goSignup__goMypage,
 .goSignup__goMypage::after {
   -webkit-transition: all 0.3s;
-	-moz-transition: all 0.3s;
+  -moz-transition: all 0.3s;
   -o-transition: all 0.3s;
-	transition: all 0.3s;
+  transition: all 0.3s;
 }
 
 .goSignup__goMypage {
@@ -104,23 +101,21 @@
 .goSignup__goMypage::after {
   background: #fff;
   content: '';
-  position: absolute; 
+  position: absolute;
   z-index: -1;
 }
 .goSignup__goMypage:hover {
-    color: #2ecc71;
-  }
-
+  color: #2ecc71;
+}
 
 /* button3 */
-
 
 .loginBtn__logoutBtn,
 .loginBtn__logoutBtn::after {
   -webkit-transition: all 0.3s;
-	-moz-transition: all 0.3s;
+  -moz-transition: all 0.3s;
   -o-transition: all 0.3s;
-	transition: all 0.3s;
+  transition: all 0.3s;
 }
 
 .loginBtn__logoutBtn {
@@ -139,11 +134,10 @@
 .loginBtn__logoutBtn::after {
   background: #fff;
   content: '';
-  position: absolute; 
-z-index: -1;
+  position: absolute;
+  z-index: -1;
 }
 
 .loginBtn__logoutBtn:hover {
   color: #2ecc71;
 }
-

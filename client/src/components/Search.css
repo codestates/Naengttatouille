@@ -1,50 +1,115 @@
 .tag__container {
   border: solid;
   border-color: green;
+  /* background-color: #cccc; */
   align-items: center;
   width: 100%;
-  height: 50px;
+  height: 200px;
+  /* margin: 0px 0px 20px 0px; */
 
-  padding: 5px;
+  /* padding: 5px; */
 
   display: flex;
   flex-direction: column;
+
+  background: transparent;
+  background-image: url(../images/search_tag__box4.jpeg);
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: 70% 100%;
+  object-fit: contain;
 }
 
 .tag__box {
   width: 70%;
-  background: #ffa500;
+  height: 100%;
+  display: flex;
+  padding: 20px 50px 20px 50px;
+  /* flex-direction: column; */
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 
-  border: 3px solid red;
-  padding: 5px;
-  height: 40px;
+  /* background: transparent; */
+  /* background-image: url(../images/search_tag__box4.jpeg);
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: 100% 100%;
+  object-fit: contain; */
+  /* padding: 10px; */
+  /* width: 70%;
+  height: 80%; */
+
+  /* background-color: #ffa500; */
+  /* border: 3px solid red; */
 }
+
+/* .tag__box::before {
+  content: '';
+  opacity: 0.8;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  z-index: -1;
+
+  background: transparent;
+  background-image: url(../images/search_tag__box4.jpeg);
+  background-repeat: no-repeat;
+  background-position: 50% 0%;
+  background-size: 80% 100%;
+} */
 
 .tagAndSearch {
-  border: 3px solid red;
+  /* border: 3px solid red; */
   padding: 5px;
   height: 15px;
+  position: relative;
+  top: 75px;
 }
-
-.tagAndSearch > button .recipe_search {
-  margin: 0px 0px 5px 5px;
+.tagAndSearch > button.uncheck_tags,
+.recipe_search {
+  margin: 0px 5px 0px 5px;
 }
+/* .tagAndSearch > button.recipe_search {
+  margin: 5px 0px 5px 5px;
+} */
 
 .tag {
   /* border: ridge; */
-  border: 1px solid green;
+  align-items: center;
+
+  width: 60px;
+  height: 20px;
+  font-family: 'Gaegu', cursive;
+  color: white;
+  border: 2px solid green;
+
   /* border-radius: 1em; */
   border-top-left-radius: 50%;
   border-bottom-right-radius: 50%;
   font: italic small-caps bold 16px/2 cursive;
-  background: #ffa500;
-  padding: 10px;
-  margin: 7px;
+  /* background-color: #ffa500; */
+  padding: 20px;
+  margin: 5px 10px 5px 10px;
+
+  position: 50% 50%;
+
+  /* background: transparent; */
+  /* background-image: url(../images/search_tag__box2.jpeg); */
+  /* background-repeat: no-repeat; */
+  /* background-size: 100% 100%; */
+  /* object-fit: contain; */
 }
 
 .tag:hover {
-  background: white;
+  /* background: white; */
+  filter: opacity(90%);
   /* box-shadow: 10px 5px 5px red; */
+  border: 2px solid green;
+  color: black;
+  background-color: white;
 
   -webkit-box-shadow: 5px 3px 3px 2px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 5px 3px 3px 2px rgba(0, 0, 0, 0.75);
@@ -53,4 +118,6 @@
 
 .tag:hover:after {
   content: '✘';
+  background-color: white;
+  filter: opacity(80%);
 }

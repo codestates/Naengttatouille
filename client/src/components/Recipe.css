@@ -7,7 +7,24 @@
   margin: 0;
   padding: 0;
   width: 100vw;
-  /* height: 700px; */
+}
+.recipe::before {
+  content: '';
+  /* opacity: 0.8; */
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  z-index: -1;
+
+  /* background: transparent; */
+  /* background-color: black; */
+  background-image: url(../images/recipe_before4.jpeg);
+  background-repeat: no-repeat;
+  background-position: 50% 0%;
+  background-size: 65em 100%;
+  object-fit: contain;
 }
 
 .recipe__container {
@@ -18,12 +35,21 @@
 }
 
 .recipe__list {
+  width: 80%;
   display: flex;
   flex-direction: column;
-  position: absolute;
-  width: 100%;
+  position: relative;
+  /* padding: 10px; */
+  align-items: center;
   /* border: 3px solid red; */
-  padding: 10px;
+  /* background: transparent;
+  opacity: 0.25 !important;
+  background-color: black;
+  background-image: url(../images/search_tag__box_background1.png);
+  background-image: url(../images/search_tag__box_background2.png);
+  background-repeat: no-repeat;
+  background-position: 50% 0%;
+  background-size: contain; */
 }
 
 .thumbnail {
@@ -42,7 +68,30 @@
 .recipe__content > a {
   text-decoration: none;
   color: black;
+  /* background-color: #ffa500; */
 }
+
+.text {
+  display: flex;
+  flex-direction: column;
+
+  background-color: white;
+  opacity: 0.95;
+  align-items: center;
+  justify-content: center;
+}
+
+/* .text::before {
+  opacity: 0.2;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  z-index: -1;
+
+  background-color: black;
+} */
 
 .video {
   width: 45%;
@@ -57,6 +106,7 @@
 }
 
 .description {
+  color: green;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -73,6 +123,7 @@
 } */
 
 .title {
+  width: 80%;
 }
 
 .description {

@@ -34,7 +34,7 @@ export default function Main({ isLogin, userInfo }) {
     handleRecipeTags(str, tag);
   };
 
-  const maxResults = 3;
+  const maxResults = 5;
 
   const searchUrl = `https://www.googleapis.com/youtube/v3/search?q=${searchStr}&type=$video&maxResults=${maxResults}&part=snippet&key=${api_key}`;
   const nextPageUrl = `https://www.googleapis.com/youtube/v3/search?q=${searchStr}&pageToken=${nextPageToken}&part=snippet&maxResults=${maxResults}&key=${api_key}`;

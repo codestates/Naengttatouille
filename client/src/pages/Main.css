@@ -1,17 +1,17 @@
 .ingredients {
-    width: 100vw;
-    height: 600px;
+  width: 100vw;
+  height: 600px;
 }
 
 .grocery {
-    position: absolute;
-    left: 50%;
-    top: 8.2%;
+  position: absolute;
+  left: 50%;
+  top: 8.2%;
 }
 
 .refrigerator {
-    position: absolute;
-    top: 8.2%;
+  position: absolute;
+  top: 8.2%;
 }
 
 /* .recipe{

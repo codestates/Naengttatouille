@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 export default function Recipe({ getYoutubeVideo, videoList, nextPageUrl }) {
   return (
     <div className='recipe'>
-      <ul>
+      <ul className='recipe__list'>
         {videoList?.map((video) => {
           return (
             <li key={video.videoId} className='recipe__content'>
