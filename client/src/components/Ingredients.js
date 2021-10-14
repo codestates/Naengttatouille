@@ -3,6 +3,7 @@ import axios from 'axios'
 import './Ingredients.css'
 import { v4 as uuidv4 } from 'uuid';
 
+
 export default function Ingredients({
   isLogin,
   setGuestRefrigerator,
@@ -105,15 +106,15 @@ export default function Ingredients({
 
   const makeDelete = (el) => {
     if(el[1] === undefined){
-      return <div className='showDeleteBtn__Ingredients'><span className='deleteBtn__Ingredient' onClick={() => deleteIngrediente(el[0])}>X 이 식재료 지우기</span></div>
+      return <div className='showDeleteBtn__Ingredients'><span className='deleteBtn__Ingredient' onClick={() => deleteIngrediente(el[0])}>X 삭제</span></div>
     }else if(el[2] === undefined){
-      return <div className='showDeleteBtn__Ingredients'><span className='deleteBtn__Ingredient' onClick={() => deleteIngrediente(el[0])}>X 이 식재료 지우기</span><span className='deleteBtn__Ingredient' onClick={() => deleteIngrediente(el[1])}>X 이 식재료 지우기</span></div>
+      return <div className='showDeleteBtn__Ingredients'><span className='deleteBtn__Ingredient' onClick={() => deleteIngrediente(el[0])}>X 삭제</span><span className='deleteBtn__Ingredient' onClick={() => deleteIngrediente(el[1])}>X 삭제</span></div>
     }else if(el[3] === undefined){
-      return <div className='showDeleteBtn__Ingredients'><span className='deleteBtn__Ingredient' onClick={() => deleteIngrediente(el[0])}>X 이 식재료 지우기</span><span className='deleteBtn__Ingredient' onClick={() => deleteIngrediente(el[1])}>X 이 식재료 지우기</span><span className='deleteBtn__Ingredient' onClick={() => deleteIngrediente(el[2])}>X 이 식재료 지우기</span></div>
+      return <div className='showDeleteBtn__Ingredients'><span className='deleteBtn__Ingredient' onClick={() => deleteIngrediente(el[0])}>X 삭제</span><span className='deleteBtn__Ingredient' onClick={() => deleteIngrediente(el[1])}>X 삭제</span><span className='deleteBtn__Ingredient' onClick={() => deleteIngrediente(el[2])}>X 삭제</span></div>
     }else if(el[4] === undefined){
-      return <div className='showDeleteBtn__Ingredients'><span className='deleteBtn__Ingredient' onClick={() => deleteIngrediente(el[0])}>X 이 식재료 지우기</span><span className='deleteBtn__Ingredient' onClick={() => deleteIngrediente(el[1])}>X 이 식재료 지우기</span><span className='deleteBtn__Ingredient' onClick={() => deleteIngrediente(el[2])}>X 이 식재료 지우기</span><span className='deleteBtn__Ingredient' onClick={() => deleteIngrediente(el[3])}>X 이 식재료 지우기</span></div>
+      return <div className='showDeleteBtn__Ingredients'><span className='deleteBtn__Ingredient' onClick={() => deleteIngrediente(el[0])}>X 삭제</span><span className='deleteBtn__Ingredient' onClick={() => deleteIngrediente(el[1])}>X 삭제</span><span className='deleteBtn__Ingredient' onClick={() => deleteIngrediente(el[2])}>X 삭제</span><span className='deleteBtn__Ingredient' onClick={() => deleteIngrediente(el[3])}>X 삭제</span></div>
     }else{
-      return <div className='showDeleteBtn__Ingredients'><span className='deleteBtn__Ingredient' onClick={() => deleteIngrediente(el[0])}>X 이 식재료 지우기</span><span className='deleteBtn__Ingredient' onClick={() => deleteIngrediente(el[1])}>X 이 식재료 지우기</span><span className='deleteBtn__Ingredient' onClick={() => deleteIngrediente(el[2])}>X 이 식재료 지우기</span><span className='deleteBtn__Ingredient' onClick={() => deleteIngrediente(el[3])}>X 이 식재료 지우기</span><span className='deleteBtn__Ingredient' onClick={() => deleteIngrediente(el[4])}>X 이 식재료 지우기</span></div>
+      return <div className='showDeleteBtn__Ingredients'><span className='deleteBtn__Ingredient' onClick={() => deleteIngrediente(el[0])}>X 삭제</span><span className='deleteBtn__Ingredient' onClick={() => deleteIngrediente(el[1])}>X 삭제</span><span className='deleteBtn__Ingredient' onClick={() => deleteIngrediente(el[2])}>X 삭제</span><span className='deleteBtn__Ingredient' onClick={() => deleteIngrediente(el[3])}>X 삭제</span><span className='deleteBtn__Ingredient' onClick={() => deleteIngrediente(el[4])}>X 삭제</span></div>
     }
   }
 
@@ -132,7 +133,7 @@ export default function Ingredients({
   }
   return (
     <div className='ingredient__Container'>
-      <div className='ingredient__title'>식재료 리스트</div>
+      <h3 className='ingredient__title'>식재료 리스트</h3>
       <section className='ingredients__List'>
           {division.map((el) => {
             return <div key={uuidv4()} className='grocery_row'>
@@ -142,11 +143,11 @@ export default function Ingredients({
           })}
       </section>
       <section className='Storage__method'>
-        <div className='method__description'>식재료 보관방법</div>
+        <h4 className='method__description'>식재료 보관방법</h4>
 
-        {userInfo.admin ? <span><input onKeyUp={(e) => onChangeName(e)} type='text' placeholder='재료이름을 입력해주세요'></input>
-        <input onKeyUp={(e) => onChangeMethod(e)} type='text' placeholder='보관법을 작성해주세요'>
-          </input><button onClick={addIngredients}>추가</button></span> : null}
+        {userInfo.admin ? <span><input onKeyUp={(e) => onChangeName(e)} type='text' placeholder='재료이름을 입력해주세요' className='inputCss'></input>
+        <input onKeyUp={(e) => onChangeMethod(e)} type='text' placeholder='보관법을 작성해주세요' className='inputCss'>
+          </input><button onClick={addIngredients} className='addButton'>+</button></span> : null}
         
         <div className='method__explain'>{exContent}</div>
       </section>

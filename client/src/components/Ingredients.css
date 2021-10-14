@@ -9,25 +9,31 @@
     flex-wrap: wrap;
     margin-top: -1%;
     overflow-y: auto;
-    border: solid;
-    border-color: chartreuse;
+    /* border: solid; */
+    /* border-color: chartreuse; */
+    border-bottom: 1px solid white;
+    border-radius: 20px;
     height: 70%;
+    background-color: white;
 }
 
 .grocery_row {
     /* border-color: black;
-    border: solid; */
+    border: solid;  */
     height: 10vh;
     margin: 2.25% 1.25% 1.25% 1.25%;
 }
 
 .ingredient {
-    border: solid;
-    border-color: gray;
+    /* border: solid;
+    border-color: gray; */
     width:  7.5vw;
     margin-left: 3%;
     margin-top: 1.5%;
     height: 5vh;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: lightgrey;
     
 }
 
@@ -43,13 +49,15 @@
 }
 
 .method__explain {
-    border: solid;
-    border-color: black;
-    overflow-y: auto;
+    border: 1px solid white;
+    border-radius: 10px;
     width: 30vw;
-    height: 6vh;
+    height: 10vh;
     margin-left: 20%;
-    font-size: 12px;
+    font-size: 15px;
+    color: black;
+    font-weight: 700;
+    background-color: white;
 }
 
 .showDeleteBtn__Ingredients{
@@ -62,14 +70,36 @@
 }
 
 .deleteBtn__Ingredient {
-    border: solid;
-    border-color: aqua;
+    /* border: solid;
+    border-color: aqua; */
     height: 2.5vh;
-    margin-left: 3%;
-    width: 7.5vw;
+    margin-left: 3.1%;
+    width: 7.45vw;
     font-size: x-small;
+    margin-top: -0.8%;
+    border-bottom: 1px solid gray;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    background-color: peachpuff;
 }
 
 .deleteBtn__Ingredient:hover {
     background-color: pink;
 }
+
+.addButton{
+    cursor: pointer;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.inputCss{
+    height: 20px;
+    border-radius: 10px;
+}
+
+.inputCss:focus{
+    background-color: skyblue;
+    color: black;
+}
+
