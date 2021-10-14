@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { checkErr, ShowInput } from '../functions/InputUserDataFunc';
+import './Signup.css';
 
 export default function Signup({ userInfo, userInfoHandler }) {
   const history = useHistory();
@@ -49,19 +50,32 @@ export default function Signup({ userInfo, userInfoHandler }) {
     }
   };
   return (
-    <div>
-      <h1>Sign Up</h1>
-      <ShowInput
-        inputBoxList={inputBoxList}
-        userInfoHandler={userInfoHandler}
-        userInfo={userInfo}
-        inputInfo={inputInfo}
-        handleInputInfo={handleInputInfo}
-        handleCurrentErrorList={handleCurrentErrorList}
-      />
-      <button type='button' onClick={handleLogin}>
-        Sign Up
-      </button>
+    <div id='container-signup' className='max'>
+      <div className='f15 max-width'></div>
+      <div id='content-signup'>
+        <div className='left-section-signup signup-img'></div>
+        <div className='right-section-signup'>
+          <div className='h1-parent-signup'>
+            <h1>Sign Up</h1>
+          </div>
+          <div className='f30 userinputs-signup'>
+            <ShowInput
+              inputBoxList={inputBoxList}
+              userInfoHandler={userInfoHandler}
+              userInfo={userInfo}
+              inputInfo={inputInfo}
+              handleInputInfo={handleInputInfo}
+              handleCurrentErrorList={handleCurrentErrorList}
+            />
+          </div>
+          <button className='button-signup' type='button' onClick={handleLogin}>
+            Sign Up
+          </button>
+          <div className='f20'></div>
+        </div>
+        <div className='f20'></div>
+      </div>
+      <div className='f30 max-width'></div>
     </div>
   );
 }

@@ -60,10 +60,8 @@ export default function Login({ userInfo, userInfoHandler, loginHandler }) {
       <div id='content'>
         <div className='left-section login-img'></div>
         <div className='right-section'>
-          <div className='f20 h1-parent'>
-            <div className='f22'></div>
-            <h1 className='f10'>Sign In</h1>
-            <div className='f15'></div>
+          <div className='h1-parent'>
+            <h1>Sign In</h1>
           </div>
           <div className='f30 userinputs'>
             <ShowInput
@@ -75,25 +73,18 @@ export default function Login({ userInfo, userInfoHandler, loginHandler }) {
               handleCurrentErrorList={handleCurrentErrorList}
             />
           </div>
-          <div className='f10'></div>
-          <div className='buttons'>
-            <div className='f40'></div>
-            <Link to='/signup' className='f30 button'>
-              <button className='max button' type='button'>
-                Sign Up
-              </button>
-            </Link>
-            <div className='f10'></div>
-            <button
-              className='f30 button'
-              type={'button'}
-              onClick={handleLogin}
-            >
-              Sign In
+          <Link to='/signup'>
+            <button className='button button-signup-signup' type='button'>
+              Sign Up
             </button>
-            <div className='f20'></div>
-          </div>
-          <div className='f20'></div>
+          </Link>
+          <button
+            className='button button-signup-signin'
+            type={'button'}
+            onClick={handleLogin}
+          >
+            Sign In
+          </button>
         </div>
       </div>
       <div className='f30 max-width'></div>
