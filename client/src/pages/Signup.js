@@ -58,7 +58,7 @@ export default function Signup({ userInfo, userInfoHandler }) {
           <div className='h1-parent-signup'>
             <h1>Sign Up</h1>
           </div>
-          <div className='f30 userinputs-signup'>
+          <div className='userinputs-signup'>
             <ShowInput
               inputBoxList={inputBoxList}
               userInfoHandler={userInfoHandler}
@@ -71,9 +71,7 @@ export default function Signup({ userInfo, userInfoHandler }) {
           <button className='button-signup' type='button' onClick={handleLogin}>
             Sign Up
           </button>
-          <div className='f20'></div>
         </div>
-        <div className='f20'></div>
       </div>
       <div className='f30 max-width'></div>
     </div>
