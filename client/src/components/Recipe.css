@@ -1,4 +1,3 @@
-
 .recipe {
   box-sizing: border-box;
   display: flex;
@@ -11,45 +10,9 @@
   /* height: 700px; */
 }
 
-.tag__container{
-  border: solid;
-  border-color: green;
-  width: 100%;
-  height: 50px;
-
-  padding: 5px;
-
+.recipe__container {
   display: flex;
-  flex-direction: column;
-}
-
-.tag__box{
-  border: 3px solid red;
-  padding: 5px;
-  height: 40px;
-}
-
-.tagAndSearch {
-  border: 3px solid red;
-  padding: 5px;
-  height: 15px;
-}
-
-.tagAndSearch > button{
-  margin: 0px 0px 5px 5px;
-}
-
-.tag {
-  border: 1px solid green;
-  border-radius: 1em;
-  padding: 10px;
-  margin: 7px;
-}
-
-
-.recipe__container{
-  display: flex;
-  position:absolute;
+  position: absolute;
   flex-direction: column;
   align-items: center;
 }
@@ -62,8 +25,6 @@
   /* border: 3px solid red; */
   padding: 10px;
 }
-
-
 
 .thumbnail {
   height: 100%;
@@ -80,7 +41,7 @@
 
 .recipe__content > a {
   text-decoration: none;
-  color: black
+  color: black;
 }
 
 .video {
@@ -90,16 +51,16 @@
   /* flex: 0 0 auto; */
 }
 
-.video > img{
+.video > img {
   width: 100%;
-  height: 100%
+  height: 100%;
 }
 
-.text {
+.description {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  width:80%;
+  width: 80%;
   /* border: 2px solid blue; */
   padding: 20px;
   /* flex: 1 0 auto; */
@@ -111,15 +72,13 @@
   padding: 10px;
 } */
 
-.title{
-
+.title {
 }
 
-.description{
-
+.description {
 }
 
-.recipe__container .button__more{
+.recipe__container .button__more {
   display: flex;
   position: absolute;
   height: 100px;
