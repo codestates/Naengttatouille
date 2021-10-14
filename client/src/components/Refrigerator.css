@@ -6,17 +6,19 @@
 }
 
 .Refrigerator__title {
-    /* border: solid;
-    border-color: skyblue; */
+    font-size: 1.3rem;
+    color: white
 }
 
 .My__refrigerator {
     border: 1px solid skyblue;
-    background-color: white;
+    /* background-color: white; */
+    background-color: #fafafa;
     overflow-y: auto;
-    height: 35vh;
+    margin-top: -1%;
+    height: 70%;
     /* background-color: skyblue; */
-    width: 40vw;
+    width: 85%;
     margin-left: 8%;
     border-radius: 15px;
 }
@@ -31,6 +33,9 @@
 }
 
 .Refrigerator__ingredient{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     /* border: solid;
     border-color: gray; */
     width:  7.5vw;
@@ -69,6 +74,9 @@
     background-color: pink;
 }
 .deleteBtn__Refrigerator {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     /* border: solid;
     border-color: aqua; */
     height: 3vh;
