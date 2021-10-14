@@ -10,23 +10,13 @@
   z-index: 1000;
 }
 
-.loginBtn .logoutBtn {
-}
-
-/* .Logo {
-    margin: 15px 0 15px 10px;
-    font-weight: 500;
-} */
-
 .ServiceName {
   margin: 0 0 0 5%;
   font-size: 30px;
-  font-weight: ;
+  font-weight: 50;
   color: hotpink;
   font: italic 2em 'Fira Sans', serif;
 }
-
-/* button1 */
 
 .goMain,
 .goMain::after {
