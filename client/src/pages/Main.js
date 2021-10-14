@@ -7,7 +7,7 @@ import Recipe from '../components/Recipe';
 export default function Main({ isLogin, userInfo }) {
   const [guestRefrigerator, setGuestRefrigerator] = useState(['당근', '양상추', '토마토', '애호박', '양파', '가지']);
   const [recipeTags, setRecipeTags] = useState([]);
-  const [state, setState] = useState(true)
+  const [state, setState] = useState(true);
   const handleRecipeTags = (str, tag) => {
     if (str === 'add') setRecipeTags([...recipeTags, tag]);
     if (str === 'delete') {
@@ -17,7 +17,7 @@ export default function Main({ isLogin, userInfo }) {
       setRecipeTags([]);
     }
   };
-console.log(userInfo)
+  console.log(userInfo);
   return (
     <div>
       <div id='ingredients'>
@@ -32,7 +32,6 @@ console.log(userInfo)
             setGuestRefrigerator={setGuestRefrigerator}
             setState={setState}
             state={state}
-
           />
         </div>
         <div id='grocery'>
