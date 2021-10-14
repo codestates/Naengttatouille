@@ -1,0 +1,160 @@
+.tag__container__title {
+  font-size: 1.3rem;
+  color: #fff;
+}
+
+.tag__container {
+  box-sizing: border-box;
+  align-items: center;
+  width: 100%;
+  height: 240px;
+  padding: 0px;
+  margin: 20px 0px;
+  display: flex;
+  flex-direction: column;
+}
+
+.tag__box {
+  display: flex;
+  background-color: whitesmoke;
+  border-radius: 12px;
+  box-sizing: border-box;
+  width: 70%;
+  height: 100%;
+  display: flex;
+  padding: 20px;
+  margin-bottom: 5px;
+  /* flex-direction: column; */
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.do_choose {
+  color: lightslategrey;
+}
+
+.tagAndSearch {
+  padding: 5px;
+  height: 30px;
+  /* position: relative; */
+  top: -5px;
+  margin-bottom: 15px;
+}
+
+.tagAndSearch > button.uncheck_tags,
+.recipe_search {
+  border-radius: 25px;
+  width: 104px;
+  height: 40px;
+  background-color: #eee;
+  cursor: pointer;
+  outline: none;
+  box-shadow: 1px 4px 0 rgb(0, 0, 0, 0.5);
+  margin: 10px;
+}
+
+.tagAndSearch > button.uncheck_tags:hover,
+.recipe_search:hover {
+  background-color: #fff9c7;
+}
+.tagAndSearch > button.uncheck_tags:active,
+.recipe_search:active {
+  background-color: #f1e575;
+  box-shadow: 1px 1px 0 rgb(0, 0, 0, 0.5);
+  position: relative;
+  top: 2px;
+}
+
+.tag {
+  box-sizing: border-box;
+  cursor: pointer;
+  background-color: #000;
+  border-top-left-radius: 50%;
+  border-bottom-right-radius: 50%;
+  width: 120px;
+  height: 60px;
+  padding: 10px 10px;
+  line-height: 64px;
+  position: relative;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  z-index: 0;
+  background: #9a8a62;
+  /* margin-left: 20px; */
+  margin: 5px 5px 5px 5px;
+}
+
+.tag span {
+  color: #fff;
+  display: flex;
+  text-transform: uppercase;
+  font: bold 18px/66px Arial;
+  transform: scaleX(0.6);
+  letter-spacing: 3px;
+  transform-origin: center left;
+  transition: color 0.3s ease;
+  position: absolute;
+  top: 0%;
+  left: 30%;
+  z-index: 1;
+}
+
+.tag em {
+  position: absolute;
+  height: 1px;
+  background: #fff;
+  width: 47%;
+  right: 23px;
+  top: 50%;
+  transform: scaleX(0.25);
+  -webkit-transform: scaleX(0.25);
+  transform-origin: center right;
+  transition: all 0.3s ease;
+  z-index: 1;
+}
+
+.tag:before,
+.tag:after {
+  content: '';
+  background: #fff;
+  height: 50%;
+  width: 0;
+  position: absolute;
+  transition: 0.3s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  -webkit-transition: 0.3s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+}
+
+.tag:before {
+  top: 0;
+  left: 0;
+  right: auto;
+}
+
+.tag:after {
+  bottom: 0;
+  right: 0;
+  left: auto;
+}
+
+.tag:hover:before {
+  width: 100%;
+  right: 0;
+  left: auto;
+}
+
+.tag:hover:after {
+  width: 100%;
+  left: 0;
+  right: auto;
+}
+
+.tag:hover span {
+  color: #000;
+}
+
+.tag:hover em {
+  background: #000;
+  transform: scaleX(0.51);
+  transform: scaleX(0.51);
+}

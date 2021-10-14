@@ -19,7 +19,7 @@ module.exports = {
     const userinfo = isAuthorized(req);
     if (!userinfo) {
       clearAccessToken(res);
-      return res.status(401).send('invalid accesstoken');
+      return res.status(401).send('Invalid accesstoken');
     }
 
     const { user_id } = userinfo;
@@ -43,7 +43,7 @@ module.exports = {
     const userinfo = isAuthorized(req);
     if (!userinfo) {
       clearAccessToken(res);
-      return res.status(401).send('invalid accesstoken');
+      return res.status(401).send('Invalid accesstoken');
     }
 
     const { user_id } = userinfo;
@@ -59,7 +59,7 @@ module.exports = {
     })
       .then(([result, created]) => {
         if (!created) {
-          return res.status(409).send('ingredient exists in refrigerator');
+          return res.status(409).send('Ingredient exists in refrigerator');
         }
         return res.status(201).send(ingredient);
       })
@@ -72,7 +72,7 @@ module.exports = {
     const userinfo = isAuthorized(req);
     if (!userinfo) {
       clearAccessToken(res);
-      return res.status(401).send('invalid accesstoken');
+      return res.status(401).send('Invalid accesstoken');
     }
 
     const { user_id } = userinfo;

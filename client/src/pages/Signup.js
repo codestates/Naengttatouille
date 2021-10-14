@@ -1,60 +1,79 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
-import UserInput from '../components/UserInput';
+import { checkErr, ShowInput } from '../functions/InputUserDataFunc';
+import './Signup.css';
 
 export default function Signup({ userInfo, userInfoHandler }) {
-  const checkErr = () => {
-    for (const key in userInfo) {
-      if (!userInfo[key][`validity`]) return true;
-    }
-    return false;
+  const history = useHistory();
+  //[input tag 앞의 텍스트, input type]의 배열
+  const inputBoxList = [
+    ['email', 'email'],
+    ['password', 'password'],
+    ['password confirm', 'password'],
+    ['name', 'text'],
+  ];
+
+  //각 인풋 박스의 유효성 검사 결과 불린값 배열
+  const [currentErrList, setCurrentErrorList] = useState([]);
+  //현재 유저가 input에 입력중인 텍스트 값
+  const [inputInfo, setInputInfo] = useState({});
+
+  const handleInputInfo = (key) => (value) => {
+    if (key === 'init') setInputInfo({});
+    else setInputInfo({ ...inputInfo, [key]: value });
+  };
+
+  const handleCurrentErrorList = (errList) => {
+    setCurrentErrorList(errList);
   };
 
   const handleLogin = () => {
-    if (checkErr()) {
-      console.log('failed to submit');
+    if (checkErr(currentErrList)) {
+      console.log('failed to sign up submit');
     } else {
-      // console.log(`
-      //       name: ${userInfo.name.validity},
-      //       email: ${userInfo.email.validity},
-      //       password: ${userInfo.password.validity},
-      // `);
-      // axios
-      //   .post(
-      //     'https://localhost:4000/user/signup',
-      //     {
-      //       name: userInfo.name.validity,
-      //       email: userInfo.email.validity,
-      //       password: userInfo.password.validity,
-      //     },
-      //     {
-      //       withCredentials: true, //쿠키 허용
-      //     }
-      //   )
-      //   .then((result) => {
-      //     console.log(result.config.data);
-      //   });
+      axios
+        .post(`http://localhost:4000/user/signup`, {
+          name: inputInfo.name,
+          email: inputInfo.email,
+          password: inputInfo.password,
+        })
+        .then((result) => {
+          alert('회원가입을 성공했습니다');
+          history.push('/login');
+        })
+        .catch((err) => {
+          handleInputInfo('init');
+          console.log('sign up faild Error : ', err);
+          alert('회원가입을 실패했습니다');
+        });
     }
   };
-  // console.log('signup1 : ', userInfo.edit);
-  // useEffect(() => {
-  //   userInfoHandler('edit')(null, null, false);
-  //   return userInfoHandler('edit')(null, null, false);
-  // }, []);
-  // console.log('signup2 : ', userInfo.edit);
-
   return (
-    <div>
-      <h1>Sign Up</h1>
-      <form id='signupForm' method='post' action='https://localhost:4000/user/signup'>
-        <UserInput item='email' type='email' handler={userInfoHandler} inputInfo={userInfo} />
-        <UserInput item='password' type='password' handler={userInfoHandler} inputInfo={userInfo} />
-        <UserInput item='password confirm' type='password' handler={userInfoHandler} inputInfo={userInfo} />
-        <UserInput item='name' type='text' handler={userInfoHandler} inputInfo={userInfo} />
-      </form>
-      <button type={checkErr() ? 'button' : 'submit'} onClick={handleLogin} form='signupForm'>
-        Sign Up
-      </button>
+    <div id='container-signup' className='max'>
+      <div className='f15 max-width'></div>
+      <div id='content-signup'>
+        <div className='left-section-signup signup-img'></div>
+        <div className='right-section-signup'>
+          <div className='h1-parent-signup'>
+            <h1>Sign Up</h1>
+          </div>
+          <div className='userinputs-signup'>
+            <ShowInput
+              inputBoxList={inputBoxList}
+              userInfoHandler={userInfoHandler}
+              userInfo={userInfo}
+              inputInfo={inputInfo}
+              handleInputInfo={handleInputInfo}
+              handleCurrentErrorList={handleCurrentErrorList}
+            />
+          </div>
+          <button className='button-signup' type='button' onClick={handleLogin}>
+            Sign Up
+          </button>
+        </div>
+      </div>
+      <div className='f30 max-width'></div>
     </div>
   );
 }

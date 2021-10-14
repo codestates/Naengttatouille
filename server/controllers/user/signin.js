@@ -5,12 +5,12 @@ module.exports = {
   post: (req, res) => {
     const [reqEmail, reqPassword] = [req.body.email, req.body.password];
     if (!reqEmail || !reqPassword) {
-      return res.status(400).send('Bad Request');
+      return res.status(400).send('check password and name');
     }
     User.findOne({ where: { email: reqEmail } })
       .then((data) => {
         if (!data) {
-          return res.status(404).send('Not exist');
+          return res.status(404).send('No exists');
         }
 
         const { user_id, email, password, name, admin, createdAt, updatedAt } =
