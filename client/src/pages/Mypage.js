@@ -60,6 +60,7 @@ export default function Mypage({ isLogin, userInfo, userInfoHandler }) {
   return (
     <div className='Mypage__container'>
       <h1>Mypage</h1>
+      <div className='editInput'>
       <ShowInput
         edit={true}
         inputBoxList={inputBoxList}
@@ -69,6 +70,7 @@ export default function Mypage({ isLogin, userInfo, userInfoHandler }) {
         handleInputInfo={handleInputInfo}
         handleCurrentErrorList={handleCurrentErrorList}
       />
+      </div>
       <button type='button' onClick={requestEdit}>
         Edit Profile
       </button>

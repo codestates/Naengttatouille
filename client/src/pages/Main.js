@@ -77,7 +77,7 @@ export default function Main({ isLogin, userInfo }) {
   }
 
   return (
-    <>
+    <div className='container__all'>
       <div className='ingredients'>
         <div className='refrigerator'>
           <Refrigerator
@@ -128,6 +128,6 @@ export default function Main({ isLogin, userInfo }) {
           <></>
         )}
       </div>
-    </>
+    </div>
   );
 }
