@@ -1,12 +1,8 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import './Nav.css';
-import axios from 'axios';
 
 export default function Nav({ isLogin, 
-  loginHandler, 
-  userInfoHandler, 
-  handleResponseSuccess,
   logoutHandler }) {
   const history = useHistory();
 
@@ -20,12 +16,10 @@ export default function Nav({ isLogin,
   };
 
   const goMypage = () => {
-    // handleResponseSuccess()
     history.push('/mypage');
   };
 
   const goMain = () => {
-    // handleResponseSuccess()
     history.push('/main');
   };
 
@@ -57,7 +51,7 @@ Naengttatouille</span>
           </button>
         ) : (
           <button className='loginBtn__logoutBtn' onClick={logoutHandler}>
-            로그아웃
+            Signout
           </button>
         )}
       </div>
