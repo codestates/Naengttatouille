@@ -58,12 +58,12 @@ export default function Login({ userInfo, userInfoHandler, loginHandler }) {
     <div id='container-login' className='max'>
       <div className='f15 max-width'></div>
       <div id='content'>
-        <div className='left-section login-img'></div>
-        <div className='right-section'>
+        <div className='left-section-login login-img'></div>
+        <div className='right-section-login'>
           <div className='h1-parent'>
             <h1>Sign In</h1>
           </div>
-          <div className='f30 userinputs'>
+          <div className='userinputs-login'>
             <ShowInput
               inputBoxList={inputBoxList}
               userInfoHandler={userInfoHandler}
@@ -74,12 +74,15 @@ export default function Login({ userInfo, userInfoHandler, loginHandler }) {
             />
           </div>
           <Link to='/signup'>
-            <button className='button button-signup-signup' type='button'>
+            <button
+              className='button-signin button-signin-signup'
+              type='button'
+            >
               Sign Up
             </button>
           </Link>
           <button
-            className='button button-signup-signin'
+            className='button-signin button-signin-signin'
             type={'button'}
             onClick={handleLogin}
           >
