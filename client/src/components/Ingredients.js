@@ -7,7 +7,9 @@ export default function Ingredients({
   isLogin,
   setGuestRefrigerator,
   guestRefrigerator,
-  userInfo}) {
+  userInfo,
+  setState,
+  state}) {
 
   const [exContent, setExContent] = useState('')
   const [nameValue, setNameValue] = useState('')
@@ -53,8 +55,8 @@ export default function Ingredients({
   const addRefrigerator = async(event) => {
     let text = event.target.textContent
     let filtered = ingredientData.filter((el) => el.name === text)
-    console.log(filtered)
     axios.post(`http://localhost:4000/refrigerator/${filtered[0].ingredient_id}`) 
+    setState(!state)
   }
 
 

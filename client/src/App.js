@@ -34,7 +34,7 @@ function App() {
   const logoutHandler = () => {
     axios.post('http://localhost:4000/user/signout').then((res) => {
       setIsLogin(false);
-      alert(`${userInfo}님 이용해주셔서 감사합니다`);
+      // alert(`${userInfo.name}님 이용해주셔서 감사합니다`);
       userInfoHandler(initUser);
       console.log('로그아웃');
     });
@@ -67,12 +67,7 @@ function App() {
   return (
     <BrowserRouter>
       <div className='App'>
-        <Nav
-          isLogin={isLogin}
-          userInfo={userInfo}
-          logoutHandler={logoutHandler}
-          userInfoHandler={userInfoHandler}
-        />
+        <Nav isLogin={isLogin} userInfo={userInfo} logoutHandler={logoutHandler} userInfoHandler={userInfoHandler} />
         <Switch>
           <Route exact path='/'>
             <About isLogin={isLogin} userInfo={userInfo} />

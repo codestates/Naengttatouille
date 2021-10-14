@@ -9,6 +9,7 @@ import Search from '../components/Search';
 export default function Main({ isLogin, userInfo }) {
   const [guestRefrigerator, setGuestRefrigerator] = useState(['당근', '양상추', '토마토', '애호박', '양파', '가지']);
   const [recipeTags, setRecipeTags] = useState([]);
+  const [state, setState] = useState(true)
   const handleRecipeTags = (str, tag) => {
     if (str === 'add'&& !recipeTags.includes(tag)) setRecipeTags([...recipeTags, tag]);
     if (str === 'delete') {
@@ -78,6 +79,9 @@ export default function Main({ isLogin, userInfo }) {
             isLogin={isLogin}
             userInfo={userInfo}
             setGuestRefrigerator={setGuestRefrigerator}
+            setState={setState}
+            state={state}
+
           />
         </div>
         <div className='grocery'>
@@ -86,6 +90,8 @@ export default function Main({ isLogin, userInfo }) {
             setGuestRefrigerator={setGuestRefrigerator}
             isLogin={isLogin}
             userInfo={userInfo}
+            setState={setState}
+            state={state}
           />
         </div>
       </div>

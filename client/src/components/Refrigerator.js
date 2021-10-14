@@ -12,7 +12,9 @@ export default function Refrigerator({
   guestRecipeTags,
   setGuestRecipeTags,
   userInfo,
-  setGuestRefrigerator }) {
+  setGuestRefrigerator,
+  setState,
+  state }) {
   const [userLists, setUserLists] = useState([])
   const [userListDivision, setUserListDivision] = useState([])
   let listDivision = [];
@@ -42,7 +44,7 @@ export default function Refrigerator({
     }
     
     
-  },[])
+  },[state])
 
   const deleteRefrigerator = async(el) => {
     let refrigeratorNameData = userListDivision.reduce((acc, cur) => {
@@ -52,6 +54,7 @@ export default function Refrigerator({
     let filtered = refrigeratorData.data.filter(res => res.name === el)
     axios.delete(`http://localhost:4000/refrigerator/${filtered[0].ingredient_id}`)
     // console.log(filtered[0])
+    setState(!state)
   };
 
   const deleteGuestRefrigerator = (el) => {
