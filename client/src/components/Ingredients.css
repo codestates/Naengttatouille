@@ -1,6 +1,6 @@
 .ingredient__Container {
-    border: solid;
-    border-color: blue;
+    /* border: solid;
+    border-color: blue; */
     height: 50vh;
     width: 50vw;
 }
@@ -15,8 +15,8 @@
 }
 
 .grocery_row {
-    border-color: black;
-    border: solid;
+    /* border-color: black;
+    border: solid; */
     height: 10vh;
     margin: 2.25% 1.25% 1.25% 1.25%;
 }
@@ -32,8 +32,8 @@
 }
 
 .showIngredients {
-    border: solid;
-    border-color: violet;
+    /* border: solid;
+    border-color: violet; */
     height: 50%;
     
 }
@@ -44,7 +44,7 @@
 
 .method__explain {
     border: solid;
-    border-color: orange;
+    border-color: black;
     overflow-y: auto;
     width: 30vw;
     height: 6vh;
@@ -53,11 +53,12 @@
 }
 
 .showDeleteBtn__Ingredients{
-    border: solid;
-    border-color: tomato;
+    /* border: solid;
+    border-color: tomato; */
     display: flex;
     margin-right: 0.5%;
     padding-left: -2.5%;
+    margin-top: 2.3%;
 }
 
 .deleteBtn__Ingredient {
@@ -70,5 +71,5 @@
 }
 
 .deleteBtn__Ingredient:hover {
-    background-color: springgreen;
+    background-color: pink;
 }

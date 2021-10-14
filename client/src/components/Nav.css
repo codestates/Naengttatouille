@@ -3,9 +3,10 @@
     justify-content: space-between;
     /* border: solid;
     border-color: red; */
-    position: fixed;
+    position: absolute;
     width: 100%;
     height: 5%;
+    background-color: orange;
 }
 
 .loginBtn .logoutBtn {
@@ -24,7 +25,7 @@
     font-size: 30px;
     font-weight: ;
     color: hotpink;
-    font: italic 2.5em "Fira Sans", serif;
+    font: italic 2em "Fira Sans", serif;
 }
 {/*위 오른쪽 아래 왼쪽*/}
 
@@ -93,7 +94,7 @@
   border: 3px solid hotpink;
   border-radius: 5px;
   color: hotpink;
-  font-size: 0.3em;
+  font-size: 0.2em;
   font-weight: bold;
   margin: 1em auto;
   padding: 2em 6em;
@@ -129,7 +130,7 @@
   border: 3px solid hotpink;
   border-radius: 5px;
   color: hotpink;
-  font-size: 0.3em;
+  font-size: 0.2em;
   font-weight: bold;
   margin: 1em auto;
   padding: 2em 6em;

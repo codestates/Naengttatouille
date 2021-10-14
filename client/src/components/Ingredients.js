@@ -33,7 +33,7 @@ export default function Ingredients({
 
 
   useEffect(async()=> {
-    if(isLogin){
+    
     let realList1 = await axios.get('http://localhost:4000/ingredient')
     .then(res => {
       return res.data
@@ -42,21 +42,7 @@ export default function Ingredients({
     setIngredientData(realList1)
     makeDivision(realList)
     setDivision(listDivision)
-    }
-
-    const guestMakeDivision = (guestRefrigerator) => { 
-      const copy = guestRefrigerator.slice(0)
-      while(copy.length > 0){
-      if(copy.length >= 5){
-          guestDivision.push(copy.splice(0,5))
-        }else if(copy.length < 5){
-          guestDivision.push(copy.splice(0))
-        }
-      }
-    }
-    guestMakeDivision(guestRefrigerator)
-    setDivisionForGuest(guestDivision)
-    console.log(guestRefrigerator)
+    
   },[])
 
   const addIngredients = () => {
@@ -72,7 +58,8 @@ export default function Ingredients({
     let text = event.target.textContent
     let filtered = ingredientData.filter((el) => el.name === text)
     axios.post(`http://localhost:4000/refrigerator/${filtered[0].ingredient_id}`) 
-    setState(!state)
+    // setState(!state)
+    window.location.reload()
   }
 
 
@@ -133,13 +120,11 @@ export default function Ingredients({
   //삭제하는 버튼
   
   const MouseOver =  async(event) => {
-    event.target.style.background = 'red'
+    event.target.style.background = 'skyblue'
     let text = event.target.textContent
     let data = await axios.get('http://localhost:4000/ingredient').then((res) => res.data)
     let filtered = data.filter((el) => el.name === text)
-    console.log(data)
-    // setExContent(filtered[0].keep_method)
-    // console.log(filtered)
+    setExContent(filtered[0].keep_method)
   }
   function MouseOut(event) {
     event.target.style.background = ''
@@ -149,14 +134,10 @@ export default function Ingredients({
     <div className='ingredient__Container'>
       <div className='ingredient__title'>식재료 리스트</div>
       <section className='ingredients__List'>
-          {isLogin ? division.map((el) => {
+          {division.map((el) => {
             return <div key={uuidv4()} className='grocery_row'>
               {makeEl(el)}
               {userInfo.admin ? makeDelete(el) : null}
-            </div>
-          }) : divisionForGuest.map((el) => {
-            return <div key={uuidv4()} className='grocery_row'>
-              {makeEl(el)}
             </div>
           })}
       </section>
