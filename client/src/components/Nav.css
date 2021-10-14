@@ -1,29 +1,140 @@
 .navigation {
-    display: flex;
-    justify-content: space-between;
-    border: solid;
-    border-color: red;
-}
-
-.loginBtn .logoutBtn {
-    
-}
-
-
-
-.Logo {
-    margin: 15px 0 15px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  width: 100%;
+  height: 60px;
+  background-color: orange;
+  z-index: 1000;
+  padding: 10px 15px;
 }
 
 .ServiceName {
-    margin: 0 0 0 15px;
+  margin-left: 4px;
+  font-size: 30px;
+  font-weight: 50;
+  color: hotpink;
+  font-weight: bold;
+  /* font: italic 2em 'Fira Sans', serif; */
+  cursor:pointer
 }
-{/*위 오른쪽 아래 왼쪽*/}
 
-.goSignup .goMypage {
-
+.goMain,
+.goMain::after {
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
 }
 
 .goMain {
-    margin-left: -70%;
+  background: hotpink;
+  border: 5px solid hotpink;
+  border-radius: 5px;
+  color: #fafafa;
+  display: block;
+  font-size: 0.9rem;
+  font-weight: bold;
+  /* margin: 1em auto; */
+  /* margin-left: -5%; */
+  padding: 1px 10px;
+  /* padding-bottom: 1em; */
+  /* position: relative; */
+  text-transform: uppercase;
+  height: 70%;
+  cursor:pointer
+}
+
+.goMain::before,
+.goMain::after {
+  /* background: #fff; */
+  content: '';
+  position: absolute;
+  z-index: -1;
+}
+
+.goMain:hover {
+  color: #2ecc71;
+}
+
+.goMain::after {
+  height: 0;
+  left: 0;
+  top: 0;
+  width: 100%;
+}
+
+.goMain:hover:after {
+  height: 100%;
+}
+
+/* button2 */
+
+.goSignup__goMypage,
+.goSignup__goMypage::after {
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.goSignup__goMypage {
+  background: hotpink;
+  border: 3px solid hotpink;
+  border-radius: 5px;
+  color: #fafafa;
+  font-size: 0.9rem;
+  font-weight: bold;
+  padding: 1px 4px;
+  text-transform: uppercase;
+  cursor:pointer
+}
+
+.goSignup__goMypage::before,
+.goSignup__goMypage::after {
+  background: #fff;
+  content: '';
+  position: absolute;
+  z-index: -1;
+}
+.goSignup__goMypage:hover {
+  color: #2ecc71;
+}
+
+/* button3 */
+
+.loginBtn__logoutBtn,
+.loginBtn__logoutBtn::after {
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.loginBtn__logoutBtn {
+  background: hotpink;
+  border: 3px solid hotpink;
+  border-radius: 5px;
+  color: #fafafa;
+  font-size: 0.9rem;
+  font-weight: bold;
+  /* margin: 1em auto; */
+  margin-left: 10px;
+  padding: 1px 4px;
+  /* position: relative; */
+  text-transform: uppercase;
+  cursor:pointer
+}
+
+.loginBtn__logoutBtn::before,
+.loginBtn__logoutBtn::after {
+  background: #fff;
+  content: '';
+  position: absolute;
+  z-index: -1;
+}
+
+.loginBtn__logoutBtn:hover {
+  color: #2ecc71;
 }

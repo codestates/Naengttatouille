@@ -17,6 +17,11 @@ module.exports = (sequelize, DataTypes) => {
   }
   Ingredient.init(
     {
+      ingredient_id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+      },
       name: DataTypes.STRING,
       keep_method: DataTypes.STRING,
     },
@@ -24,6 +29,7 @@ module.exports = (sequelize, DataTypes) => {
       sequelize,
       tableName: 'Ingredient',
       modelName: 'Ingredient',
+      timestamps: false,
     }
   );
   return Ingredient;

@@ -4,7 +4,7 @@ module.exports = {
   post: (req, res) => {
     const { email, password, name } = req.body;
     if (!email || !password || !name) {
-      return res.status(400).send('Bad Request');
+      return res.status(400).send('Check password and name');
     }
     User.findOrCreate({
       where: {
@@ -19,11 +19,11 @@ module.exports = {
     })
       .then(([result, created]) => {
         if (!created) {
-          return res.status(409).send('email exists');
+          return res.status(409).send('Email exists');
         }
-        const { email, name, admin, createdAt, updatedAt } = result.dataValues;
-        const data = { email, name, admin, createdAt, updatedAt };
-        return res.status(201).send(data);
+        const { user_id, email, name, admin, createdAt, updatedAt } = result;
+        const userinfo = { user_id, email, name, admin, createdAt, updatedAt };
+        return res.status(201).send(userinfo);
       })
       .catch((err) => {
         console.log(err);
