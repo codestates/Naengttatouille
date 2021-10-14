@@ -21,7 +21,7 @@
 .ServiceName {
   margin: 0 0 0 5%;
   font-size: 30px;
-  font-weight: ;
+  /* font-weight: ; */
   color: hotpink;
   font: italic 2em 'Fira Sans', serif;
 }
