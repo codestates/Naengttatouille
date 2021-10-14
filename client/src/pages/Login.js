@@ -55,7 +55,7 @@ export default function Login({ userInfo, userInfoHandler, loginHandler }) {
     }
   };
   return (
-    <div id='container' className='max'>
+    <div id='container-login' className='max'>
       <div className='f15 max-width'></div>
       <div id='content'>
         <div className='left-section login-img'></div>
