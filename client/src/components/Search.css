@@ -1,0 +1,206 @@
+.tag__container {
+  box-sizing: border-box;
+  border: solid;
+  /* border-color: green; */
+  /* background-color: #cccc; */
+  align-items: center;
+  width: 100%;
+  height: 200px;
+  padding: 0px;
+  margin: 20px 0px;
+
+  /* padding: 5px; */
+
+  display: flex;
+  flex-direction: column;
+
+  /* background: transparent;
+  background-image: url(../images/search_tag__box4.jpeg);
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: 70% 100%;
+  object-fit: contain; */
+}
+
+.tag__box {
+  display: flex;
+  box-sizing: border-box;
+  width: 70%;
+  height: 100%;
+  display: flex;
+  padding: 20px;
+  /* flex-direction: column; */
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+
+  /* background: transparent; */
+  /* background-image: url(../images/search_tag__box4.jpeg); */
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: 100% 100%;
+  object-fit: contain;
+  overflow: auto;
+  /* padding: 10px; */
+  /* width: 70%;
+  height: 80%; */
+
+  /* background-color: #ffa500; */
+  /* border: 3px solid red; */
+}
+
+/* .tag__box::before {
+  content: '';
+  opacity: 0.8;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  z-index: -1;
+  background: transparent;
+  background-image: url(../images/search_tag__box4.jpeg);
+  background-repeat: no-repeat;
+  background-position: 50% 0%;
+  background-size: 80% 100%;
+} */
+
+.do_choose {
+  color: white;
+}
+
+.tagAndSearch {
+  padding: 5px;
+  height: 15px;
+  position: relative;
+  top: -5px;
+}
+/* .tagAndSearch > button.uncheck_tags,
+.recipe_search {
+  margin: 0px 5px 0px 5px;
+  border: 0;
+  line-height: 2.5;
+  padding: 0 20px;
+  font-size: 1rem;
+  text-align: center;
+  color: #fff;
+  text-shadow: 1px 1px 1px #000;
+  border-radius: 10px;
+  background-color: rgba(220, 0, 0, 1);
+  background-image: linear-gradient(to top left, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) 30%, rgba(0, 0, 0, 0));
+  box-shadow: inset 2px 2px 3px rgba(255, 255, 255, 0.6), inset -2px -2px 3px rgba(0, 0, 0, 0.6);
+}
+.tagAndSearch > button.uncheck_tags,
+.recipe_search:hover {
+  background-color: rgba(255, 0, 0, 1);
+} */
+
+.tagAndSearch > button.uncheck_tags,
+.recipe_search {
+  border-radius: 25px;
+  width: 104px;
+  height: 40px;
+  background-color: #eee;
+  cursor: pointer;
+  outline: none;
+  box-shadow: 1px 4px 0 rgb(0, 0, 0, 0.5);
+  margin: 10px;
+}
+
+.tagAndSearch > button.uncheck_tags:hover,
+.recipe_search:hover {
+  background-color: #fff9c7;
+}
+.tagAndSearch > button.uncheck_tags:active,
+.recipe_search:active {
+  background-color: #f1e575;
+  box-shadow: 1px 1px 0 rgb(0, 0, 0, 0.5);
+  position: relative;
+  top: 2px;
+}
+
+.tag {
+  box-sizing: border-box;
+  cursor: pointer;
+  background-color: #000;
+  border-top-left-radius: 50%;
+  border-bottom-right-radius: 50%;
+  width: 120px;
+  height: 60px;
+  padding: 10px 10px;
+  line-height: 64px;
+  position: relative;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  z-index: 0;
+  background: #9a8a62;
+  /* margin-left: 20px; */
+  margin: 5px 5px 5px 5px;
+}
+.tag span {
+  color: #fff;
+  display: inline-block;
+  /* padding-left: 35px; */
+  /* padding-left: 5px; */
+  text-transform: uppercase;
+  font: bold 18px/66px Arial;
+  transform: scaleX(0.6);
+  letter-spacing: 3px;
+  transform-origin: center left;
+  transition: color 0.3s ease;
+  position: absolute;
+  top: 0%;
+  left: 30%;
+  z-index: 1;
+}
+.tag em {
+  position: absolute;
+  height: 1px;
+  background: #fff;
+  width: 47%;
+  right: 23px;
+  top: 50%;
+  transform: scaleX(0.25);
+  -webkit-transform: scaleX(0.25);
+  transform-origin: center right;
+  transition: all 0.3s ease;
+  z-index: 1;
+}
+.tag:before,
+.tag:after {
+  content: '';
+  background: #fff;
+  height: 50%;
+  width: 0;
+  position: absolute;
+  transition: 0.3s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  -webkit-transition: 0.3s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+}
+.tag:before {
+  top: 0;
+  left: 0;
+  right: auto;
+}
+.tag:after {
+  bottom: 0;
+  right: 0;
+  left: auto;
+}
+.tag:hover:before {
+  width: 100%;
+  right: 0;
+  left: auto;
+}
+.tag:hover:after {
+  width: 100%;
+  left: 0;
+  right: auto;
+}
+.tag:hover span {
+  color: #000;
+}
+.tag:hover em {
+  background: #000;
+  transform: scaleX(0.51);
+  transform: scaleX(0.51);
+}
