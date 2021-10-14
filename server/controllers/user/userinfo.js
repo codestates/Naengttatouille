@@ -1,10 +1,5 @@
 const { User } = require('../../models');
-const {
-  isAuthorized,
-  generateAccessToken,
-  sendAccessToken,
-  clearAccessToken,
-} = require('../tokenFunctions');
+const { isAuthorized, generateAccessToken, sendAccessToken, clearAccessToken } = require('../tokenFunctions');
 
 module.exports = {
   patch: async (req, res) => {
