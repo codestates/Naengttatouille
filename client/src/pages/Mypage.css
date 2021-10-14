@@ -1,0 +1,9 @@
+.Mypage__container{
+    position: fixed;
+    top: 5%;
+    left: 27%;
+    width: 50%;
+    height: 95%;
+    background-image: url('../background-Mypage.jpg');
+    background-size: 71%;
+}

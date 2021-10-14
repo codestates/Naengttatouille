@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { checkErr, ShowInput } from '../functions/InputUserDataFunc';
+import './Mypage.css'
 
 export default function Mypage({ isLogin, userInfo, userInfoHandler }) {
   const history = useHistory();
@@ -57,7 +58,7 @@ export default function Mypage({ isLogin, userInfo, userInfoHandler }) {
   }, []);
 
   return (
-    <div>
+    <div className='Mypage__container'>
       <h1>Mypage</h1>
       <ShowInput
         edit={true}
