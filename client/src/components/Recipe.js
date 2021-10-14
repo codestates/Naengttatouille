@@ -21,8 +21,10 @@ export default function Recipe({ getYoutubeVideo, videoList, nextPageUrl }) {
           );
         })}
       </ul>
-      <div className='button__more'>
-        <button onClick={() => getYoutubeVideo(nextPageUrl)}>더보기</button>
+      <div>
+        <button className='button__more' onClick={() => getYoutubeVideo(nextPageUrl)}>
+          더보기
+        </button>
       </div>
     </div>
   );

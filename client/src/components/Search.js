@@ -6,17 +6,21 @@ function Search({ recipeTags, handleRecipeTags, handleTag, getYoutubeVideo, sear
     <>
       <div className='tag__container'>
         <div className='tag__box'>
+          {recipeTags.length === 0 ? <div className='do_choose'>냉장고에서 재료를 선택해보세요!</div> : undefined}
           {recipeTags.map((tag) => {
             return (
-              <span key={tag} className='tag' onClick={() => handleTag('delete', tag)}>
-                {/* {tag + '  ✘'} */}
-                {tag}
-              </span>
+              <a key={tag} href='#0' class='tag' onClick={() => handleTag('delete', tag)}>
+                <em> </em>
+                <span>
+                  {tag}
+                  {/* {tag + '  ✘'} */}
+                </span>
+              </a>
             );
           })}
         </div>
         <div className='tagAndSearch'>
-          <button className='uncheck_tags' onClick={() => handleTag('deleteAll', '')}>
+          <button type='button' className='uncheck_tags' onClick={() => handleTag('deleteAll', '')}>
             전체 선택 취소
           </button>
           {/* <button type='button' className='recipe_search' onClick={getYoutubeVideo}>
