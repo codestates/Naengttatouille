@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import UserInput from '../components/UserInput';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { checkErr, ShowInput } from '../functions/InputUserDataFunc';
 
 export default function Mypage({ isLogin, userInfo, userInfoHandler }) {
@@ -32,18 +31,24 @@ export default function Mypage({ isLogin, userInfo, userInfoHandler }) {
     if (checkErr(currentErrList)) {
       console.log('failed to mypage submit');
     } else {
-      axios
-        .patch(`http://localhost:4000/user/userinfo?${userInfo.user_id}`, {
-          email: inputInfo.email,
-          password: inputInfo.password,
-        })
-        .then((result) => {
-          alert('회원정보 수정에 성공했습니다');
-        })
-        .catch((err) => {
-          console.log('mypage faild Error : ', err);
-          alert('회원정보 수정에 실패했습니다');
-        });
+      console.log('**************', userInfo);
+      console.log('**************', inputInfo);
+      try {
+        axios
+          .patch(`http://localhost:4000/user/userinfo/${userInfo.user_id}`, {
+            name: inputInfo.name,
+            password: inputInfo.password,
+          })
+          .then((result) => {
+            alert('회원정보 수정에 성공했습니다');
+          })
+          .catch((err) => {
+            console.log('mypage faild Error : ', err);
+            alert('회원정보 수정에 실패했습니다');
+          });
+      } catch (err) {
+        console.log('회원정보 수정 요청에 실패', err);
+      }
     }
   };
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { Link, useHistory } from 'react-router-dom';
 import { checkErr, ShowInput } from '../functions/InputUserDataFunc';
@@ -31,22 +31,26 @@ export default function Login({ userInfo, userInfoHandler, loginHandler }) {
     if (checkErr(currentErrList)) {
       console.log('failed to login submit');
     } else {
-      await axios
-        .post('http://localhost:4000/user/signin', {
-          email: inputInfo.email,
-          password: inputInfo.password,
-        })
-        .then((response) => {
-          loginHandler();
-          userInfoHandler(response.data);
-          history.push('/main');
-        })
-        .catch((err) => {
-          handleInputInfo('init');
-          console.log('login faild Error : ', err);
-          alert('로그인에 실패했습니다');
-          return 'err';
-        });
+      try {
+        await axios
+          .post('http://localhost:4000/user/signin', {
+            email: inputInfo.email,
+            password: inputInfo.password,
+          })
+          .then((response) => {
+            loginHandler();
+            userInfoHandler(response.data);
+            history.push('/main');
+          })
+          .catch((err) => {
+            handleInputInfo('init');
+            console.log('login faild Error : ', err);
+            alert('로그인에 실패했습니다');
+            return 'err';
+          });
+      } catch (err) {
+        console.log('login try catch err : ', err, '---------------');
+      }
     }
   };
   return (

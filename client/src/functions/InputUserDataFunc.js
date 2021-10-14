@@ -43,8 +43,9 @@ function ShowInput({
     errSetting();
   }, [errState]);
 
-  return inputBoxList.map((inputBox) => (
+  return inputBoxList.map((inputBox, idx) => (
     <UserInput
+      key={idx}
       edit={edit}
       item={inputBox[0]}
       type={inputBox[1]}

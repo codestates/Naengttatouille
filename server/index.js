@@ -5,11 +5,7 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const express = require('express');
 const app = express();
-const {
-  userRouter,
-  ingredientRouter,
-  refrigeratorRouter,
-} = require('./routes');
+const { userRouter, ingredientRouter, refrigeratorRouter } = require('./routes');
 
 app.use(express.json());
 app.use(
@@ -25,8 +21,7 @@ app.use('/user', userRouter);
 app.use('/ingredient', ingredientRouter);
 app.use('/refrigerator', refrigeratorRouter);
 
-const PORT = 4000;
-// const PORT = process.env.HTTPS_PORT || 80;
+const PORT = process.env.HTTPS_PORT || 4000;
 let server;
 if (fs.existsSync('./key.pem') && fs.existsSync('./cert.pem')) {
   const privateKey = fs.readFileSync(__dirname + '/key.pem', 'utf8');
@@ -36,8 +31,6 @@ if (fs.existsSync('./key.pem') && fs.existsSync('./cert.pem')) {
   server = https.createServer(credentials, app);
   server.listen(PORT, () => console.log(`https server runnning PORT ${PORT}`));
 } else {
-  server = app.listen(PORT, () =>
-    console.log(`http server runnning PORT ${PORT}`)
-  );
+  server = app.listen(PORT, () => console.log(`http server runnning PORT ${PORT}`));
 }
 module.exports = server;
