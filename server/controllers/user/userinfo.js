@@ -1,22 +1,17 @@
 const { User } = require('../../models');
-const {
-  isAuthorized,
-  generateAccessToken,
-  sendAccessToken,
-  clearAccessToken,
-} = require('../tokenFunctions');
+const { isAuthorized, generateAccessToken, sendAccessToken, clearAccessToken } = require('../tokenFunctions');
 
 module.exports = {
   patch: async (req, res) => {
     const userinfo = isAuthorized(req);
     if (!userinfo) {
       clearAccessToken(res);
-      return res.status(401).send('invalid access token');
+      return res.status(401).send('Invalid access token');
     }
     const { user_id } = req.params;
     const { password, name } = req.body;
     if (!password || !name) {
-      return res.status(400).send('check password and name');
+      return res.status(400).send('Check password and name');
     }
 
     await User.update(
@@ -53,7 +48,7 @@ module.exports = {
     const userinfo = isAuthorized(req);
     if (!userinfo) {
       clearAccessToken(res);
-      return res.status(401).send('invalid access token');
+      return res.status(401).send('Invalid access token');
     }
     const { user_id } = req.params;
     await User.destroy({ where: { user_id } })

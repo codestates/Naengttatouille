@@ -19,7 +19,7 @@ module.exports = {
   post: (req, res) => {
     const userinfo = isAuthorized(req);
     if (!userinfo) {
-      return res.status(401).send('invalid accesstoken');
+      return res.status(401).send('Invalid accesstoken');
     }
     if (!userinfo.admin) {
       return res
@@ -38,7 +38,7 @@ module.exports = {
     })
       .then(([result, created]) => {
         if (!created) {
-          return res.status(409).send('resource exists');
+          return res.status(409).send('Resource exists');
         }
         return res.status(201).send(result);
       })
@@ -50,7 +50,7 @@ module.exports = {
   delete: async (req, res) => {
     const userinfo = isAuthorized(req);
     if (!userinfo) {
-      return res.status(401).send('invalid accesstoken');
+      return res.status(401).send('Invalid accesstoken');
     }
     if (!userinfo.admin) {
       return res

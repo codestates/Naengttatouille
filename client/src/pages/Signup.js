@@ -1,34 +1,48 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import UserInput from '../components/UserInput';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import axios from 'axios';
+import { checkErr, ShowInput } from '../functions/InputUserDataFunc';
 
 export default function Signup({ userInfo, userInfoHandler }) {
-  useEffect(() => userInfoHandler('edit')(null, null, false), []);
   const history = useHistory();
-  const checkErr = () => {
-    const emailValidity = userInfo['email'][`validity`];
-    const passValidity = userInfo['password'][`validity`];
-    const confirmValidity = userInfo['password confirm'][`validity`];
-    const nameValidity = userInfo['name'][`validity`];
-    if (emailValidity && passValidity && confirmValidity && nameValidity) return false;
+  //[input tag 앞의 텍스트, input type]의 배열
+  const inputBoxList = [
+    ['email', 'email'],
+    ['password', 'password'],
+    ['password confirm', 'password'],
+    ['name', 'text'],
+  ];
+
+  //각 인풋 박스의 유효성 검사 결과 불린값 배열
+  const [currentErrList, setCurrentErrorList] = useState([]);
+  //현재 유저가 input에 입력중인 텍스트 값
+  const [inputInfo, setInputInfo] = useState({});
+
+  const handleInputInfo = (key) => (value) => {
+    if (key === 'init') setInputInfo({});
+    else setInputInfo({ ...inputInfo, [key]: value });
+  };
+
+  const handleCurrentErrorList = (errList) => {
+    setCurrentErrorList(errList);
   };
 
   const handleLogin = () => {
-    if (checkErr()) {
+    if (checkErr(currentErrList)) {
       console.log('failed to sign up submit');
     } else {
       axios
         .post('http://localhost:4000/user/signup', {
-          name: userInfo.name.data,
-          email: userInfo.email.data,
-          password: userInfo.password.data,
+          name: inputInfo.name,
+          email: inputInfo.email,
+          password: inputInfo.password,
         })
         .then((result) => {
           alert('회원가입을 성공했습니다');
-          history.push('/');
+          history.push('/login');
         })
         .catch((err) => {
+          handleInputInfo('init');
           console.log('sign up faild Error : ', err);
           alert('회원가입을 실패했습니다');
         });
@@ -37,10 +51,14 @@ export default function Signup({ userInfo, userInfoHandler }) {
   return (
     <div>
       <h1>Sign Up</h1>
-      <UserInput item='email' type='email' handler={userInfoHandler} inputInfo={userInfo} />
-      <UserInput item='password' type='password' handler={userInfoHandler} inputInfo={userInfo} />
-      <UserInput item='password confirm' type='password' handler={userInfoHandler} inputInfo={userInfo} />
-      <UserInput item='name' type='text' handler={userInfoHandler} inputInfo={userInfo} />
+      <ShowInput
+        inputBoxList={inputBoxList}
+        userInfoHandler={userInfoHandler}
+        userInfo={userInfo}
+        inputInfo={inputInfo}
+        handleInputInfo={handleInputInfo}
+        handleCurrentErrorList={handleCurrentErrorList}
+      />
       <button type='button' onClick={handleLogin}>
         Sign Up
       </button>

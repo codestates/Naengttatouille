@@ -1,13 +1,13 @@
 .Refrigerator__Container{
-    border: solid;
-    border-color: sienna;
+    /* border: solid;
+    border-color: sienna; */
     height: 50vh;
     width: 50vw;
 }
 
 .Refrigerator__title {
-    border: solid;
-    border-color: skyblue;
+    /* border: solid;
+    border-color: skyblue; */
 }
 
 .My__refrigerator {
@@ -21,15 +21,15 @@
     display: flex;
     margin-right: 1%;
     padding-left: -5%;
-    border: solid;
-    border-color: teal;
+    /* border: solid;
+    border-color: teal; */
     margin-top: 3%;
 }
 
 .Refrigerator__ingredient{
     border: solid;
     border-color: gray;
-    width:  10vw;
+    width:  7.5vw;
     margin-left: 3%;
     margin-top: 1.5%;
     height: 5vh;
@@ -40,8 +40,8 @@
 }
 
 .showDeleteBtn__Refrigerator {
-    border: solid;
-    border-color: tomato;
+    /* border: solid;
+    border-color: tomato; */
     display: flex;
     margin-right: 1%;
     padding-left: -5%;
@@ -60,7 +60,7 @@
     border: solid;
     border-color: aqua;
     height: 3vh;
-    margin-left: 2.3%;
-    width: 18%;
+    margin-left: 3%;
+    width: 7.5vw;
     font-size: 11px;
 }
