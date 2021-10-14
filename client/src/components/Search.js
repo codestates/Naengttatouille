@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 
-function Search({ recipeTags, handleRecipeTags, handleTag, getYoutubeVideo }) {
+function Search({ recipeTags, handleRecipeTags, handleTag, getYoutubeVideo, searchUrl }) {
 
   return (
     <>
@@ -18,9 +18,15 @@ function Search({ recipeTags, handleRecipeTags, handleTag, getYoutubeVideo }) {
           <button className='uncheck_tags' onClick={() => handleTag('deleteAll', '')}>
             전체 선택 취소
           </button>
-        <button type='button' className='recipe_search' onClick={getYoutubeVideo}>
+        {/* <button type='button' className='recipe_search' onClick={getYoutubeVideo}>
           레시피 검색
-          </button>
+          </button> */}
+
+        <button type='button' className='recipe_search' onClick={() => getYoutubeVideo(searchUrl)}>
+          레시피 검색
+        </button>
+        {/* <button className='more' onClick={() => getYoutubeVideo(nextPageUrl)}>더보기</button> */}
+
       </div>
       </div>
     </>

@@ -25,7 +25,8 @@ app.use('/user', userRouter);
 app.use('/ingredient', ingredientRouter);
 app.use('/refrigerator', refrigeratorRouter);
 
-const PORT = process.env.HTTPS_PORT || 80;
+const PORT = 4000;
+// const PORT = process.env.HTTPS_PORT || 80;
 let server;
 if (fs.existsSync('./key.pem') && fs.existsSync('./cert.pem')) {
   const privateKey = fs.readFileSync(__dirname + '/key.pem', 'utf8');

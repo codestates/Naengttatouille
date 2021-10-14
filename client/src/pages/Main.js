@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import Ingredients from '../components/Ingredients';
 import Refrigerator from '../components/Refrigerator';
 import Recipe from '../components/Recipe';
-import axios from 'axios';
 import Search from '../components/Search';
 
 export default function Main({ isLogin, userInfo }) {
@@ -23,49 +22,60 @@ export default function Main({ isLogin, userInfo }) {
   const [showRecipe, setShowRecipe] = useState(false);
   const [videoList, setVideoList] = useState([]);
 
-  const baseURL = 'https://www.googleapis.com/youtube/v3';
-  const api_key = 'AIzaSyC1yj060gnMdEUBCnp-Sm1u20KuwxQ9b20';
+  const [nextPageToken, setNextPageToken] = useState('');
+  const [prePageToken, setPrePageToken] = useState('');
+  const [pageTokens, setPageTokens] = useState([]);
 
-  const getYoutubeVideo = async () => {
+  const api_key = 'AIzaSyAVtvwSguR35KrUH0-V9QMxtOadCMYAqyQ';
 
-    setShowRecipe(true);
-
-    const params = {
-      key: api_key,
-      part: 'snippet',
-      q: searchStr,
-      maxResults: 5,
-      type: 'video',
-    };
-
-    await axios
-      .get(`${baseURL}/search`, { params })
-      .then((response) => {
-        console.log(response.data);
-        const searchResult = response.data.items;
-        return searchResult.map((video) => {
-          const videoId = video.id.videoId; //영상 id
-          const videoTitle = video.snippet.title; //제목
-          const videoDescription = video.snippet.description; //설명
-          const videoThumbnail = video.snippet.thumbnails.high.url; //썸네일
-          const url = `https://www.youtube.com/watch?v=${videoId}`;
-          return {
-            videoId: videoId,
-            videoTitle: videoTitle,
-            videoDescription: videoDescription,
-            videoThumbnail: videoThumbnail,
-            url: url,
-          };
-        });
-      })
-      .then((data) => setVideoList(data));
-  };
 
   const searchStr = `${recipeTags.join()} 레시피`;
   const handleTag = (str, tag) => {
     //태그관리
     handleRecipeTags(str, tag);
   };
+
+  const maxResults = 3;
+
+  const searchUrl = `https://www.googleapis.com/youtube/v3/search?q=${searchStr}&type=$video&maxResults=${maxResults}&part=snippet&key=${api_key}`;
+  const nextPageUrl = `https://www.googleapis.com/youtube/v3/search?q=${searchStr}&pageToken=${nextPageToken}&part=snippet&maxResults=${maxResults}&key=${api_key}`;
+
+  function getYoutubeVideo(searchPage) {
+    setShowRecipe(true)
+
+    fetch(searchPage, {
+      method: 'GET',
+    })
+      .then((response) => {
+        return response.json();
+    })
+    .then((data) => {
+      console.log('🚀 ~ file: Recipe.js ~ line 28 ~ .then ~ data', data);
+      const searchResult = data.items;
+      setPrePageToken(data.prePageToken);
+      setNextPageToken(data.nextPageToken); //다음 페이지 검색
+      setPageTokens([...pageTokens, data.nextPageToken]);
+      console.log('🚀 ~ file: Recipe.js ~ line 14 ~ Recipe ~ pageTokens', pageTokens);
+      return searchResult.map((video) => {
+        const videoId = video.id.videoId; //영상 id
+        const videoTitle = video.snippet.title; //제목
+        const videoDescription = video.snippet.description; //설명
+        const videoThumbnail = video.snippet.thumbnails.high.url; //썸네일
+        const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
+        return {
+          videoId: videoId,
+          videoTitle: videoTitle,
+          videoDescription: videoDescription,
+          videoThumbnail: videoThumbnail,
+          url: videoUrl,
+        };
+      });
+    })
+    .then((data) => setVideoList(data))
+    .catch((error) => {
+      console.error(error);
+    });
+  }
 
   return (
     <>
@@ -99,7 +109,10 @@ export default function Main({ isLogin, userInfo }) {
         <Search
           getYoutubeVideo={getYoutubeVideo} handleTag={handleTag}
           recipeTags={recipeTags}
-          />
+          searchUrl={searchUrl}
+          setShowRecipe={setShowRecipe}
+        />
+
       </div>
       <div>
         {showRecipe ? <Recipe
@@ -108,7 +121,9 @@ export default function Main({ isLogin, userInfo }) {
           recipeTags={recipeTags}
           isLogin={isLogin}
           handleRecipeTags={handleRecipeTags}
+          getYoutubeVideo={getYoutubeVideo}
           videoList={videoList}
+          nextPageUrl={nextPageUrl}
         />: <></>}
       </div>
     </>
