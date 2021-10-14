@@ -3,6 +3,7 @@
     border-color: blue; */
     height: 50vh;
     width: 50vw;
+    padding-right:20px;
 }
 
 .ingredient__title {
@@ -31,6 +32,9 @@
 }
 
 .ingredient {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     /* border: solid;
     border-color: gray; */
     width:  7.5vw;
@@ -70,6 +74,11 @@
 }
 
 .method__explain {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    word-wrap: break-word;
     border-radius: 10px;
     width: 70%;
     height: 12vh;
@@ -106,6 +115,9 @@
     background-color: pink;
 }
 
+.add__ingredient{
+    padding:10px;
+}
 .addButton{
     cursor: pointer;
     border-top-right-radius: 10px;
@@ -113,6 +125,7 @@
 }
 
 .inputCss{
+    width: 40%;
     height: 20px;
     border-radius: 10px;
 }

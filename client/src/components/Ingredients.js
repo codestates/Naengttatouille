@@ -145,7 +145,7 @@ export default function Ingredients({
       <section className='Storage__method'>
         <h4 className='method__description'>식재료 보관방법</h4>
 
-        {userInfo.admin ? <span><input onKeyUp={(e) => onChangeName(e)} type='text' placeholder='재료이름을 입력해주세요' className='inputCss'></input>
+        {userInfo.admin ? <span className='add__ingredient'><input onKeyUp={(e) => onChangeName(e)} type='text' placeholder='재료이름을 입력해주세요' className='inputCss'></input>
         <input onKeyUp={(e) => onChangeMethod(e)} type='text' placeholder='보관법을 작성해주세요' className='inputCss'>
           </input><button onClick={addIngredients} className='addButton'>+</button></span> : null}
         

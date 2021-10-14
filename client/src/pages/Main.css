@@ -1,6 +1,10 @@
+body{
+    margin: 0;
+}
+
 .ingredients {
     width: 100vw;
-    height: 85vh;
+    height: 650px;
 }
 
 .grocery {
@@ -14,12 +18,9 @@
     top: 8.2%;
 }
 
-/* .recipe{
-    position: absolute;
-    top: 58.2%;
-} */
 
 .container__all{
-    background-image: url(../background-Main.jpg);
-    background-size: 100% auto;
+    background-image: url(https://www.moneycrashers.com/wp-content/uploads/2011/12/paper-bag-filled-with-groceries-produce-bread-milk.jpg);
+    background-size: 104%;
+    height: 1000px;
 }
