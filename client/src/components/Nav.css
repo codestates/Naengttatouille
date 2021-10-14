@@ -98,6 +98,7 @@
   margin: 1em auto;
   padding: 2em 6em;
   position: relative;
+  text-transform: uppercase;
 }
 
 .goSignup__goMypage::before,
@@ -133,6 +134,7 @@
   margin: 1em auto;
   padding: 2em 6em;
   position: relative;
+  text-transform: uppercase;
 }
 
 .loginBtn__logoutBtn::before,
